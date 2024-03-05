@@ -42,13 +42,13 @@ func _ready():
 	player_01.stat = $MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats
 	player_01.history = $MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic
 	player_01.target_score_label = $MarginContainer/VBoxContainer/HBoxContainer/Player1/Score/Player1Score
-	player_01.name_label = $MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/Player/Name
+	player_01.name_label = $MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player/Name
 	
 	player_02.name = "John"
 	player_02.stat = $MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats
 	player_02.history = $MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic
 	player_02.target_score_label = $MarginContainer/VBoxContainer/HBoxContainer/Player2/Score/Player2Score
-	player_02.name_label = $MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/Player/Name
+	player_02.name_label = $MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player/Name
 	 
 	_start_game()
 	
@@ -120,7 +120,8 @@ func _start_game():
 		list_player[i].score_100 = 0
 		list_player[i].score_140 = 0
 		list_player[i].score_180 = 0
-
+		list_player[i].name_label.text = list_player[i].name
+		
 		#Resetting up the historic of throws
 		for k in range(9):
 			var temp = list_player[i].history.get_children()[k].get_children()[0].get_children()
@@ -129,7 +130,9 @@ func _start_game():
 		list_player[i].history.get_children()[0].get_children()[0].get_children()[1].text = str(setting.score)
 		#Reset label of target score
 		list_player[i].target_score_label.text = str(setting.score)
-		list_player[i].name_label.get_children()[0].visible = false
+		print(list_player[i].name_label)
+		for k in range(0,3,2):
+			list_player[i].name_label.get_parent().get_children()[k].get_children()[0].visible = false
 		
 	#Loading up the stats of players:
 		for k in range(2,6):
@@ -139,7 +142,8 @@ func _start_game():
 		list_player[i].stat.get_children()[8].get_children()[1].text = str(list_player[i].average_per_leg)
 	
 	player_01.turn = true
-	player_01.name_label.get_children()[0].visible = true
+	player_01.name_label.get_parent().get_children()[0].get_children()[0].visible =  true
+	player_01.name_label.get_parent().get_children()[2].get_children()[0].visible =  true
 	
 func _update_score():
 	var player: Player
@@ -147,16 +151,17 @@ func _update_score():
 	if player_01.turn == true:
 		player = player_01
 		player_01.turn = false
-		player_01.name_label.get_children()[0].visible = false
 		player_02.turn = true
-		player_02.name_label.get_children()[0].visible = true
-
+		for k in range(0,3,2):
+			player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  false
+			player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = true
 	else:
 		player = player_02
 		player_01.turn = true
-		player_01.name_label.get_children()[0].visible = true
 		player_02.turn = false
-		player_02.name_label.get_children()[0].visible = false
+		for k in range(0,3,2):
+			player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  true
+			player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = false
 	
 	player.dart_1 = int(dart_1_label.text)
 	player.dart_2 = int(dart_2_label.text)
@@ -280,15 +285,17 @@ func _redo_input():
 		if player_01.turn == true:
 			player = player_02
 			player_01.turn = false
-			player_01.name_label.get_children()[0].visible = false
 			player_02.turn = true
-			player_02.name_label.get_children()[0].visible = true
+			for k in range(0,3,2):
+				player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  false
+				player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = true
 		else:
 			player = player_01
 			player_01.turn = true
-			player_01.name_label.get_children()[0].visible = true
 			player_02.turn = false
-			player_02.name_label.get_children()[0].visible = false
+			for k in range(0,3,2):
+				player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  true
+				player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = false
 			
 		if player.number_of_turn == 2:
 			var path_container = player.history.get_children()[player.number_of_turn].get_children()[0].get_children()
@@ -315,14 +322,16 @@ func _redo_input():
 			if cant_redo == true:
 				if player_01.turn == true:
 					player_01.turn = false
-					player_01.name_label.get_children()[0].visible = false
 					player_02.turn = true
-					player_02.name_label.get_children()[0].visible = true
+					for k in range(0,3,2):
+						player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  false
+						player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = true
 				else:
 					player_01.turn = true
-					player_01.name_label.get_children()[0].visible = true
 					player_02.turn = false
-					player_02.name_label.get_children()[0].visible = false
+					for k in range(0,3,2):
+						player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  true
+						player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = false
 		player.target_score_label.text = str(player.target_score)
 		_update_stats_average(player)
 		_update_stats_total(player)
