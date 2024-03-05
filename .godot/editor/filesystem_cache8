@@ -1,0 +1,15 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1709632074
+game_selection.tscn::PackedScene::153563792855136262::1709517940::0::1::::<><>::
+icon.svg::CompressedTexture2D::4693846213071454207::1709146076::1709146087::1::::<><>::
+MainMenu.gd::GDScript::-1::1709146985::0::1::::<>Control<>::
+main_menu.tscn::PackedScene::8325233448556158867::1709517940::0::1::::<><>::res://MainMenu.gd
+x_01.gd::GDScript::-1::1709609192::0::1::::<>Control<>::
+x_01.tscn::PackedScene::7099759152241652835::1709609304::0::1::::<><>::uid://is8s8jdmrquc::::res://img/france.png<>res://x_01.gd
+x_01_old.gd::GDScript::-1::1709516729::0::1::::<>Control<>::
+x_01_old.tscn::PackedScene::5036321713158344042::1709518246::0::1::::<><>::res://x_01.gd<>uid://is8s8jdmrquc::::res://img/france.png
+::res://img/::1709516449
+france.png::CompressedTexture2D::600707101055740626::1709150663::1709516449::1::::<><>::
+::res://script/::1709607230
+player.gd::GDScript::-1::1709607230::0::1::::Player<>RefCounted<>::
+x_01_settings.gd::GDScript::-1::1709603435::0::1::::X_01_Settings<>RefCounted<>::
