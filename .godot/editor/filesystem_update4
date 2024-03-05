@@ -1,4 +1,2 @@
-res://x_01.tscn
-res://x_01.gd
-res://script/player.gd
-res://credit.txt
+res://x_01_duo.tscn
+res://main_menu/game/x_01/x_01_duo.tscn

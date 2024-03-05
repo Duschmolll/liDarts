@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://c8ff84k2lsxv4"]
 
-[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://img/france.png" id="1_groeo"]
-[ext_resource type="Script" path="res://x_01.gd" id="1_k8spv"]
-[ext_resource type="Texture2D" uid="uid://ciycfssdp6ljc" path="res://img/turn_arrow.png" id="2_pdvvx"]
+[ext_resource type="Script" path="res://main_menu/game/x_01/script/x_01_duo.gd" id="1_5ysku"]
+[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://img/france.png" id="2_vl7k6"]
+[ext_resource type="Texture2D" uid="uid://ciycfssdp6ljc" path="res://img/turn_arrow.png" id="3_0ukao"]
 
 [node name="x01" type="Control"]
 layout_mode = 3
@@ -11,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_k8spv")
+script = ExtResource("1_5ysku")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -49,7 +49,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="Flag" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/MarginContainer"]
 layout_mode = 2
-texture = ExtResource("1_groeo")
+texture = ExtResource("2_vl7k6")
 expand_mode = 4
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name"]
@@ -69,7 +69,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player/MarginContainer2"]
 layout_mode = 2
-texture = ExtResource("2_pdvvx")
+texture = ExtResource("3_0ukao")
 expand_mode = 4
 
 [node name="Name" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player"]
@@ -92,7 +92,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player/MarginContainer3"]
 layout_mode = 2
-texture = ExtResource("2_pdvvx")
+texture = ExtResource("3_0ukao")
 expand_mode = 4
 flip_h = true
 
@@ -460,67 +460,6 @@ text = "9999
 [node name="Player2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Name" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name"]
-custom_minimum_size = Vector2(69, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="Flag" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("1_groeo")
-expand_mode = 4
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name"]
-layout_mode = 2
-
-[node name="Player" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer"]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player"]
-custom_minimum_size = Vector2(69, 69)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player/MarginContainer2"]
-layout_mode = 2
-texture = ExtResource("2_pdvvx")
-expand_mode = 4
-
-[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 50
-text = "Krek
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player"]
-custom_minimum_size = Vector2(69, 69)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player/MarginContainer3"]
-layout_mode = 2
-texture = ExtResource("2_pdvvx")
-expand_mode = 4
-flip_h = true
 
 [node name="Score" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2"]
 layout_mode = 2
