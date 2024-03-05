@@ -113,7 +113,7 @@ func _start_game():
 	for i in range(len(list_player)):
 		#Reseting Player Proprety
 		list_player[i].target_score = setting.score
-		list_player[i].number_of_turn = 1
+		list_player[i].number_of_turn = 0
 		list_player[i].turn = false
 		list_player[i].average = 0
 		list_player[i].score_80 = 0
@@ -130,7 +130,6 @@ func _start_game():
 		list_player[i].history.get_children()[0].get_children()[0].get_children()[1].text = str(setting.score)
 		#Reset label of target score
 		list_player[i].target_score_label.text = str(setting.score)
-		print(list_player[i].name_label)
 		for k in range(0,3,2):
 			list_player[i].name_label.get_parent().get_children()[k].get_children()[0].visible = false
 		
@@ -138,8 +137,8 @@ func _start_game():
 		for k in range(2,6):
 			list_player[i].stat.get_children()[k].get_children()[1].text = "0"
 		list_player[i].stat.get_children()[1].get_children()[1].text = str(list_player[i].leg)
-		list_player[i].stat.get_children()[7].get_children()[1].text = "0"
-		list_player[i].stat.get_children()[8].get_children()[1].text = str(list_player[i].average_per_leg)
+		list_player[i].stat.get_children()[7].get_children()[1].text = "0.00"
+		list_player[i].stat.get_children()[8].get_children()[1].text = "%.2f" % list_player[i].average_per_leg
 	
 	player_01.turn = true
 	player_01.name_label.get_parent().get_children()[0].get_children()[0].visible =  true
@@ -171,8 +170,6 @@ func _update_score():
 	
 	var new_score = player.target_score - player.total_throw
 	
-	_update_stats_average(player)
-	
 	if (new_score > 0): #Hit
 		
 		if (setting.double_out == true && new_score == 1):
@@ -190,6 +187,8 @@ func _update_score():
 		if (setting.double_out == false): #Double Out rule is not active
 			number_of_leg += 1
 			player.leg += 1
+			player.number_of_turn += 1
+			_update_stats_average(player)
 			_start_game()
 		else: # Double Out is active
 			var dart_value_check = [dart_3_value_check, dart_2_value_check, dart_1_value_check]
@@ -201,6 +200,8 @@ func _update_score():
 						number_of_leg += 1
 						player.leg += 1
 						double_out = true
+						player.number_of_turn += 1
+						_update_stats_average(player)
 						_start_game()
 						break
 			if (double_out == false):
@@ -227,11 +228,11 @@ func _update_stats_total(player: Player):
 		player.stat.get_children()[5].get_children()[1].text = str(player.score_180) 
 
 func _update_stats_average(player: Player):
-	
+
 	player.average = float(player.total_score) / float(player.number_of_turn)
-	player.stat.get_children()[7].get_children()[1].text = str(player.average)
+	player.stat.get_children()[7].get_children()[1].text =  "%.2f" % player.average
 	player.average_per_leg = player.average / number_of_leg
-	player.stat.get_children()[8].get_children()[1].text = str(player.average_per_leg)
+	player.stat.get_children()[8].get_children()[1].text = "%.2f" % player.average_per_leg
 
 func _new_score(player: Player, new_score):
 	_update_stats_total(player)
@@ -258,29 +259,38 @@ func _new_score(player: Player, new_score):
 		path_container[1].text = str(player.target_score)
 		
 	player.number_of_turn += 1
+	_update_stats_average(player)
 	
 func _bust(player: Player):
-	if player.number_of_turn < 9: #adding score to each label till they're full
-		var temp = player.history.get_children()[player.number_of_turn].get_children()[0].get_children()
-		temp[0].text = "0"
-		temp[1].text = str(player.target_score)
-
-	else: #Looping throught the historic to update each on the next one while adding the newer score
-		for i in range(8):
-			var path_container = player.history.get_children()[i].get_children()[0].get_children()
-			var path_container_next = player.history.get_children()[i+1].get_children()[0].get_children()
+	
+	var value_changed = false
+	
+	for i in range(9):#adding score to each label till they're full
+		var path_container = player.history.get_children()[i].get_children()[0].get_children()
+		if path_container[1].text == "":
+			path_container[0].text = "0"
+			path_container[1].text = str(player.target_score)
+			value_changed = true
+			break
+			
+	if value_changed == false: #Looping throught the historic to update each on the next one while adding the newer score
+		for k in range(8):
+			var path_container = player.history.get_children()[k].get_children()[0].get_children()
+			var path_container_next = player.history.get_children()[k+1].get_children()[0].get_children()
 			path_container[0].text = path_container_next[0].text
 			path_container[1].text = path_container_next[1].text
 		var path_container = player.history.get_children()[8].get_children()[0].get_children()
 		path_container[0].text = "0"
 		path_container[1].text = str(player.target_score)
+
 	player.number_of_turn += 1
+	_update_stats_average(player)
 
 func _redo_input():
 
 	_reset_input()
 	#Pick which player to redo
-	if player_01.number_of_turn > 1 || player_02.number_of_turn > 1:
+	if player_01.number_of_turn > 0 || player_02.number_of_turn > 0:
 		var player: Player
 		if player_01.turn == true:
 			player = player_02
@@ -296,27 +306,31 @@ func _redo_input():
 			for k in range(0,3,2):
 				player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  true
 				player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = false
-			
-		if player.number_of_turn == 2:
-			var path_container = player.history.get_children()[player.number_of_turn].get_children()[0].get_children()
+
+		if player.number_of_turn == 1:
+			var path_container = player.history.get_children()[1].get_children()[0].get_children()
 			player.total_throw = 0
 			player.target_score = setting.score
 			player.number_of_turn -= 1
-			path_container = player.history.get_children()[player.number_of_turn].get_children()[0].get_children()
 			path_container[0].text = ""
 			path_container[1].text = ""
+			_back_stats(player)
 
-		elif player.number_of_turn > 2: 
+		elif player.number_of_turn > 1: 
 			var cant_redo = true
 			for i in range(8,0,-1):
 				var path_container = player.history.get_children()[i].get_children()[0].get_children()
 				if path_container[1].text != "":
+					player.total_throw = int(path_container[0].text)
 					player.target_score += player.total_throw
-					player.total_throw = player.total_throw - int(path_container[0].text)
+					player.total_score -= player.total_throw 
 					player.number_of_turn -= 1
 					path_container = player.history.get_children()[i].get_children()[0].get_children()
 					path_container[0].text = ""
 					path_container[1].text = ""
+					
+					#Update Stats:
+					_back_stats(player)
 					cant_redo = false
 					break
 			if cant_redo == true:
@@ -332,10 +346,30 @@ func _redo_input():
 					for k in range(0,3,2):
 						player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  true
 						player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = false
+		
 		player.target_score_label.text = str(player.target_score)
-		_update_stats_average(player)
-		_update_stats_total(player)
- 
+		
+func _back_stats(player: Player):
+	if player.number_of_turn == 0:
+		player.average = 0.00
+	else:
+		player.average = float(player.total_score) / float(player.number_of_turn)
+	player.stat.get_children()[7].get_children()[1].text =  "%.2f" % player.average 
+	player.average_per_leg = player.average / number_of_leg
+	player.stat.get_children()[8].get_children()[1].text = "%.2f" % player.average_per_leg
+		
+	if player.total_throw in range(80,99):
+		player.score_80 -= 1
+		player.stat.get_children()[2].get_children()[1].text = str(player.score_80) 
+	elif player.total_throw in range(100,139):
+		player.score_100 -= 1
+		player.stat.get_children()[3].get_children()[1].text = str(player.score_100) 
+	elif player.total_throw in range(140,179):
+		player.score_140 -= 1
+		player.stat.get_children()[4].get_children()[1].text = str(player.score_140) 
+	elif player.total_throw >= 180:
+		player.score_180 -= 1
+		player.stat.get_children()[5].get_children()[1].text = str(player.score_180) 
 func _reset_input():
 	dart_1_label.text = ""
 	dart_1_value_check = false
