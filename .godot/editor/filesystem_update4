@@ -1,2 +1,4 @@
-res://x_01_duo.tscn
-res://main_menu/game/x_01/x_01_duo.tscn
+res://main_menu/player/player_menu.tscn
+res://player_list.gd
+res://player_list.tscn
+res://main_menu/player/player_menu.gd

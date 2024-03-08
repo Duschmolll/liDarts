@@ -1,1 +1,3 @@
 Arrow: https://www.flaticon.com/free-icon/navigation_4939901
+Modify: https://www.flaticon.com/free-icon/write_10613752?term=modify&page=1&position=28&origin=search&related_id=10613752
+Delete: https://www.flaticon.com/free-icon/x-button_458594?term=delete&page=1&position=38&origin=search&related_id=458594
