@@ -29,14 +29,12 @@ func save_data(path: String):
 	print("global_data.number_of_player: " + str(global_data.number_of_player))
 	if global_data.number_of_player > 0:
 		print('Test')
-		for i in range(1, global_data.number_of_player + 1):
-			var current_player = global_data.player_list["player_"+str(i)]
-			global_player["player_"+str(i)] = {
+		print(global_data.player_list.keys())
+		for key in global_data.player_list.keys():
+			var current_player = global_data.player_list[key]
+			global_player[key] = {
 				'name' = current_player.name
 			}
-			print("ezmkajeazmkejzamea")
-			print("The Current Player: " + current_player.name)
-		
 	var data = {
 		"global_data" = {
 			"number_of_player" = global_data.number_of_player,
@@ -65,11 +63,11 @@ func load_data(path: String):
 		global_data.number_of_player = int(data.global_data.number_of_player)
 		global_data.player_list = data.global_data.player_list
 		print(global_data.player_list)
-		for i in range(1, global_data.number_of_player + 1):
-			var temp = global_data.player_list["player_" + str(i)]
-			global_data.player_list["player_" + str(i)] = Player.new()
-			global_data.player_list["player_" + str(i)].name = temp.name
-		print(global_data.player_list["player_1"].name)
+
+		for key in data.global_data.player_list.keys():
+			var current_player = data.global_data.player_list[key]
+			global_data.player_list[key] = Player.new()
+			global_data.player_list[key].name = current_player.name
 	else:
 		printerr("Cannot open non-existant file at %s!" % [path])
 		
@@ -86,12 +84,19 @@ func _on_new_player_pressed():
 func _createPlayerList():
 	var grid = $MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PlayerListContainer/PanelContainer/MarginContainer/PlayerListControl/PlayerListGrid
 	const PLAYER_LIST = preload("res://player_list.tscn")
+	var grid_children = grid.get_children()
+	if len(grid_children) > 0:
+		for i in range(0, len(grid_children)):
+			grid.remove_child(grid_children[i])
 	if global_data.number_of_player > 0:
-		for i in range(1, global_data.number_of_player + 1):
+		var i = 0
+		for key in global_data.player_list.keys():
 			var instance = PLAYER_LIST.instantiate()
 			grid.add_child(instance)
-			grid.get_children()[i-1].get_children()[0].get_children()[0].get_children()[1].text = global_data.player_list["player_" + str(i)].name
-		print(self.get_children()[0])
+			grid.get_children()[i].get_children()[0].get_children()[0].get_children()[1].text = global_data.player_list[key].name
+			i += 1
+		print(i)
+	
 	
 func _on_button_pressed():
 	var player: Player = Player.new()
@@ -106,17 +111,21 @@ func _on_button_pressed():
 			if result.get_string() != "" || name == "":
 				name_line.clear()
 				name_line.placeholder_text= "Invalid Name"
-				print("Wrong: " + name) 
+
 		else:
-			print("All good: " + name)
-			global_data.player_list['player_'+str(global_data.number_of_player + 1)] = Player.new()
-			global_data.player_list["player_"+str(global_data.number_of_player + 1)].name = name
-			print("Player Name: " + global_data.player_list["player_"+str(global_data.number_of_player + 1)].name)
-			#print(global_data.player_list)
+			for key in global_data.player_list.keys():
+				if key.to_lower() == name.to_lower() :
+					name_line.clear()
+					name_line.placeholder_text= "Name already taken"
+					return
+					
+			global_data.player_list[str(name)] = Player.new()
+			global_data.player_list[str(name)].name = name
 			global_data.number_of_player += 1
-			#print(global_data.number_of_player)
 			save_data(SAVE_DIR + SAVE_FILE_NAME)
+			name_line.clear()
 			canvas.visible = false
+			_createPlayerList()
 	else:
 		name_line.clear()
 		name_line.placeholder_text= "Name too short"
