@@ -1,7 +1,7 @@
 class_name Player
 
 var name: String
-var flag: Texture
+var flag: String
 var dart_1: int = 0
 var dart_2: int = 0
 var dart_3: int = 0

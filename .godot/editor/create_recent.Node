@@ -1,3 +1,4 @@
+ReferenceRect
 AspectRatioContainer
 LineEdit
 MarginContainer
@@ -12,4 +13,3 @@ Label
 ColorRect
 ItemList
 TextEdit
-Control
