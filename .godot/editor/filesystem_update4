@@ -1,4 +1,5 @@
 res://main_menu/player/player_menu.tscn
-res://main_menu/player/player_menu.gd
 res://player_list.tscn
-res://player_list.gd
+res://country_list.tscn
+res://main_menu/game/x_01/script/player.gd
+res://main_menu/player/player_menu.gd
