@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="liDarts"
-run/main_scene="res://main_menu/main_menu.tscn"
+run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalData="*res://script/global_data.gd"
 
 [display]
 

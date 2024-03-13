@@ -1,5 +1,7 @@
-res://main_menu/player/player_menu.tscn
-res://player_list.tscn
-res://country_list.tscn
-res://main_menu/game/x_01/script/player.gd
-res://main_menu/player/player_menu.gd
+res://gamemode/game_selection.tscn
+res://script/global_data.gd
+res://gamemode/game_selection.gd
+res://main_menu.tscn
+res://script/main_menu.gd
+res://gamemode/x_01/x_01_duo.tscn
+res://gamemode/x_01/script/x_01_duo.gd
