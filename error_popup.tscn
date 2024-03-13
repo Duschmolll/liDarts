@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpckflmx3fapi"]
+[gd_scene load_steps=4 format=3 uid="uid://bpckflmx3fapi"]
 
 [ext_resource type="Script" path="res://script/error_popup.gd" id="1_bn7rf"]
+
+[sub_resource type="Shader" id="Shader_yqk8t"]
+code = "shader_type canvas_item;
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
+
+void fragment() {
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, 0.5);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q77j"]
+shader = SubResource("Shader_yqk8t")
 
 [node name="ErrorPopup" type="Control"]
 layout_mode = 3
@@ -12,6 +24,7 @@ grow_vertical = 2
 script = ExtResource("1_bn7rf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_5q77j")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

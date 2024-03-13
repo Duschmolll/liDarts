@@ -3,7 +3,8 @@ extends Control
 # Containers:
 @export var button_container: Node
 @export var dart_input_container: Node
-
+@export var player_01_container: Node
+@export var player_02_container: Node
 # Label:
 @export var dart_1_label: Node
 @export var dart_2_label: Node
@@ -17,12 +18,14 @@ var number_of_leg = 1
 var total_of_turn = 1
 
 var setting = X_01_Settings.new()
-var player_01 = Player.new()
-var player_02 = Player.new()
-var list_player: Array[Player] = [player_01, player_02]
-
+var player_01: String 
+var player_02: String 
+var list_player: Array[String]
+var key: Array
 
 func _ready():
+	GlobalData.load_data("user://data/data.json")
+	key = GlobalData.player_selected.keys()
 	# Set-in functions for all buttons:
 	for btn in button_container.get_children():
 		if btn.text.is_valid_int():
@@ -37,22 +40,27 @@ func _ready():
 	
 	# Set-in proprety of players
 	setting.score = 181
+	player_01 = key[0]
+	player_02 = key[1] 
+	list_player = [player_01, player_02]
+	GlobalData.player_list[key[0]].stat = player_01_container.statistic_container
+	GlobalData.player_list[key[0]].history = player_01_container.history_container
+	GlobalData.player_list[key[0]].target_score_label = player_01_container.score_label
+	GlobalData.player_list[key[0]].name_container = player_01_container.name_container
+
+	GlobalData.player_list[key[1]].stat = player_02_container.statistic_container
+	GlobalData.player_list[key[1]].history = player_02_container.history_container
+	GlobalData.player_list[key[1]].target_score_label = player_02_container.score_label
+	GlobalData.player_list[key[1]].name_container = player_02_container.name_container
 	
-	player_01.name = "Andrew"
-	player_01.stat = $MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats
-	player_01.history = $MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic
-	player_01.target_score_label = $MarginContainer/VBoxContainer/HBoxContainer/Player1/Score/Player1Score
-	player_01.name_label = $MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player/Name
-	
-	player_02.name = "John"
-	player_02.stat = $MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats
-	player_02.history = $MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic
-	player_02.target_score_label = $MarginContainer/VBoxContainer/HBoxContainer/Player2/Score/Player2Score
-	player_02.name_label = $MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player/Name
-	 
 	_start_game()
 	
 	
+func _process(delta):
+	if Input.is_action_just_pressed("InGameMenu"):
+			const in_game_menu_scene = preload("res://gamemode/scene/in_game_menu.tscn")
+			var instance = in_game_menu_scene.instantiate()
+			self.add_child(instance)
 
 func _number_buttons(btn):
 	var multiplier = 1
@@ -110,57 +118,56 @@ func _multiplier_buttons(btn):
 		dart_label.text = str(int(dart_label.text) * btn.name.to_int())
 
 func _start_game():
-	for i in range(len(list_player)):
+	for i in range(len(key)):
 		#Reseting Player Proprety
-		list_player[i].target_score = setting.score
-		list_player[i].number_of_turn = 0
-		list_player[i].turn = false
-		list_player[i].average = 0
-		list_player[i].score_80 = 0
-		list_player[i].score_100 = 0
-		list_player[i].score_140 = 0
-		list_player[i].score_180 = 0
-		list_player[i].name_label.text = list_player[i].name
+		GlobalData.player_list[key[i]].target_score = setting.score
+		GlobalData.player_list[key[i]].number_of_turn = 0
+		GlobalData.player_list[key[i]].turn = false
+		GlobalData.player_list[key[i]].average = 0
+		GlobalData.player_list[key[i]].score_80 = 0
+		GlobalData.player_list[key[i]].score_100 = 0
+		GlobalData.player_list[key[i]].score_140 = 0
+		GlobalData.player_list[key[i]].score_180 = 0
 		
 		#Resetting up the historic of throws
 		for k in range(9):
-			var temp = list_player[i].history.get_children()[k].get_children()[0].get_children()
+			var temp = GlobalData.player_list[key[i]].history.get_children()[k].get_children()[0].get_children()
 			temp[0].text = ""
 			temp[1].text = ""
-		list_player[i].history.get_children()[0].get_children()[0].get_children()[1].text = str(setting.score)
+		GlobalData.player_list[key[i]].history.get_children()[0].get_children()[0].get_children()[1].text = str(setting.score)
 		#Reset label of target score
-		list_player[i].target_score_label.text = str(setting.score)
+		GlobalData.player_list[key[i]].target_score_label.text = str(setting.score)
 		for k in range(0,3,2):
-			list_player[i].name_label.get_parent().get_children()[k].get_children()[0].visible = false
+			GlobalData.player_list[key[i]].name_container.get_children()[k].get_children()[0].visible = false
 		
 	#Loading up the stats of players:
 		for k in range(2,6):
-			list_player[i].stat.get_children()[k].get_children()[1].text = "0"
-		list_player[i].stat.get_children()[1].get_children()[1].text = str(list_player[i].leg)
-		list_player[i].stat.get_children()[7].get_children()[1].text = "0.00"
-		list_player[i].stat.get_children()[8].get_children()[1].text = "%.2f" % list_player[i].average_per_leg
+			GlobalData.player_list[key[i]].stat.get_children()[k].get_children()[1].text = "0"
+		GlobalData.player_list[key[i]].stat.get_children()[1].get_children()[1].text = str(GlobalData.player_list[key[i]].leg)
+		GlobalData.player_list[key[i]].stat.get_children()[7].get_children()[1].text = "0.00"
+		GlobalData.player_list[key[i]].stat.get_children()[8].get_children()[1].text = "%.2f" % GlobalData.player_list[key[i]].average_per_leg
 	
-	player_01.turn = true
-	player_01.name_label.get_parent().get_children()[0].get_children()[0].visible =  true
-	player_01.name_label.get_parent().get_children()[2].get_children()[0].visible =  true
+	GlobalData.player_list[key[0]].turn = true
+	GlobalData.player_list[key[0]].name_container.get_children()[0].get_children()[0].visible =  true
+	GlobalData.player_list[key[0]].name_container.get_children()[2].get_children()[0].visible =  true
 	
 func _update_score():
 	var player: Player
 	#Pick which player to update
-	if player_01.turn == true:
-		player = player_01
-		player_01.turn = false
-		player_02.turn = true
+	if GlobalData.player_list[key[0]].turn == true:
+		player = GlobalData.player_list[key[0]]
+		GlobalData.player_list[key[0]].turn = false
+		GlobalData.player_list[key[1]].turn = true
 		for k in range(0,3,2):
-			player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  false
-			player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = true
+			GlobalData.player_list[key[0]].name_container.get_children()[k].get_children()[0].visible =  false
+			GlobalData.player_list[key[1]].name_container.get_children()[k].get_children()[0].visible = true
 	else:
-		player = player_02
-		player_01.turn = true
-		player_02.turn = false
+		player = GlobalData.player_list[key[1]]
+		GlobalData.player_list[key[0]].turn = true
+		GlobalData.player_list[key[1]].turn = false
 		for k in range(0,3,2):
-			player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  true
-			player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = false
+			GlobalData.player_list[key[0]].name_container.get_children()[k].get_children()[0].visible =  true
+			GlobalData.player_list[key[1]].name_container.get_children()[k].get_children()[0].visible = false
 	
 	player.dart_1 = int(dart_1_label.text)
 	player.dart_2 = int(dart_2_label.text)
@@ -290,22 +297,22 @@ func _redo_input():
 
 	_reset_input()
 	#Pick which player to redo
-	if player_01.number_of_turn > 0 || player_02.number_of_turn > 0:
+	if GlobalData.player_list[key[0]].number_of_turn > 0 || GlobalData.player_list[key[1]].number_of_turn > 0:
 		var player: Player
-		if player_01.turn == true:
-			player = player_02
-			player_01.turn = false
-			player_02.turn = true
+		if GlobalData.player_list[key[0]].turn == true:
+			player = GlobalData.player_list[key[1]]
+			GlobalData.player_list[key[0]].turn = false
+			GlobalData.player_list[key[1]].turn = true
 			for k in range(0,3,2):
-				player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  false
-				player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = true
+				GlobalData.player_list[key[0]].name_container.get_children()[k].get_children()[0].visible =  false
+				GlobalData.player_list[key[1]].name_container.get_children()[k].get_children()[0].visible = true
 		else:
-			player = player_01
-			player_01.turn = true
-			player_02.turn = false
+			player = GlobalData.player_list[key[0]]
+			GlobalData.player_list[key[0]].turn = true
+			GlobalData.player_list[key[1]].turn = false
 			for k in range(0,3,2):
-				player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  true
-				player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = false
+				GlobalData.player_list[key[0]].name_container.get_children()[k].get_children()[0].visible =  true
+				GlobalData.player_list[key[1]].name_container.get_children()[k].get_children()[0].visible = false
 
 		if player.number_of_turn == 1:
 			var path_container = player.history.get_children()[1].get_children()[0].get_children()
@@ -334,18 +341,18 @@ func _redo_input():
 					cant_redo = false
 					break
 			if cant_redo == true:
-				if player_01.turn == true:
-					player_01.turn = false
-					player_02.turn = true
+				if GlobalData.player_list[key[0]].turn == true:
+					GlobalData.player_list[key[0]].turn = false
+					GlobalData.player_list[key[1]].turn = true
 					for k in range(0,3,2):
-						player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  false
-						player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = true
+						GlobalData.player_list[key[0]].name_container.get_children()[k].get_children()[0].visible =  false
+						GlobalData.player_list[key[1]].name_container.get_children()[k].get_children()[0].visible = true
 				else:
-					player_01.turn = true
-					player_02.turn = false
+					GlobalData.player_list[key[0]].turn = true
+					GlobalData.player_list[key[1]].turn = false
 					for k in range(0,3,2):
-						player_01.name_label.get_parent().get_children()[k].get_children()[0].visible =  true
-						player_02.name_label.get_parent().get_children()[k].get_children()[0].visible = false
+						GlobalData.player_list[key[0]].name_container.get_children()[k].get_children()[0].visible =  true
+						GlobalData.player_list[key[1]].name_container.get_children()[k].get_children()[0].visible = false
 		
 		player.target_score_label.text = str(player.target_score)
 		

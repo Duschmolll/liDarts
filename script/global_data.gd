@@ -7,6 +7,7 @@ const SECURITY_KEY = "0EZASQ"
 var player_list = {}
 var player_selected = {}
 var setting = {}
+var data_loaded = false
 
 func _ready():
 	verify_save_dir(SAVE_DIR)
@@ -67,6 +68,10 @@ func save_data(path: String):
 
 
 func load_data(path: String):
+	if data_loaded:
+		return
+	else:
+		data_loaded = true
 	if FileAccess.file_exists(path):
 		var file = FileAccess.open(path,FileAccess.READ)
 		if file == null:
@@ -102,6 +107,7 @@ func load_data(path: String):
 		GlobalData.setting['x01'].double_in = current_setting.double_in
 		GlobalData.setting['x01'].double_out = current_setting.double_out
 		GlobalData.setting['x01'].show_check_out = current_setting.show_check_out
+		print("Data has been loaded")
 	else:
 		printerr("Cannot open non-existant file at %s!" % [path])
 

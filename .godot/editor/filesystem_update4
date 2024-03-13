@@ -5,3 +5,5 @@ res://main_menu.tscn
 res://script/main_menu.gd
 res://gamemode/x_01/x_01_duo.tscn
 res://gamemode/x_01/script/x_01_duo.gd
+res://script/player.gd
+res://error_popup.tscn

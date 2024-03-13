@@ -1,10 +1,68 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8ff84k2lsxv4"]
+[gd_scene load_steps=10 format=3 uid="uid://c8ff84k2lsxv4"]
 
 [ext_resource type="Script" path="res://gamemode/x_01/script/x_01_duo.gd" id="1_5ysku"]
 [ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="2_vl7k6"]
 [ext_resource type="Texture2D" uid="uid://ciycfssdp6ljc" path="res://texture/turn_arrow.png" id="3_0ukao"]
 
-[node name="x01" type="Control" node_paths=PackedStringArray("button_container", "dart_input_container", "dart_1_label", "dart_2_label", "dart_3_label")]
+[sub_resource type="GDScript" id="GDScript_34fim"]
+script/source = "extends VBoxContainer
+
+@export var name_container: Node
+@export var statistic_container: Node
+@export var history_container: Node
+@export var score_label: Node
+"
+
+[sub_resource type="GDScript" id="GDScript_5qlxe"]
+script/source = "extends TextureRect
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var key = GlobalData.player_selected.keys()[0]
+	self.set_texture(load(GlobalData.player_list[key].flag))
+"
+
+[sub_resource type="GDScript" id="GDScript_8ko1t"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var key = GlobalData.player_selected.keys()[0]
+	self.text = GlobalData.player_list[key].name
+"
+
+[sub_resource type="GDScript" id="GDScript_44jur"]
+script/source = "extends VBoxContainer
+
+@export var name_container: Node
+@export var statistic_container: Node
+@export var history_container: Node
+@export var score_label: Node
+"
+
+[sub_resource type="GDScript" id="GDScript_0rsny"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var key = GlobalData.player_selected.keys()[1]
+	self.text = GlobalData.player_list[key].name
+"
+
+[sub_resource type="GDScript" id="GDScript_gia2k"]
+script/source = "extends TextureRect
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var key = GlobalData.player_selected.keys()[1]
+	self.set_texture(load(GlobalData.player_list[key].flag))
+"
+
+[node name="x01" type="Control" node_paths=PackedStringArray("button_container", "dart_input_container", "player_01_container", "player_02_container", "dart_1_label", "dart_2_label", "dart_3_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +72,8 @@ grow_vertical = 2
 script = ExtResource("1_5ysku")
 button_container = NodePath("MarginContainer/VBoxContainer/MarginContainer/PanelContainer/Input/GridContainer")
 dart_input_container = NodePath("MarginContainer/VBoxContainer/MarginContainer/PanelContainer/Input/DartScore")
+player_01_container = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Player1")
+player_02_container = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Player2")
 dart_1_label = NodePath("MarginContainer/VBoxContainer/MarginContainer/PanelContainer/Input/DartScore/Dart1Score/Dart1")
 dart_2_label = NodePath("MarginContainer/VBoxContainer/MarginContainer/PanelContainer/Input/DartScore/Dart2Score/Dart2")
 dart_3_label = NodePath("MarginContainer/VBoxContainer/MarginContainer/PanelContainer/Input/DartScore/Dart3Score/Dart3")
@@ -36,9 +96,14 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Player1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Player1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_container", "statistic_container", "history_container", "score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
+script = SubResource("GDScript_34fim")
+name_container = NodePath("Name/CenterContainer/Player")
+statistic_container = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic")
+history_container = NodePath("PanelContainer/MarginContainer/FlowContainer/History")
+score_label = NodePath("Score/Player1Score")
 
 [node name="Name" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1"]
 layout_mode = 2
@@ -56,6 +121,7 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 texture = ExtResource("2_vl7k6")
 expand_mode = 4
+script = SubResource("GDScript_5qlxe")
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name"]
 layout_mode = 2
@@ -85,6 +151,7 @@ text = "Krek
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+script = SubResource("GDScript_8ko1t")
 
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player"]
 custom_minimum_size = Vector2(69, 69)
@@ -126,13 +193,13 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 alignment = 2
 
-[node name="Stats" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer"]
+[node name="Statistic" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Total
@@ -140,16 +207,16 @@ text = "Total
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Legs" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="Legs" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/Legs"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Legs"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Legs:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/Legs"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Legs"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
@@ -157,122 +224,122 @@ text = "1
 "
 horizontal_alignment = 2
 
-[node name="80+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="80+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/80+"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/80+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "80+:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/80+"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/80+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="100+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="100+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/100+"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/100+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "100+:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/100+"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/100+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="140+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="140+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/140+"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/140+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "140+:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/140+"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/140+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="180+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="180+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/180+"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/180+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "180+:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/180+"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/180+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="Averages" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="Averages" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Averages"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Match" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="Match" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/Match"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Match"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Match:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/Match"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Match"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "180.00"
 horizontal_alignment = 2
 
-[node name="Leg" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="Leg" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/Leg"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Leg"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Leg:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Stats/Leg"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Leg"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="Historic" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer"]
+[node name="History" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -280,20 +347,20 @@ theme_override_font_sizes/font_size = 30
 text = "2"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "1"
 
-[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer2"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer2/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -301,21 +368,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer2/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer3"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer3/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -323,21 +390,21 @@ theme_override_font_sizes/font_size = 30
 text = "2"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer3/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer4"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer4/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -345,21 +412,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer4/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer5" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer5" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer5"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer5/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -367,21 +434,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer5/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer6" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer6" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer6"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer6/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -389,21 +456,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer6/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer7" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer7" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer7"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer7/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -411,21 +478,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer7/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer8" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer8" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer8"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer8/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -433,21 +500,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer8/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer9" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer9" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer9"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer9/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -455,16 +522,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer9/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="Player2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Player2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_container", "statistic_container", "history_container", "score_label")]
 layout_mode = 2
 size_flags_horizontal = 3
+script = SubResource("GDScript_44jur")
+name_container = NodePath("Name/CenterContainer/Player")
+statistic_container = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic")
+history_container = NodePath("PanelContainer/MarginContainer/FlowContainer/History")
+score_label = NodePath("Score/Player2Score")
 
 [node name="Name" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2"]
 layout_mode = 2
@@ -497,6 +569,7 @@ text = "Krek
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+script = SubResource("GDScript_0rsny")
 
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player"]
 custom_minimum_size = Vector2(69, 69)
@@ -516,7 +589,7 @@ flip_h = true
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name"]
 custom_minimum_size = Vector2(69, 0)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -526,6 +599,7 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 texture = ExtResource("2_vl7k6")
 expand_mode = 4
+script = SubResource("GDScript_gia2k")
 
 [node name="Score" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2"]
 layout_mode = 2
@@ -552,19 +626,19 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 alignment = 2
 
-[node name="Historic" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer"]
+[node name="History" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -572,21 +646,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer2"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer2/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -594,21 +668,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer2/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer3"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer3/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -616,21 +690,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer3/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer4"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer4/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -638,21 +712,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer4/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer5" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer5" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer5"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer5/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -660,21 +734,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer5/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer6" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer6" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer6"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer6/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -682,21 +756,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer6/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer7" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer7" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer7"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer7/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -704,21 +778,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer7/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer8" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer8" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer8"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer8/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -726,21 +800,21 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer8/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="CenterContainer9" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic"]
+[node name="CenterContainer9" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History"]
 layout_mode = 2
 
-[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer9"]
+[node name="Shot00" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer9/Shot00"]
+[node name="score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -748,20 +822,20 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 2
 
-[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Historic/CenterContainer9/Shot00"]
+[node name="rem_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9/Shot00"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="Stats" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer"]
+[node name="Statistic" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Total
@@ -769,16 +843,16 @@ text = "Total
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Legs" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="Legs" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/Legs"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/Legs"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Legs:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/Legs"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/Legs"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
@@ -786,103 +860,103 @@ text = "1
 "
 horizontal_alignment = 2
 
-[node name="80+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="80+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/80+"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/80+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "80+:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/80+"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/80+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="100+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="100+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/100+"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/100+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "100+:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/100+"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/100+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="140+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="140+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/140+"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/140+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "140+:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/140+"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/140+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="180+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="180+" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/180+"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/180+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "180+:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/180+"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/180+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="Averages" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="Averages" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Averages"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Match" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="Match" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/Match"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/Match"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Match:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/Match"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/Match"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "180.00"
 horizontal_alignment = 2
 
-[node name="Leg" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats"]
+[node name="Leg" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/Leg"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/Leg"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Leg:"
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Stats/Leg"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/PanelContainer/MarginContainer/FlowContainer/Statistic/Leg"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30

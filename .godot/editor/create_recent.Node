@@ -1,5 +1,6 @@
-CenterContainer
+CanvasLayer
 Control
+CenterContainer
 ColorRect
 Button
 PanelContainer
@@ -9,6 +10,5 @@ Label
 SpinBox
 LineEdit
 HBoxContainer
-CanvasLayer
 Container
 ReferenceRect

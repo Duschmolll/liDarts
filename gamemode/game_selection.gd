@@ -1,5 +1,5 @@
 extends Control
-
+#TODO: Stats
 var anim_can_up = true
 @export var selected_grid: Node
 @export var unselected_grid: Node
@@ -12,6 +12,9 @@ func _ready():
 	create_player_list()
 	GlobalData.load_data("user://data/data.json")
 
+func _process(delta):
+	if Input.is_action_just_pressed("InGameMenu"):
+			get_tree().change_scene_to_file("res://main_menu.tscn")
 
 func create_player_list():
 	const PLAYER_LIST = preload("res://gamemode/scene/player_list_button.tscn")
