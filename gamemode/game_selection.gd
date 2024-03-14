@@ -5,7 +5,7 @@ var anim_can_up = true
 @export var unselected_grid: Node
 @export var split_container: Node
 @export var x01_Canvas_Layer: Node
-@export var x01_Play_Button: Node
+@export var x01_Gamemode_Button: Node
 @export var x01_Spin_Box: Node
 
 func _ready():
@@ -78,7 +78,7 @@ func _on_x01_button_pressed(gamemode: String):
 			x01_Canvas_Layer.visible = true
 	else:
 		x01_Canvas_Layer.visible = false
-		x01_Play_Button.text = gamemode
+		x01_Gamemode_Button.text = gamemode
 		GlobalData.setting["x01"].score = str(gamemode)
 
 func _on_x01_setting_pressed(toggled: bool,setting: String):

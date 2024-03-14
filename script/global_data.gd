@@ -11,6 +11,7 @@ var data_loaded = false
 
 func _ready():
 	verify_save_dir(SAVE_DIR)
+	GlobalData.setting['x01'] = X_01_Settings.new()
 	load_data(SAVE_DIR + SAVE_FILE_NAME)
 
 
@@ -32,9 +33,20 @@ func save_data(path: String):
 			var current_player = GlobalData.player_list[key]
 			global_player[key] = {
 				'name' = current_player.name,
-				'flag' = current_player.flag
+				'flag' = current_player.flag,
+				'all_time_average_per_leg' = current_player.all_time_average_per_leg,
+				'all_time_average_per_throw' = current_player.all_time_average_per_throw,
+				'all_time_throw' = current_player.all_time_throw,
+				'all_time_dart' = current_player.all_time_dart,
+				'all_time_score_80' = current_player.all_time_score_80,
+				'all_time_score_100' = current_player.all_time_score_100,
+				'all_time_score_140' = current_player.all_time_score_140,
+				'all_time_score_180' = current_player.all_time_score_180,
+				'all_time_leg' = current_player.all_time_leg,
+				'all_time_leg_win' = current_player.all_time_leg_win,
+				'all_time_total_score' = current_player.all_time_total_score
 			}
-	
+				
 	if len(GlobalData.player_selected.keys()) > 0:
 		for key in GlobalData.player_selected.keys():
 			var current_player = GlobalData.player_selected[key]
@@ -92,6 +104,17 @@ func load_data(path: String):
 			GlobalData.player_list[key] = Player.new()
 			GlobalData.player_list[key].name = current_player.name
 			GlobalData.player_list[key].flag = current_player.flag
+			GlobalData.player_list[key].all_time_average_per_leg = current_player.all_time_average_per_leg
+			GlobalData.player_list[key].all_time_average_per_throw = current_player.all_time_average_per_throw
+			GlobalData.player_list[key].all_time_throw = current_player.all_time_throw
+			GlobalData.player_list[key].all_time_dart = current_player.all_time_dart
+			GlobalData.player_list[key].all_time_score_80 = current_player.all_time_score_80
+			GlobalData.player_list[key].all_time_score_100 = current_player.all_time_score_100
+			GlobalData.player_list[key].all_time_score_140 = current_player.all_time_score_140
+			GlobalData.player_list[key].all_time_score_180 = current_player.all_time_score_180
+			GlobalData.player_list[key].all_time_leg = current_player.all_time_leg
+			GlobalData.player_list[key].all_time_leg_win = current_player.all_time_leg_win
+			GlobalData.player_list[key].all_time_total_score = current_player.all_time_total_score
 		
 		for key in data.global_data.player_selected.keys():
 			var current_player = data.global_data.player_selected[key]

@@ -70,7 +70,7 @@ func _on_button_pressed():
 			GlobalData.player_list[str(name)].flag = country_flag.texture.resource_path
 			GlobalData.save_data(SAVE_DIR + SAVE_FILE_NAME)
 			name_line.clear()
-			country_flag.set_texture(load("res://img/countryFlag/World_Wide.png"))
+			country_flag.set_texture(load("res://texture/countryFlag/World_Wide.png"))
 			country_name.text = ""
 			name_line.placeholder_text = "Name"
 			canvas.visible = false
