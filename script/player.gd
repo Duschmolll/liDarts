@@ -18,6 +18,7 @@ var target_score_label = Label
 var history: VBoxContainer
 var stat: VBoxContainer
 var name_container: HBoxContainer 
+var check_out_label: Label
 
 var score_80: int = 0
 var score_100: int = 0

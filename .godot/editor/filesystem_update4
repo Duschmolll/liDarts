@@ -1,9 +1,4 @@
-res://error_popup.tscn
-res://script/error_popup.gd
 res://gamemode/x_01/x_01_duo.tscn
 res://gamemode/x_01/script/x_01_duo.gd
-res://script/player.gd
-res://script/global_data.gd
 res://gamemode/game_selection.tscn
-res://player/script/player_menu.gd
-res://gamemode/game_selection.gd
+res://script/player.gd

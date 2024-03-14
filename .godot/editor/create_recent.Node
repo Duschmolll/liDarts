@@ -1,3 +1,5 @@
+MarginContainer
+Label
 CanvasLayer
 Control
 CenterContainer
@@ -5,8 +7,6 @@ ColorRect
 Button
 PanelContainer
 VBoxContainer
-MarginContainer
-Label
 SpinBox
 LineEdit
 HBoxContainer

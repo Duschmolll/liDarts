@@ -1,5 +1,5 @@
 extends Control
-#TODO: Check Out
+
 # Containers:
 @export var button_container: Node
 @export var dart_input_container: Node
@@ -45,12 +45,14 @@ func _ready():
 	GlobalData.player_list[key[0]].history = player_01_container.history_container
 	GlobalData.player_list[key[0]].target_score_label = player_01_container.score_label
 	GlobalData.player_list[key[0]].name_container = player_01_container.name_container
-
+	GlobalData.player_list[key[0]].check_out_label = player_01_container.check_out_label
+	
 	GlobalData.player_list[key[1]].stat = player_02_container.statistic_container
 	GlobalData.player_list[key[1]].history = player_02_container.history_container
 	GlobalData.player_list[key[1]].target_score_label = player_02_container.score_label
 	GlobalData.player_list[key[1]].name_container = player_02_container.name_container
-	
+	GlobalData.player_list[key[1]].check_out_label = player_02_container.check_out_label
+
 	start_game()
 
 
@@ -273,6 +275,9 @@ func new_score(player: Player, new_score):
 		path_container[1].text = str(player.target_score)
 		
 	player.number_of_turn += 1
+	if GlobalData.setting["x01"].show_check_out:
+		print(player.target_score)
+		check_out(player)
 	update_stats_average(player)
 
 
@@ -297,7 +302,7 @@ func bust(player: Player):
 		var path_container = player.history.get_children()[8].get_children()[0].get_children()
 		path_container[0].text = "0"
 		path_container[1].text = str(player.target_score)
-
+	
 	player.number_of_turn += 1
 	update_stats_average(player)
 
@@ -422,3 +427,62 @@ func update_stat_global(player: Player):
 		GlobalData.player_list[key[i]].all_time_score_180 += GlobalData.player_list[key[i]].score_180
 	
 	GlobalData.save_data("user://data/data.json")
+
+
+func check_out(player: Player):
+	var check_out_array = check_out_calculate(player.target_score)
+	var part_01: String
+	var part_02: String
+	var part_03: String
+	var check_out_string:String
+	if check_out_array[0] == 0:
+		player.check_out_label.text = ""
+	else:
+		for i in check_out_array:
+			if i == 0:
+				check_out_string += ""
+			elif i % 3 == 0:
+				check_out_string += "T" + str(i / 3) + " - "
+			elif i % 2 == 0:
+				check_out_string += "D" + str(i / 2) + " - "
+			else:
+				check_out_string += str(i) + " - "
+		
+		player.check_out_label.text = check_out_string.left(check_out_string.length() - 3)
+
+
+func check_out_calculate(score: int):
+	print(score)
+	var dart
+	var dart_value = [60,57,54,51,50,48,45,42,40,39,38,36,34,33,32,30,28,26,25,24,22,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
+	print(GlobalData.setting['x01'].double_out)
+	for i in dart_value:
+		dart = i
+		if dart == score and not GlobalData.setting['x01'].double_out:
+			return([i,0,0])
+		elif dart == score and i % 2 == 0:
+			return([i,0,0])
+		else:
+			for k in dart_value:
+				dart += k
+				if dart == score and not GlobalData.setting['x01'].double_out:
+					return([i,k,0])
+				elif dart == score and k % 2 == 0:
+					return([i,k,0])
+				else:
+					for x in dart_value:
+						dart += x
+						if dart == score and not GlobalData.setting['x01'].double_out:
+							return([i,k,x])
+						elif dart == score and x % 2 == 0:
+							return([i,k,x])
+						dart -= x
+				dart -= k
+		dart -= i
+	return ([0,0,0])
+
+
+
+
+
+
