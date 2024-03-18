@@ -276,7 +276,6 @@ func new_score(player: Player, new_score):
 		
 	player.number_of_turn += 1
 	if GlobalData.setting["x01"].show_check_out:
-		print(player.target_score)
 		check_out(player)
 	update_stats_average(player)
 
@@ -374,11 +373,12 @@ func back_stats(player: Player):
 	if player.number_of_turn == 0:
 		player.average = 0.00
 	else:
-		player.average = float(player.total_score) / float(player.number_of_turn)
+		player.average = player.average - (player.total_throw - player.average) / float(player.number_of_turn)
 	player.stat.get_children()[7].get_children()[1].text =  "%.2f" % player.average 
-	player.average_per_leg = player.average / number_of_leg
+	
+	player.average_per_leg = player.average_per_leg - (player.average_per_leg - player.average ) / number_of_leg
 	player.stat.get_children()[8].get_children()[1].text = "%.2f" % player.average_per_leg
-		
+	
 	if player.total_throw in range(80,99):
 		player.score_80 -= 1
 		player.stat.get_children()[2].get_children()[1].text = str(player.score_80) 
@@ -431,10 +431,8 @@ func update_stat_global(player: Player):
 
 func check_out(player: Player):
 	var check_out_array = check_out_calculate(player.target_score)
-	var part_01: String
-	var part_02: String
-	var part_03: String
 	var check_out_string:String
+	
 	if check_out_array[0] == 0:
 		player.check_out_label.text = ""
 	else:
@@ -452,10 +450,9 @@ func check_out(player: Player):
 
 
 func check_out_calculate(score: int):
-	print(score)
 	var dart
 	var dart_value = [60,57,54,51,50,48,45,42,40,39,38,36,34,33,32,30,28,26,25,24,22,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
-	print(GlobalData.setting['x01'].double_out)
+	
 	for i in dart_value:
 		dart = i
 		if dart == score and not GlobalData.setting['x01'].double_out:

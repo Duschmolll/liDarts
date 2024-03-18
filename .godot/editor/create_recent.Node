@@ -1,14 +1,14 @@
+HBoxContainer
+ColorRect
 MarginContainer
 Label
 CanvasLayer
 Control
 CenterContainer
-ColorRect
 Button
 PanelContainer
 VBoxContainer
 SpinBox
 LineEdit
-HBoxContainer
 Container
 ReferenceRect

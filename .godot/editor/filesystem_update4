@@ -1,4 +1,5 @@
-res://gamemode/x_01/x_01_duo.tscn
+res://player/player_menu.tscn
+res://texture/blur.gdshader
 res://gamemode/x_01/script/x_01_duo.gd
-res://gamemode/game_selection.tscn
-res://script/player.gd
+res://error_popup.tscn
+res://gamemode/x_01/x_01_duo.tscn
