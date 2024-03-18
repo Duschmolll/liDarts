@@ -5,3 +5,6 @@ res://player/scene/country_list.tscn
 res://player/script/country_list.gd
 res://player/script/player_menu.gd
 res://gamemode/game_selection.tscn
+res://player/scene/player_list.tscn
+res://player/script/player_list.gd
+res://gamemode/game_selection.gd

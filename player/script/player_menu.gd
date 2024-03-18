@@ -18,6 +18,7 @@ func _on_back_to_menu_pressed():
 func _on_new_player_pressed():
 	const add_player_scene = preload("res://add_player.tscn")
 	var instance = add_player_scene.instantiate()
+	instance.parent = self
 	self.add_child(instance)
 
 

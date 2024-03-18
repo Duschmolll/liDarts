@@ -10,6 +10,8 @@ script/source = "extends Node
 @export var country_texture: TextureRect
 @export var country_line: LineEdit
 @export var country_scroll: ScrollContainer
+var parent: Node
+
 
 func _ready():
 	create_flag_list()
@@ -20,33 +22,34 @@ func _on_return_pressed():
 
 
 func _on_validate_pressed():
-	var name: String = player_line.text
+	var user_name: String = player_line.text
 	var re = RegEx.new()
 	re.compile(\"[\\\\d\\\\s]+\")
-	var result = re.search(name)
+	var result = re.search(user_name)
 
-	if len(name) > 3:
+	if len(user_name) > 3:
 		if result:
-			if result.get_string() != \"\" || name == \"\":
+			if result.get_string() != \"\" || user_name == \"\":
 				player_line.clear()
 				player_line.placeholder_text= \"Invalid Name\"
 
 		else:
 			for key in GlobalData.player_list.keys():
-				if key.to_lower() == name.to_lower() :
+				if key.to_lower() == user_name.to_lower() :
 					player_line.clear()
 					player_line.placeholder_text= \"Name already taken\"
 					return
 					
-			GlobalData.player_list[str(name)] = Player.new()
-			GlobalData.player_list[str(name)].name = name
-			GlobalData.player_list[str(name)].flag = country_texture.texture.resource_path
+			GlobalData.player_list[str(user_name)] = Player.new()
+			GlobalData.player_list[str(user_name)].name = user_name
+			GlobalData.player_list[str(user_name)].flag = country_texture.texture.resource_path
 			GlobalData.save_data(GlobalData.SAVE_DIR + GlobalData.SAVE_FILE_NAME)
 			player_line.clear()
 			country_texture.set_texture(load(\"res://texture/countryFlag/World_Wide.png\"))
 			country_line.text = \"\"
 			player_line.placeholder_text = \"Name\"
-			get_node(\"/root\").get_children()[1].player_list_updated()
+			parent.player_list_updated()
+			self.queue_free()
 	else:
 		player_line.clear()
 		player_line.placeholder_text= \"Name too short\"
@@ -91,7 +94,7 @@ func _on_line_edit_country_focus_entered():
 func _on_line_edit_country_text_changed(new_text):
 	for i in country_scroll.get_children()[0].get_child_count():
 		var country_name_btn = country_scroll.get_children()[0].get_children()[i].get_children()[0].get_children()[1]
-		if !country_name_btn.text.to_lower().begins_with(country_line.text.to_lower()):
+		if !country_name_btn.text.to_lower().begins_with(new_text.to_lower()):
 			country_scroll.get_children()[0].get_children()[i].visible = false
 		else:
 			country_scroll.get_children()[0].get_children()[i].visible = true

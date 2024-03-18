@@ -130,3 +130,13 @@ func create_error(title: String, desc: String):
 	instance.get_node('CenterContainer/PanelContainer/VBoxContainer/Desc').text = desc
 	self.add_child(instance)
 
+
+func _on_add_player_pressed():
+	const add_player_scene = preload("res://add_player.tscn")
+	var instance = add_player_scene.instantiate()
+	instance.parent = self
+	self.add_child(instance)
+
+func player_list_updated():
+	create_player_list()
+

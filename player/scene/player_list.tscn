@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dqt42h481gt24" path="res://texture/ui/delete.png" id="5_crc3b"]
 [ext_resource type="Texture2D" uid="uid://sjk35bp63qvd" path="res://texture/ui/cross.png" id="6_7bnnl"]
 
-[node name="AspectRatioContainer" type="AspectRatioContainer"]
+[node name="PlayerList" type="AspectRatioContainer"]
 script = ExtResource("1_6yxb5")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -82,7 +82,7 @@ stretch_mode = 5
 
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer3/ButtonEdit" to="." method="_on_button_edit_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer3/ButtonValidate" to="." method="_on_button_validate_pressed"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete" to="." method="_on_button_delete_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonCancel" to="." method="_on_button_cancel_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonCancel" to="." method="_on_texture_button_pressed"]
