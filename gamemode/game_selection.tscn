@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgnf5iywlcnm"]
+[gd_scene load_steps=8 format=3 uid="uid://cgnf5iywlcnm"]
 
 [ext_resource type="Script" path="res://gamemode/game_selection.gd" id="1_4ceev"]
-[ext_resource type="Texture2D" uid="uid://csmjlh88yxtjc" path="res://texture/countryFlag/World_Wide.png" id="2_w003g"]
 
 [sub_resource type="GDScript" id="GDScript_ql431"]
 script/source = "extends Button
@@ -72,7 +71,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4ceev")
 selected_grid = NodePath("MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer2/MarginContainer/ScrollContainer/GCSelectedPlayer")
-unselected_grid = NodePath("MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/GCUnselectedPlayer")
+unselected_grid = NodePath("MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/GCUnselectedPlayer")
 split_container = NodePath("MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer")
 x01_Canvas_Layer = NodePath("MarginContainer/VBoxContainer/GameModeContainer/MarginContainer/PanelContainer/VBoxContainer/ButtonX01/CanvasLayer")
 x01_Gamemode_Button = NodePath("MarginContainer/VBoxContainer/GameModeContainer/MarginContainer/PanelContainer/VBoxContainer/ButtonX01")
@@ -386,7 +385,7 @@ size_flags_horizontal = 3
 
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2"]
 layout_mode = 2
-split_offset = 350
+split_offset = 400
 dragger_visibility = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer"]
@@ -430,7 +429,7 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 20
-text = "Add Player"
+text = "Player List:"
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer"]
@@ -447,53 +446,24 @@ layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="GCUnselectedPlayer" type="GridContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="GCUnselectedPlayer" type="GridContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="AddPlayer" type="Button" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer"]
+[node name="AddPlayer" type="Button" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
-flat = true
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/AddPlayer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/AddPlayer/PanelContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/AddPlayer/PanelContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(25, 25)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="Flag" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/AddPlayer/PanelContainer/HBoxContainer/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("2_w003g")
-expand_mode = 3
-
-[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/AddPlayer/PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(215, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-text = "Create a new player"
-horizontal_alignment = 1
+size_flags_horizontal = 4
+text = "Create a Player"
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -541,4 +511,4 @@ text = "TEST"
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer2" to="." method="_on_v_box_container_2_mouse_entered"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer" to="." method="_on_v_box_container_mouse_entered"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer" to="." method="_on_v_box_container_mouse_exited"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/AddPlayer" to="." method="_on_add_player_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/AddPlayer" to="." method="_on_add_player_pressed"]

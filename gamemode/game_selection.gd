@@ -44,10 +44,13 @@ func create_player_list():
 	if len(GlobalData.player_selected.keys()) > 0:
 		var i = 0
 		for key in GlobalData.player_selected.keys():
-				var instance = PLAYER_LIST.instantiate()
-				selected_grid.add_child(instance)
-				selected_grid.get_children()[i].get_children()[0].get_children()[0].get_children()[1].text = GlobalData.player_selected[key].name
-				selected_grid.get_children()[i].get_children()[0].get_children()[0].get_children()[0].get_children()[0].set_texture(load(GlobalData.player_selected[key].flag))
+				if key in GlobalData.player_list:
+					var instance = PLAYER_LIST.instantiate()
+					selected_grid.add_child(instance)
+					selected_grid.get_children()[i].get_children()[0].get_children()[0].get_children()[1].text = GlobalData.player_selected[key].name
+					selected_grid.get_children()[i].get_children()[0].get_children()[0].get_children()[0].get_children()[0].set_texture(load(GlobalData.player_selected[key].flag))
+				else:
+					GlobalData.player_selected.erase(key)
 				i += 1
 
 
