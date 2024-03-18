@@ -1,5 +1,7 @@
 res://player/player_menu.tscn
 res://texture/blur.gdshader
-res://gamemode/x_01/script/x_01_duo.gd
-res://error_popup.tscn
-res://gamemode/x_01/x_01_duo.tscn
+res://add_player.tscn
+res://player/scene/country_list.tscn
+res://player/script/country_list.gd
+res://player/script/player_menu.gd
+res://gamemode/game_selection.tscn

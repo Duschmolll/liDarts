@@ -1,0 +1,233 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8q6v6cep8lt1"]
+
+[ext_resource type="Shader" path="res://texture/blur.gdshader" id="1_hcisb"]
+[ext_resource type="Texture2D" uid="uid://csmjlh88yxtjc" path="res://texture/countryFlag/World_Wide.png" id="2_nxten"]
+
+[sub_resource type="GDScript" id="GDScript_3rnwi"]
+script/source = "extends Node
+
+@export var player_line: LineEdit
+@export var country_texture: TextureRect
+@export var country_line: LineEdit
+@export var country_scroll: ScrollContainer
+
+func _ready():
+	create_flag_list()
+
+
+func _on_return_pressed():
+	self.queue_free()
+
+
+func _on_validate_pressed():
+	var name: String = player_line.text
+	var re = RegEx.new()
+	re.compile(\"[\\\\d\\\\s]+\")
+	var result = re.search(name)
+
+	if len(name) > 3:
+		if result:
+			if result.get_string() != \"\" || name == \"\":
+				player_line.clear()
+				player_line.placeholder_text= \"Invalid Name\"
+
+		else:
+			for key in GlobalData.player_list.keys():
+				if key.to_lower() == name.to_lower() :
+					player_line.clear()
+					player_line.placeholder_text= \"Name already taken\"
+					return
+					
+			GlobalData.player_list[str(name)] = Player.new()
+			GlobalData.player_list[str(name)].name = name
+			GlobalData.player_list[str(name)].flag = country_texture.texture.resource_path
+			GlobalData.save_data(GlobalData.SAVE_DIR + GlobalData.SAVE_FILE_NAME)
+			player_line.clear()
+			country_texture.set_texture(load(\"res://texture/countryFlag/World_Wide.png\"))
+			country_line.text = \"\"
+			player_line.placeholder_text = \"Name\"
+			get_node(\"/root\").get_children()[1].player_list_updated()
+	else:
+		player_line.clear()
+		player_line.placeholder_text= \"Name too short\"
+
+
+func create_flag_list():
+	const COUNTRY_LIST = preload(\"res://player/scene/country_list.tscn\")
+	var countries = get_all_flag()
+	var i = 0
+	
+	for key in countries.keys():
+		var instance = COUNTRY_LIST.instantiate()
+		country_scroll.get_children()[0].add_child(instance)
+		country_scroll.get_children()[0].get_children()[i].get_children()[0].get_children()[0].get_children()[0].set_texture(load(countries[key].path))
+		country_scroll.get_children()[0].get_children()[i].get_children()[0].get_children()[1].text = countries[key].name
+		i += 1
+
+
+func get_all_flag():
+	var countries = {}
+	var dir = DirAccess.open(\"res://texture/countryFlag\")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != \"\":
+			if file_name.get_extension() == \"png\":
+				countries[file_name.replace('.png','')] = {
+					\"name\" = file_name.replace('.png','').replace('_', ' '),
+					\"path\" = (\"res://texture/countryFlag/\" + file_name)
+				}
+			file_name = dir.get_next()
+	else:
+		printerr(\"An error occurred when trying to access the path.\")
+	return countries
+
+
+func _on_line_edit_country_focus_entered():
+	country_line.text = \"\"
+	_on_line_edit_country_text_changed(\"\")
+	country_scroll.visible = true
+
+func _on_line_edit_country_text_changed(new_text):
+	for i in country_scroll.get_children()[0].get_child_count():
+		var country_name_btn = country_scroll.get_children()[0].get_children()[i].get_children()[0].get_children()[1]
+		if !country_name_btn.text.to_lower().begins_with(country_line.text.to_lower()):
+			country_scroll.get_children()[0].get_children()[i].visible = false
+		else:
+			country_scroll.get_children()[0].get_children()[i].visible = true
+	country_scroll.get_children()[0].visible = true
+
+
+func _on_line_edit_name_focus_entered():
+		country_scroll.visible = false
+
+
+func _on_item_list_item_selected(country_name, country_flag):
+	country_texture.set_texture(country_flag)
+	country_line.text = country_name
+	country_scroll.visible = false
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_udk22"]
+shader = ExtResource("1_hcisb")
+
+[sub_resource type="GDScript" id="GDScript_0s81u"]
+script/source = "extends VBoxContainer
+
+@export var parent: Node
+"
+
+[node name="AddPlayer" type="Node" node_paths=PackedStringArray("player_line", "country_texture", "country_line", "country_scroll")]
+script = SubResource("GDScript_3rnwi")
+player_line = NodePath("PanelContainer/MarginContainer/CreatePlayer/HBoxContainer/LineEditName")
+country_texture = NodePath("PanelContainer/MarginContainer/CreatePlayer/HBoxContainer2/MarginContainer/Flag")
+country_line = NodePath("PanelContainer/MarginContainer/CreatePlayer/HBoxContainer2/LineEditCountry")
+country_scroll = NodePath("PanelContainer/MarginContainer/CreatePlayer/ScrollContainer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_udk22")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer"]
+layout_mode = 2
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CreatePlayer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/CreatePlayer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LineEditName" type="LineEdit" parent="PanelContainer/MarginContainer/CreatePlayer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Name"
+alignment = 1
+max_length = 15
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/CreatePlayer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/CreatePlayer/HBoxContainer2"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Flag" type="TextureRect" parent="PanelContainer/MarginContainer/CreatePlayer/HBoxContainer2/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_nxten")
+expand_mode = 3
+
+[node name="LineEditCountry" type="LineEdit" parent="PanelContainer/MarginContainer/CreatePlayer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 25
+placeholder_text = "World Wide"
+alignment = 1
+text_direction = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/CreatePlayer"]
+visible = false
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/CreatePlayer/ScrollContainer" node_paths=PackedStringArray("parent")]
+layout_mode = 2
+size_flags_horizontal = 3
+script = SubResource("GDScript_0s81u")
+parent = NodePath("../../../../..")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/CreatePlayer"]
+layout_mode = 2
+
+[node name="Return" type="Button" parent="PanelContainer/MarginContainer/CreatePlayer/HBoxContainer3"]
+layout_mode = 2
+text = "Return"
+
+[node name="Validate" type="Button" parent="PanelContainer/MarginContainer/CreatePlayer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Validate"
+
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/CreatePlayer/HBoxContainer/LineEditName" to="." method="_on_line_edit_name_focus_entered"]
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/CreatePlayer/HBoxContainer2/LineEditCountry" to="." method="_on_line_edit_country_focus_entered"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/CreatePlayer/HBoxContainer2/LineEditCountry" to="." method="_on_line_edit_country_text_changed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/CreatePlayer/HBoxContainer3/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/CreatePlayer/HBoxContainer3/Validate" to="." method="_on_validate_pressed"]

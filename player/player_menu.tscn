@@ -84,6 +84,7 @@ layout_mode = 2
 text = "Add Player"
 
 [node name="PlayerCanvas" type="CanvasLayer" parent="MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/AddPlayerContainer/PanelContainer" node_paths=PackedStringArray("player_line", "country_texture", "country_line", "country_scroll")]
+visible = false
 offset = Vector2(800, 300)
 transform = Transform2D(1, 0, 0, 1, 800, 300)
 script = SubResource("GDScript_m4k20")
