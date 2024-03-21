@@ -1,7 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://dapgtwefc22ye"]
 
-[ext_resource type="Script" path="res://gamemode/script/player_list_button.gd" id="1_ov6ke"]
 [ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="2_n76bn"]
+
+[sub_resource type="GDScript" id="GDScript_c04mc"]
+script/source = "extends Button
+
+@export var player_name: Label
+
+func _on_pressed():
+	var parent_node = self.get_node(\"/root/Statistic\")
+	parent_node.get_statistic(player_name.text)
+"
 
 [node name="Button" type="Button" node_paths=PackedStringArray("player_name")]
 custom_minimum_size = Vector2(200, 30)
@@ -9,7 +18,7 @@ offset_right = 264.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 flat = true
-script = ExtResource("1_ov6ke")
+script = SubResource("GDScript_c04mc")
 player_name = NodePath("PanelContainer/HBoxContainer/Name")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

@@ -7,6 +7,7 @@ var anim_can_up = true
 @export var x01_Canvas_Layer: Node
 @export var x01_Gamemode_Button: Node
 @export var x01_Spin_Box: Node
+@export var stat_container: MarginContainer
 
 func _ready():
 	create_player_list()
@@ -143,3 +144,17 @@ func _on_add_player_pressed():
 func player_list_updated():
 	create_player_list()
 
+func get_stats(player_name):
+	stat_container.player_label.text = str(GlobalData.player_list[player_name].name)
+	stat_container.player_flag.set_texture(load(GlobalData.player_list[player_name].flag))
+	stat_container.game_played.text = str(GlobalData.player_list[player_name].name)
+	stat_container.leg_played.text = str(GlobalData.player_list[player_name].all_time_leg)
+	stat_container.game_won.text = str(GlobalData.player_list[player_name].name)
+	stat_container.break_leg.text = str(GlobalData.player_list[player_name].name)
+	stat_container.throw.text = str(GlobalData.player_list[player_name].all_time_throw)
+	stat_container.dart.text = str(GlobalData.player_list[player_name].all_time_dart)
+	stat_container.play_time.text = str(GlobalData.player_list[player_name].name)
+	stat_container.average.text = str(GlobalData.player_list[player_name].all_time_average_per_throw)
+	stat_container.average_per_leg.text = str(GlobalData.player_list[player_name].all_time_average_per_leg)
+	stat_container.hovered.visible = true
+	stat_container.no_hovered.visible = false

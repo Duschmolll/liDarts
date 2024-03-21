@@ -3,6 +3,8 @@ extends Control
 @export var player_list_grid: GridContainer
 @export var player_stats_hbox: HBoxContainer
 var local_player_selected = []
+
+
 func _ready():
 	create_player_list()
 
@@ -21,6 +23,7 @@ func create_player_list():
 			player_list_grid.get_children()[i].get_children()[0].get_children()[0].get_children()[1].text = GlobalData.player_list[key].name
 			player_list_grid.get_children()[i].get_children()[0].get_children()[0].get_children()[0].get_children()[0].set_texture(load(GlobalData.player_list[key].flag))
 			i += 1
+
 
 func get_statistic(player):
 	if len(local_player_selected) < 2:

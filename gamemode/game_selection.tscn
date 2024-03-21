@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgnf5iywlcnm"]
+[gd_scene load_steps=10 format=3 uid="uid://cgnf5iywlcnm"]
 
 [ext_resource type="Script" path="res://gamemode/game_selection.gd" id="1_4ceev"]
+[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="2_keoss"]
 
 [sub_resource type="GDScript" id="GDScript_ql431"]
 script/source = "extends Button
@@ -62,7 +63,25 @@ func _ready():
 
 "
 
-[node name="GameSelection" type="Control" node_paths=PackedStringArray("selected_grid", "unselected_grid", "split_container", "x01_Canvas_Layer", "x01_Gamemode_Button", "x01_Spin_Box")]
+[sub_resource type="GDScript" id="GDScript_5iitg"]
+script/source = "extends MarginContainer
+
+@export var player_flag: TextureRect
+@export var player_label: Label
+@export var game_played: Label
+@export var leg_played: Label
+@export var game_won: Label
+@export var break_leg: Label
+@export var throw: Label
+@export var dart: Label
+@export var play_time: Label
+@export var average: Label
+@export var average_per_leg: Label
+@export var hovered: VBoxContainer
+@export var no_hovered: Label
+"
+
+[node name="GameSelection" type="Control" node_paths=PackedStringArray("selected_grid", "unselected_grid", "split_container", "x01_Canvas_Layer", "x01_Gamemode_Button", "x01_Spin_Box", "stat_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,12 +89,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4ceev")
-selected_grid = NodePath("MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer2/MarginContainer/ScrollContainer/GCSelectedPlayer")
-unselected_grid = NodePath("MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/GCUnselectedPlayer")
-split_container = NodePath("MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer")
+selected_grid = NodePath("MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer2/MarginContainer/ScrollContainer/GCSelectedPlayer")
+unselected_grid = NodePath("MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/GCUnselectedPlayer")
+split_container = NodePath("MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer")
 x01_Canvas_Layer = NodePath("MarginContainer/VBoxContainer/GameModeContainer/MarginContainer/PanelContainer/VBoxContainer/ButtonX01/CanvasLayer")
 x01_Gamemode_Button = NodePath("MarginContainer/VBoxContainer/GameModeContainer/MarginContainer/PanelContainer/VBoxContainer/ButtonX01")
 x01_Spin_Box = NodePath("MarginContainer/VBoxContainer/GameModeContainer/MarginContainer/PanelContainer/VBoxContainer/MarginContainer4/HBoxContainer/CenterContainer/VBoxContainer/HBoxContainer/SpinBox")
+stat_container = NodePath("MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -321,9 +341,9 @@ size_flags_vertical = 3
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 25
+theme_override_constants/margin_left = 350
 theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
+theme_override_constants/margin_right = 350
 theme_override_constants/margin_bottom = 25
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer"]
@@ -371,7 +391,7 @@ text = "vs. Computer"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="PlayerContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
@@ -379,19 +399,19 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2"]
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2"]
 layout_mode = 2
 split_offset = 400
 dragger_visibility = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 20
@@ -399,7 +419,7 @@ text = "Selected Players"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -408,12 +428,12 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer2/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer2/MarginContainer"]
 layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="GCSelectedPlayer" type="GridContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer2/MarginContainer/ScrollContainer"]
+[node name="GCSelectedPlayer" type="GridContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer2/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -421,10 +441,10 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 1
@@ -432,7 +452,7 @@ theme_override_font_sizes/font_size = 20
 text = "Player List:"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -441,59 +461,307 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
-[node name="GCUnselectedPlayer" type="GridContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="GCUnselectedPlayer" type="GridContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="AddPlayer" type="Button" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="AddPlayer" type="Button" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Create a Player"
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="StatisticContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer2"]
+[node name="PlayerStatsContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2" node_paths=PackedStringArray("player_flag", "player_label", "game_played", "leg_played", "game_won", "break_leg", "throw", "dart", "play_time", "average", "average_per_leg", "hovered", "no_hovered")]
 layout_mode = 2
-theme_override_constants/separation = 100
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+script = SubResource("GDScript_5iitg")
+player_flag = NodePath("VBoxContainer/PlayerName/HBoxContainer/MarginContainer/Flag")
+player_label = NodePath("VBoxContainer/PlayerName/HBoxContainer/Name")
+game_played = NodePath("VBoxContainer/GamePlayed/HBoxContainer/Input")
+leg_played = NodePath("VBoxContainer/LegPlayed/HBoxContainer/Input")
+game_won = NodePath("VBoxContainer/GameWon/HBoxContainer/Input")
+break_leg = NodePath("VBoxContainer/BreakLeg/HBoxContainer/Input")
+throw = NodePath("VBoxContainer/Throw/HBoxContainer/Input")
+dart = NodePath("VBoxContainer/Dart/HBoxContainer/Input")
+play_time = NodePath("VBoxContainer/PlayTime/HBoxContainer/Input")
+average = NodePath("VBoxContainer/Average/HBoxContainer/Input")
+average_per_leg = NodePath("VBoxContainer/AveragePerLeg/HBoxContainer/Input")
+hovered = NodePath("VBoxContainer")
+no_hovered = NodePath("NoHover")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer2/HSeparator"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 50
-text = "TEST"
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer2/HSeparator"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 50
-text = "TEST"
+[node name="PlayerName" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/PlayerName"]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/PlayerName"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/PlayerName/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Flag" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/PlayerName/HBoxContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_keoss")
+expand_mode = 3
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/PlayerName/HBoxContainer"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "123456789112345"
+horizontal_alignment = 1
+
+[node name="GamePlayed" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/GamePlayed"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/GamePlayed/HBoxContainer"]
+layout_mode = 2
+text = "Games Played:
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/GamePlayed/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LegPlayed" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/LegPlayed"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/LegPlayed/HBoxContainer"]
+layout_mode = 2
+text = "Legs Played:
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/LegPlayed/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GameWon" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/GameWon"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/GameWon/HBoxContainer"]
+layout_mode = 2
+text = "Game Won"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/GameWon/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BreakLeg" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/BreakLeg"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/BreakLeg/HBoxContainer"]
+layout_mode = 2
+text = "Break Leg"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/BreakLeg/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Throw" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/Throw"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/Throw/HBoxContainer"]
+layout_mode = 2
+text = "Throw :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/Throw/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Dart" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/Dart"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/Dart/HBoxContainer"]
+layout_mode = 2
+text = "Darts : "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/Dart/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PlayTime" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/PlayTime"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/PlayTime/HBoxContainer"]
+layout_mode = 2
+text = "Play Time :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/PlayTime/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Average" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/Average"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/Average/HBoxContainer"]
+layout_mode = 2
+text = "Average :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/Average/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AveragePerLeg" type="MarginContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/AveragePerLeg"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/AveragePerLeg/HBoxContainer"]
+layout_mode = 2
+text = "Average Per Leg :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer/VBoxContainer/AveragePerLeg/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="NoHover" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer"]
+visible = false
+custom_minimum_size = Vector2(257, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Hover a player to see
+their statistics"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GameModeContainer/MarginContainer/PanelContainer/VBoxContainer/ButtonX01" to="." method="_on_x01_button_pressed" binds= ["main"]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GameModeContainer/MarginContainer/PanelContainer/VBoxContainer/ButtonX01/CanvasLayer/PanelContainer/MarginContainer/X01Button/Button" to="." method="_on_x01_button_pressed" binds= ["101"]]
@@ -508,7 +776,7 @@ text = "TEST"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GameModeContainer/MarginContainer/PanelContainer/VBoxContainer/MarginContainer4/HBoxContainer/CenterContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_X01_setting_input" binds= [0.0, "Inf"]]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/GameModeContainer/MarginContainer/PanelContainer/VBoxContainer/MarginContainer4/HBoxContainer/CenterContainer2/VBoxContainer/HBoxContainer/SpinBox" to="." method="_on_X01_setting_input" binds= ["Set"]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GameModeContainer/MarginContainer/PanelContainer/VBoxContainer/Play" to="." method="_on_play_pressed" binds= ["x01"]]
-[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer2" to="." method="_on_v_box_container_2_mouse_entered"]
-[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer" to="." method="_on_v_box_container_mouse_entered"]
-[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer" to="." method="_on_v_box_container_mouse_exited"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/AddPlayer" to="." method="_on_add_player_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer2" to="." method="_on_v_box_container_2_mouse_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer" to="." method="_on_v_box_container_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer" to="." method="_on_v_box_container_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/PlayerContainer/PanelContainer2/VSplitContainer/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/AddPlayer" to="." method="_on_add_player_pressed"]

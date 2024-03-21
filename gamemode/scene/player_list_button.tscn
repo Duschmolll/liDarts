@@ -1,15 +1,39 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkrw05xrjea0u"]
 
-[ext_resource type="Script" path="res://gamemode/script/player_list_button.gd" id="1_0mmuh"]
 [ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="2_vujix"]
 
-[node name="Button" type="Button"]
+[sub_resource type="GDScript" id="GDScript_sue2f"]
+script/source = "extends Button
+
+@export var player_name: Label
+
+
+func _on_pressed():
+	var parent_node = self.get_node(\"/root/GameSelection\")
+	var name = player_name.text
+	for key in GlobalData.player_list.keys():
+		if key in GlobalData.player_selected and key.to_lower() == player_name.text.to_lower() :
+			GlobalData.player_selected.erase(key)
+			parent_node.create_player_list()
+		elif key.to_lower() == player_name.text.to_lower() :
+			GlobalData.player_selected[str(name)] = GlobalData.player_list[str(name)]
+			parent_node.create_player_list()
+			return
+
+
+func _on_mouse_entered():
+	var parent_node = self.get_node(\"/root/GameSelection\")
+	parent_node.get_stats(player_name.text)
+"
+
+[node name="Button" type="Button" node_paths=PackedStringArray("player_name")]
 custom_minimum_size = Vector2(200, 30)
 offset_right = 264.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 flat = true
-script = ExtResource("1_0mmuh")
+script = SubResource("GDScript_sue2f")
+player_name = NodePath("PanelContainer/HBoxContainer/Name")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -45,4 +69,5 @@ theme_override_font_sizes/font_size = 25
 text = "123456789112345"
 horizontal_alignment = 1
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,8 +1,8 @@
+MarginContainer
 VBoxContainer
 Button
 Label
 TextureButton
-MarginContainer
 PanelContainer
 Panel
 HBoxContainer
