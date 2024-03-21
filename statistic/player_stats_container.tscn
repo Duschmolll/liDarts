@@ -1,0 +1,388 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxc0g6sx4x0fm"]
+
+[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="1_imrdg"]
+[ext_resource type="Texture2D" uid="uid://sjk35bp63qvd" path="res://texture/ui/cross.png" id="2_4jc6j"]
+
+[sub_resource type="GDScript" id="GDScript_12jsv"]
+script/source = "extends PanelContainer
+
+@export var player_flag: TextureRect
+@export var player_label: Label
+@export var game_played: Label
+@export var leg_played: Label
+@export var game_won: Label
+@export var break_leg: Label
+@export var throw: Label
+@export var dart: Label
+@export var play_time: Label
+@export var average: Label
+@export var average_per_leg: Label
+@export var opponent: Label
+@export var opponent_game: Label
+@export var opponent_winrate: Label
+@export var opponent_selected: VBoxContainer
+@export var opponent_unselected: Label
+
+func _on_texture_button_pressed():
+	var parent_node = self.get_node(\"/root/Statistic\")
+	for i in range(len(parent_node.local_player_selected)):
+		if parent_node.local_player_selected[i] == player_label.text:
+			parent_node.local_player_selected.remove_at(i)
+			break
+	parent_node.check_opponent()
+	self.queue_free()
+"
+
+[node name="PlayerStatsContainer" type="PanelContainer" node_paths=PackedStringArray("player_flag", "player_label", "game_played", "leg_played", "game_won", "break_leg", "throw", "dart", "play_time", "average", "average_per_leg", "opponent", "opponent_game", "opponent_winrate", "opponent_selected", "opponent_unselected")]
+size_flags_horizontal = 3
+script = SubResource("GDScript_12jsv")
+player_flag = NodePath("HBoxContainer/PlayerName/HBoxContainer/MarginContainer/Flag")
+player_label = NodePath("HBoxContainer/PlayerName/HBoxContainer/Name")
+game_played = NodePath("HBoxContainer/GamePlayed/HBoxContainer/Input")
+leg_played = NodePath("HBoxContainer/LegPlayed/HBoxContainer/Input")
+game_won = NodePath("HBoxContainer/GameWon/HBoxContainer/Input")
+break_leg = NodePath("HBoxContainer/BreakLeg/HBoxContainer/Input")
+throw = NodePath("HBoxContainer/Throw/HBoxContainer/Input")
+dart = NodePath("HBoxContainer/Dart/HBoxContainer/Input")
+play_time = NodePath("HBoxContainer/PlayTime/HBoxContainer/Input")
+average = NodePath("HBoxContainer/Average/HBoxContainer/Input")
+average_per_leg = NodePath("HBoxContainer/AveragePerLeg/HBoxContainer/Input")
+opponent = NodePath("HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer/Label")
+opponent_game = NodePath("HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2")
+opponent_winrate = NodePath("HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer/Label2")
+opponent_selected = NodePath("HBoxContainer/VsPlayer/PanelContainer/VBoxContainer")
+opponent_unselected = NodePath("HBoxContainer/VsPlayer/PanelContainer/Label")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerName" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/PlayerName"]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PlayerName"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PlayerName/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Flag" type="TextureRect" parent="HBoxContainer/PlayerName/HBoxContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_imrdg")
+expand_mode = 3
+
+[node name="Name" type="Label" parent="HBoxContainer/PlayerName/HBoxContainer"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "123456789112345"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/PlayerName/HBoxContainer"]
+custom_minimum_size = Vector2(35, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/PlayerName/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("2_4jc6j")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="GamePlayed" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/GamePlayed"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/GamePlayed/HBoxContainer"]
+layout_mode = 2
+text = "Games Played:
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="HBoxContainer/GamePlayed/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LegPlayed" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/LegPlayed"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/LegPlayed/HBoxContainer"]
+layout_mode = 2
+text = "Legs Played:
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="HBoxContainer/LegPlayed/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GameWon" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/GameWon"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/GameWon/HBoxContainer"]
+layout_mode = 2
+text = "Game Won"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="HBoxContainer/GameWon/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BreakLeg" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/BreakLeg"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/BreakLeg/HBoxContainer"]
+layout_mode = 2
+text = "Break Leg"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="HBoxContainer/BreakLeg/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Throw" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Throw"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Throw/HBoxContainer"]
+layout_mode = 2
+text = "Throw :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="HBoxContainer/Throw/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Dart" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Dart"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Dart/HBoxContainer"]
+layout_mode = 2
+text = "Darts : "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="HBoxContainer/Dart/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PlayTime" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PlayTime"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PlayTime/HBoxContainer"]
+layout_mode = 2
+text = "Play Time :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="HBoxContainer/PlayTime/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Average" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Average"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Average/HBoxContainer"]
+layout_mode = 2
+text = "Average :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="HBoxContainer/Average/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AveragePerLeg" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/AveragePerLeg"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/AveragePerLeg/HBoxContainer"]
+layout_mode = 2
+text = "Average Per Leg :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="HBoxContainer/AveragePerLeg/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VsPlayer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VsPlayer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VsPlayer/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Against "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NAME"
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Nb Game"
+
+[node name="Label2" type="Label" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Winrate"
+
+[node name="Label2" type="Label" parent="HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VsPlayer/PanelContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "No Opponent Selected"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/PlayerName/HBoxContainer/MarginContainer2/TextureButton" to="." method="_on_texture_button_pressed"]

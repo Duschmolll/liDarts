@@ -1,5 +1,7 @@
-res://gamemode/game_selection.tscn
+res://statistic/statistic.tscn
 res://texture/blur.gdshader
-res://add_player.tscn
-res://gamemode/game_selection.gd
-res://gamemode/scene/player_list_button.tscn
+res://statistic/statistic.gd
+res://statistic/player_list_stats.tscn
+res://player/scene/player_list.tscn
+res://gamemode/script/player_list_button.gd
+res://statistic/player_stats_container.tscn
