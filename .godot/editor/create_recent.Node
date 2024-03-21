@@ -1,14 +1,14 @@
+VBoxContainer
+Button
 Label
 TextureButton
 MarginContainer
 PanelContainer
 Panel
 HBoxContainer
-VBoxContainer
 ScrollContainer
 Node
 ColorRect
 CanvasLayer
 Control
 CenterContainer
-Button

@@ -60,3 +60,7 @@ func check_opponent():
 			var child = player_stats_hbox.get_children()[i]
 			child.opponent_selected.visible = false
 			child.opponent_unselected.visible = true
+
+
+func _on_button_pressed():
+	get_tree().change_scene_to_file("res://main_menu.tscn")

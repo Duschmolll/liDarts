@@ -5,3 +5,5 @@ res://statistic/player_list_stats.tscn
 res://player/scene/player_list.tscn
 res://gamemode/script/player_list_button.gd
 res://statistic/player_stats_container.tscn
+res://script/main_menu.gd
+res://main_menu.tscn

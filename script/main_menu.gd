@@ -11,7 +11,7 @@ func _on_settings_pressed():
 
 
 func _on_statistique_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://statistic/statistic.tscn")
 
 
 func _on_exit_pressed():
