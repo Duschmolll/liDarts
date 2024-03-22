@@ -8,10 +8,49 @@
 script/source = "extends VBoxContainer
 
 @export var name_container: Node
-@export var statistic_container: Node
-@export var history_container: Node
+@export var turn_arrow_left: MarginContainer
+@export var turn_arrow_right: MarginContainer
 @export var score_label: Node
 @export var check_out_label: Node
+
+@export var statistic_container: Node
+@export var stat_leg: Label
+@export var stat_80: Label
+@export var stat_100: Label
+@export var stat_140: Label
+@export var stat_180: Label
+@export var stat_average: Label
+@export var stat_average_leg: Label
+
+@export var history_container: Node
+@export var history_01_throw: Label
+@export var history_01_score: Label
+@export var history_02_throw: Label
+@export var history_02_score: Label
+@export var history_03_throw: Label
+@export var history_03_score: Label
+@export var history_04_throw: Label
+@export var history_04_score: Label
+@export var history_05_throw: Label
+@export var history_05_score: Label
+@export var history_06_throw: Label
+@export var history_06_score: Label
+@export var history_07_throw: Label
+@export var history_07_score: Label
+@export var history_08_throw: Label
+@export var history_08_score: Label
+@export var history_09_throw: Label
+@export var history_09_score: Label
+
+var history_throw = []
+var history_score = []
+var statistic_total = []
+
+func _ready():
+	history_throw = [history_01_throw, history_02_throw, history_03_throw, history_04_throw, history_05_throw, history_06_throw, history_07_throw, history_08_throw, history_09_throw]
+	history_score = [history_01_score, history_02_score, history_03_score, history_04_score, history_05_score, history_06_score,history_07_score,history_08_score, history_09_score]
+	statistic_total = [stat_80, stat_100, stat_140, stat_180]
+
 "
 
 [sub_resource type="GDScript" id="GDScript_5qlxe"]
@@ -38,10 +77,50 @@ func _ready():
 script/source = "extends VBoxContainer
 
 @export var name_container: Node
-@export var statistic_container: Node
-@export var history_container: Node
+@export var turn_arrow_left: MarginContainer
+@export var turn_arrow_right: MarginContainer
 @export var score_label: Node
 @export var check_out_label: Node
+
+@export var statistic_container: Node
+@export var stat_leg: Label
+@export var stat_80: Label
+@export var stat_100: Label
+@export var stat_140: Label
+@export var stat_180: Label
+@export var stat_average: Label
+@export var stat_average_leg: Label
+
+@export var history_container: Node
+@export var history_01_throw: Label
+@export var history_01_score: Label
+@export var history_02_throw: Label
+@export var history_02_score: Label
+@export var history_03_throw: Label
+@export var history_03_score: Label
+@export var history_04_throw: Label
+@export var history_04_score: Label
+@export var history_05_throw: Label
+@export var history_05_score: Label
+@export var history_06_throw: Label
+@export var history_06_score: Label
+@export var history_07_throw: Label
+@export var history_07_score: Label
+@export var history_08_throw: Label
+@export var history_08_score: Label
+@export var history_09_throw: Label
+@export var history_09_score: Label
+
+var history_throw = []
+var history_score = []
+var statistic_total = []
+
+func _ready():
+	history_throw = [history_01_throw, history_02_throw, history_03_throw, history_04_throw, history_05_throw, history_06_throw, history_07_throw, history_08_throw, history_09_score]
+	history_score = [history_01_score, history_02_score, history_03_score, history_04_score, history_05_score, history_06_score,history_07_score,history_08_score, history_09_score]
+	statistic_total = [stat_80, stat_100, stat_140, stat_180]
+
+
 "
 
 [sub_resource type="GDScript" id="GDScript_0rsny"]
@@ -98,15 +177,42 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Player1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_container", "statistic_container", "history_container", "score_label", "check_out_label")]
+[node name="Player1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_container", "turn_arrow_left", "turn_arrow_right", "score_label", "check_out_label", "statistic_container", "stat_leg", "stat_80", "stat_100", "stat_140", "stat_180", "stat_average", "stat_average_leg", "history_container", "history_01_throw", "history_01_score", "history_02_throw", "history_02_score", "history_03_throw", "history_03_score", "history_04_throw", "history_04_score", "history_05_throw", "history_05_score", "history_06_throw", "history_06_score", "history_07_throw", "history_07_score", "history_08_throw", "history_08_score", "history_09_throw", "history_09_score")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = SubResource("GDScript_34fim")
 name_container = NodePath("Name/CenterContainer/Player")
-statistic_container = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic")
-history_container = NodePath("PanelContainer/MarginContainer/FlowContainer/History")
+turn_arrow_left = NodePath("Name/CenterContainer/Player/TurnArrowLeft")
+turn_arrow_right = NodePath("Name/CenterContainer/Player/TurnArrowRight")
 score_label = NodePath("Score/Player1Score")
 check_out_label = NodePath("Score/Player1Score/MarginContainer/Label")
+statistic_container = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic")
+stat_leg = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/Legs/Value")
+stat_80 = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/80+/Value")
+stat_100 = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/100+/Value")
+stat_140 = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/140+/Value")
+stat_180 = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/180+/Value")
+stat_average = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/Match/Value")
+stat_average_leg = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/Leg/Value")
+history_container = NodePath("PanelContainer/MarginContainer/FlowContainer/History")
+history_01_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer/Shot00/score")
+history_01_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer/Shot00/rem_score")
+history_02_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2/Shot00/score")
+history_02_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2/Shot00/rem_score")
+history_03_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3/Shot00/score")
+history_03_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3/Shot00/rem_score")
+history_04_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4/Shot00/score")
+history_04_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4/Shot00/rem_score")
+history_05_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5/Shot00/score")
+history_05_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5/Shot00/rem_score")
+history_06_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6/Shot00/score")
+history_06_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6/Shot00/rem_score")
+history_07_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7/Shot00/score")
+history_07_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7/Shot00/rem_score")
+history_08_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8/Shot00/score")
+history_08_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8/Shot00/rem_score")
+history_09_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9/Shot00/score")
+history_09_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9/Shot00/rem_score")
 
 [node name="Name" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1"]
 layout_mode = 2
@@ -132,7 +238,7 @@ layout_mode = 2
 [node name="Player" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player"]
+[node name="TurnArrowLeft" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player"]
 custom_minimum_size = Vector2(69, 69)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -141,7 +247,7 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player/MarginContainer2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player/TurnArrowLeft"]
 layout_mode = 2
 texture = ExtResource("3_0ukao")
 expand_mode = 4
@@ -156,7 +262,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = SubResource("GDScript_8ko1t")
 
-[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player"]
+[node name="TurnArrowRight" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player"]
 custom_minimum_size = Vector2(69, 69)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -165,7 +271,7 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player/MarginContainer3"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player1/Name/CenterContainer/Player/TurnArrowRight"]
 layout_mode = 2
 texture = ExtResource("3_0ukao")
 expand_mode = 4
@@ -552,15 +658,42 @@ theme_override_font_sizes/font_size = 30
 text = "9999
 "
 
-[node name="Player2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_container", "statistic_container", "history_container", "score_label", "check_out_label")]
+[node name="Player2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("name_container", "turn_arrow_left", "turn_arrow_right", "score_label", "check_out_label", "statistic_container", "stat_leg", "stat_80", "stat_100", "stat_140", "stat_180", "stat_average", "stat_average_leg", "history_container", "history_01_throw", "history_01_score", "history_02_throw", "history_02_score", "history_03_throw", "history_03_score", "history_04_throw", "history_04_score", "history_05_throw", "history_05_score", "history_06_throw", "history_06_score", "history_07_throw", "history_07_score", "history_08_throw", "history_08_score", "history_09_throw", "history_09_score")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = SubResource("GDScript_44jur")
 name_container = NodePath("Name/CenterContainer/Player")
-statistic_container = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic")
-history_container = NodePath("PanelContainer/MarginContainer/FlowContainer/History")
+turn_arrow_left = NodePath("Name/CenterContainer/Player/TurnArrowLeft")
+turn_arrow_right = NodePath("Name/CenterContainer/Player/TurnArrowRight")
 score_label = NodePath("Score/Player2Score")
 check_out_label = NodePath("Score/Player2Score/MarginContainer/Label")
+statistic_container = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic")
+stat_leg = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/Legs/Value")
+stat_80 = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/80+/Value")
+stat_100 = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/100+/Value")
+stat_140 = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/140+/Value")
+stat_180 = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/180+/Value")
+stat_average = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/Match/Value")
+stat_average_leg = NodePath("PanelContainer/MarginContainer/FlowContainer/Statistic/Leg/Value")
+history_container = NodePath("PanelContainer/MarginContainer/FlowContainer/History")
+history_01_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer/Shot00/score")
+history_01_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer/Shot00/rem_score")
+history_02_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2/Shot00/score")
+history_02_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2/Shot00/rem_score")
+history_03_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3/Shot00/score")
+history_03_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3/Shot00/rem_score")
+history_04_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4/Shot00/score")
+history_04_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4/Shot00/rem_score")
+history_05_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5/Shot00/score")
+history_05_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5/Shot00/rem_score")
+history_06_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6/Shot00/score")
+history_06_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6/Shot00/rem_score")
+history_07_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7/Shot00/score")
+history_07_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7/Shot00/rem_score")
+history_08_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8/Shot00/score")
+history_08_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8/Shot00/rem_score")
+history_09_throw = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9/Shot00/score")
+history_09_score = NodePath("PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9/Shot00/rem_score")
 
 [node name="Name" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2"]
 layout_mode = 2
@@ -571,7 +704,7 @@ layout_mode = 2
 [node name="Player" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player"]
+[node name="TurnArrowLeft" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player"]
 custom_minimum_size = Vector2(69, 69)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -580,7 +713,7 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player/MarginContainer2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player/TurnArrowLeft"]
 layout_mode = 2
 texture = ExtResource("3_0ukao")
 expand_mode = 4
@@ -595,7 +728,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = SubResource("GDScript_0rsny")
 
-[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player"]
+[node name="TurnArrowRight" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player"]
 custom_minimum_size = Vector2(69, 69)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -604,7 +737,7 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player/MarginContainer3"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Player2/Name/CenterContainer/Player/TurnArrowRight"]
 layout_mode = 2
 texture = ExtResource("3_0ukao")
 expand_mode = 4

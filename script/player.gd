@@ -14,11 +14,7 @@ var leg: int = 0
 var average: float = 0.0
 var average_per_leg: float = 0.0
 
-var target_score_label = Label
-var history: VBoxContainer
-var stat: VBoxContainer
-var name_container: HBoxContainer 
-var check_out_label: Label
+var container: Node
 
 var score_80: int = 0
 var score_100: int = 0

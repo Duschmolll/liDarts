@@ -23,7 +23,7 @@ var list_player: Array[String]
 var key: Array
 
 func _ready():
-	GlobalData.load_data("user://data/data.json")
+	
 	key = GlobalData.player_selected.keys()
 	# Set-in functions for all buttons:
 	for btn in button_container.get_children():
@@ -38,20 +38,8 @@ func _ready():
 					btn.pressed.connect(Callable(self, "multiplier_buttons").bind(btn))
 	
 	# Set-in proprety of players
-	player_01 = key[0]
-	player_02 = key[1] 
-	list_player = [player_01, player_02]
-	GlobalData.player_list[key[0]].stat = player_01_container.statistic_container
-	GlobalData.player_list[key[0]].history = player_01_container.history_container
-	GlobalData.player_list[key[0]].target_score_label = player_01_container.score_label
-	GlobalData.player_list[key[0]].name_container = player_01_container.name_container
-	GlobalData.player_list[key[0]].check_out_label = player_01_container.check_out_label
-	
-	GlobalData.player_list[key[1]].stat = player_02_container.statistic_container
-	GlobalData.player_list[key[1]].history = player_02_container.history_container
-	GlobalData.player_list[key[1]].target_score_label = player_02_container.score_label
-	GlobalData.player_list[key[1]].name_container = player_02_container.name_container
-	GlobalData.player_list[key[1]].check_out_label = player_02_container.check_out_label
+	GlobalData.player_list[key[0]].container = player_01_container
+	GlobalData.player_list[key[1]].container = player_02_container
 
 	start_game()
 
@@ -132,28 +120,29 @@ func start_game():
 		GlobalData.player_list[key[i]].score_100 = 0
 		GlobalData.player_list[key[i]].score_140 = 0
 		GlobalData.player_list[key[i]].score_180 = 0
-		
+		GlobalData.player_list[key[i]].container.turn_arrow_left.visible = false
+		GlobalData.player_list[key[i]].container.turn_arrow_right.visible = false
 		#Resetting up the historic of throws
 		for k in range(9):
-			var temp = GlobalData.player_list[key[i]].history.get_children()[k].get_children()[0].get_children()
-			temp[0].text = ""
-			temp[1].text = ""
-		GlobalData.player_list[key[i]].history.get_children()[0].get_children()[0].get_children()[1].text = str(GlobalData.setting['x01'].score)
-		#Reset label of target score
-		GlobalData.player_list[key[i]].target_score_label.text = str(GlobalData.setting['x01'].score)
-		for k in range(0,3,2):
-			GlobalData.player_list[key[i]].name_container.get_children()[k].get_children()[0].visible = false
+			GlobalData.player_list[key[i]].container.history_throw[k].text = ""
+			GlobalData.player_list[key[i]].container.history_score[k].text = ""
+		GlobalData.player_list[key[i]].container.history_score[0].text = str(GlobalData.setting['x01'].score)
 		
+		#Reset label of target score
+		GlobalData.player_list[key[i]].container.score_label.text = str(GlobalData.setting['x01'].score)
+
+
 	#Loading up the stats of players:
-		for k in range(2,6):
-			GlobalData.player_list[key[i]].stat.get_children()[k].get_children()[1].text = "0"
-		GlobalData.player_list[key[i]].stat.get_children()[1].get_children()[1].text = str(GlobalData.player_list[key[i]].leg)
-		GlobalData.player_list[key[i]].stat.get_children()[7].get_children()[1].text = "0.00"
-		GlobalData.player_list[key[i]].stat.get_children()[8].get_children()[1].text = "%.2f" % GlobalData.player_list[key[i]].average_per_leg
+		for k in range(4):
+			GlobalData.player_list[key[0]].container.statistic_total[i].text = "0"
+			
+		GlobalData.player_list[key[i]].container.stat_leg.text = str(GlobalData.player_list[key[i]].leg)
+		GlobalData.player_list[key[i]].container.stat_average.text = "0.00"
+		GlobalData.player_list[key[i]].container.stat_average_leg.text = "%.2f" % GlobalData.player_list[key[i]].average_per_leg
 	
 	GlobalData.player_list[key[0]].turn = true
-	GlobalData.player_list[key[0]].name_container.get_children()[0].get_children()[0].visible =  true
-	GlobalData.player_list[key[0]].name_container.get_children()[2].get_children()[0].visible =  true
+	GlobalData.player_list[key[0]].container.turn_arrow_left.visible = true
+	GlobalData.player_list[key[0]].container.turn_arrow_right.visible = true
 
 
 func update_score():
@@ -163,16 +152,18 @@ func update_score():
 		player = GlobalData.player_list[key[0]]
 		GlobalData.player_list[key[0]].turn = false
 		GlobalData.player_list[key[1]].turn = true
-		for k in range(0,3,2):
-			GlobalData.player_list[key[0]].name_container.get_children()[k].get_children()[0].visible =  false
-			GlobalData.player_list[key[1]].name_container.get_children()[k].get_children()[0].visible = true
+		GlobalData.player_list[key[0]].container.turn_arrow_left.visible =  false
+		GlobalData.player_list[key[0]].container.turn_arrow_right.visible = false
+		GlobalData.player_list[key[1]].container.turn_arrow_left.visible = true
+		GlobalData.player_list[key[1]].container.turn_arrow_right.visible = true
 	else:
 		player = GlobalData.player_list[key[1]]
 		GlobalData.player_list[key[0]].turn = true
 		GlobalData.player_list[key[1]].turn = false
-		for k in range(0,3,2):
-			GlobalData.player_list[key[0]].name_container.get_children()[k].get_children()[0].visible =  true
-			GlobalData.player_list[key[1]].name_container.get_children()[k].get_children()[0].visible = false
+		GlobalData.player_list[key[0]].container.turn_arrow_left.visible =  true
+		GlobalData.player_list[key[0]].container.turn_arrow_right.visible = true
+		GlobalData.player_list[key[1]].container.turn_arrow_left.visible = false
+		GlobalData.player_list[key[1]].container.turn_arrow_right.visible = false
 	
 	player.dart_1 = int(dart_1_label.text)
 	player.dart_2 = int(dart_2_label.text)
@@ -224,30 +215,30 @@ func update_score():
 	elif (new_score < 0): #Bust
 		bust(player)
 	
-	player.target_score_label.text = str(player.target_score)
+	player.container.score_label.text = str(player.target_score)
 	reset_input()
 
 
 func update_stats_total(player: Player):
 	if player.total_throw in range(80,99):
 		player.score_80 += 1
-		player.stat.get_children()[2].get_children()[1].text = str(player.score_80) 
+		player.container.stat_80.text = str(player.score_80) 
 	elif player.total_throw in range(100,139):
 		player.score_100 += 1
-		player.stat.get_children()[3].get_children()[1].text = str(player.score_100) 
+		player.container.stat_100.text = str(player.score_100) 
 	elif player.total_throw in range(140,179):
 		player.score_140 += 1
-		player.stat.get_children()[4].get_children()[1].text = str(player.score_140) 
+		player.container.stat_140.text = str(player.score_140) 
 	elif player.total_throw >= 180:
 		player.score_180 += 1
-		player.stat.get_children()[5].get_children()[1].text = str(player.score_180) 
+		player.container.stat_180.text = str(player.score_180) 
 
 
 func update_stats_average(player: Player):
 	player.average = player.average + (player.total_throw - player.average) / float(player.number_of_turn)
-	player.stat.get_children()[7].get_children()[1].text =  "%.2f" % player.average
+	player.container.stat_average.text =  "%.2f" % player.average
 	player.average_per_leg = player.average_per_leg + (player.average - player.average_per_leg) / number_of_leg
-	player.stat.get_children()[8].get_children()[1].text = "%.2f" % player.average_per_leg
+	player.container.stat_average_leg.text = "%.2f" % player.average_per_leg
 
 
 func new_score(player: Player, new_score):
@@ -256,23 +247,19 @@ func new_score(player: Player, new_score):
 
 	var value_changed = false
 	
-	for i in range(9):
-		var path_container = player.history.get_children()[i].get_children()[0].get_children()
-		if path_container[1].text == "":
-			path_container[0].text = str(player.total_throw)
-			path_container[1].text = str(player.target_score)
+	for i in range(9):#adding score to each label till they're full
+		if player.container.history_score[i].text == "":
+			player.container.history_throw[i].text = str(player.total_throw)
+			player.container.history_score[i].text = str(player.target_score)
 			value_changed = true
 			break
 			
-	if value_changed == false:
+	if value_changed == false:#Looping throught the historic to update each on the next one while adding the newer score
 		for k in range(8):
-			var path_container = player.history.get_children()[k].get_children()[0].get_children()
-			var path_container_next = player.history.get_children()[k+1].get_children()[0].get_children()
-			path_container[0].text = path_container_next[0].text
-			path_container[1].text = path_container_next[1].text
-		var path_container = player.history.get_children()[8].get_children()[0].get_children()
-		path_container[0].text = str(player.total_throw)
-		path_container[1].text = str(player.target_score)
+			player.container.history_throw[k].text = player.container.history_throw[k+1].text
+			player.container.history_score[k].text = player.container.history_score[k+1].text
+		player.container.history_throw[8].text = str(player.total_throw)
+		player.container.history_score[8].text = str(player.target_score)
 		
 	player.number_of_turn += 1
 	if GlobalData.setting["x01"].show_check_out:
@@ -285,23 +272,19 @@ func bust(player: Player):
 	var value_changed = false
 	
 	for i in range(9):#adding score to each label till they're full
-		var path_container = player.history.get_children()[i].get_children()[0].get_children()
-		if path_container[1].text == "":
-			path_container[0].text = "0"
-			path_container[1].text = str(player.target_score)
+		if player.container.history_score[i].text == "":
+			player.container.history_throw[i].text = "0"
+			player.container.history_score[i].text = str(player.target_score)
 			value_changed = true
 			break
 			
 	if value_changed == false: #Looping throught the historic to update each on the next one while adding the newer score
 		for k in range(8):
-			var path_container = player.history.get_children()[k].get_children()[0].get_children()
-			var path_container_next = player.history.get_children()[k+1].get_children()[0].get_children()
-			path_container[0].text = path_container_next[0].text
-			path_container[1].text = path_container_next[1].text
-		var path_container = player.history.get_children()[8].get_children()[0].get_children()
-		path_container[0].text = "0"
-		path_container[1].text = str(player.target_score)
-	
+			player.container.history_throw[k].text = player.container.history_throw[k+1].text
+			player.container.history_score[k].text = player.container.history_score[k+1].text
+		player.container.history_throw[8].text = "0"
+		player.container.history_score[8].text = str(player.target_score)
+
 	player.number_of_turn += 1
 	update_stats_average(player)
 
@@ -315,38 +298,37 @@ func redo_input():
 			player = GlobalData.player_list[key[1]]
 			GlobalData.player_list[key[0]].turn = false
 			GlobalData.player_list[key[1]].turn = true
-			for k in range(0,3,2):
-				GlobalData.player_list[key[0]].name_container.get_children()[k].get_children()[0].visible =  false
-				GlobalData.player_list[key[1]].name_container.get_children()[k].get_children()[0].visible = true
+			GlobalData.player_list[key[0]].container.turn_arrow_left.visible =  false
+			GlobalData.player_list[key[0]].container.turn_arrow_right.visible = false
+			GlobalData.player_list[key[1]].container.turn_arrow_left.visible = true
+			GlobalData.player_list[key[1]].container.turn_arrow_right.visible = true
 		else:
 			player = GlobalData.player_list[key[0]]
 			GlobalData.player_list[key[0]].turn = true
 			GlobalData.player_list[key[1]].turn = false
-			for k in range(0,3,2):
-				GlobalData.player_list[key[0]].name_container.get_children()[k].get_children()[0].visible =  true
-				GlobalData.player_list[key[1]].name_container.get_children()[k].get_children()[0].visible = false
+			GlobalData.player_list[key[0]].container.turn_arrow_left.visible =  true
+			GlobalData.player_list[key[0]].container.turn_arrow_right.visible = true
+			GlobalData.player_list[key[1]].container.turn_arrow_left.visible = false
+			GlobalData.player_list[key[1]].container.turn_arrow_right.visible = false
 
 		if player.number_of_turn == 1:
-			var path_container = player.history.get_children()[1].get_children()[0].get_children()
 			player.total_throw = 0
 			player.target_score = GlobalData.setting['x01'].score
 			player.number_of_turn -= 1
-			path_container[0].text = ""
-			path_container[1].text = ""
+			player.container.history_score[1].text = ""
+			player.container.history_throw[1].text = ""
 			back_stats(player)
 
 		elif player.number_of_turn > 1: 
 			var cant_redo = true
 			for i in range(8,0,-1):
-				var path_container = player.history.get_children()[i].get_children()[0].get_children()
-				if path_container[1].text != "":
-					player.total_throw = int(path_container[0].text)
+				if player.container.history_score[i].text != "":
+					player.total_throw = int(player.container.history_throw[i].text)
 					player.target_score += player.total_throw
 					player.total_score -= player.total_throw 
 					player.number_of_turn -= 1
-					path_container = player.history.get_children()[i].get_children()[0].get_children()
-					path_container[0].text = ""
-					path_container[1].text = ""
+					player.container.history_score[i].text = ""
+					player.container.history_throw[i].text = ""
 					
 					#Update Stats:
 					back_stats(player)
@@ -366,7 +348,7 @@ func redo_input():
 						GlobalData.player_list[key[0]].name_container.get_children()[k].get_children()[0].visible =  true
 						GlobalData.player_list[key[1]].name_container.get_children()[k].get_children()[0].visible = false
 		
-		player.target_score_label.text = str(player.target_score)
+		player.container.score_label.text = str(player.target_score)
 
 
 func back_stats(player: Player):
@@ -374,23 +356,23 @@ func back_stats(player: Player):
 		player.average = 0.00
 	else:
 		player.average = player.average - (player.total_throw - player.average) / float(player.number_of_turn)
-	player.stat.get_children()[7].get_children()[1].text =  "%.2f" % player.average 
+	player.container.stat_average.text =  "%.2f" % player.average 
 	
 	player.average_per_leg = player.average_per_leg - (player.average_per_leg - player.average ) / number_of_leg
-	player.stat.get_children()[8].get_children()[1].text = "%.2f" % player.average_per_leg
+	player.container.stat_average_leg.text = "%.2f" % player.average_per_leg
 	
 	if player.total_throw in range(80,99):
 		player.score_80 -= 1
-		player.stat.get_children()[2].get_children()[1].text = str(player.score_80) 
+		player.container.stat_80.text = str(player.score_80) 
 	elif player.total_throw in range(100,139):
 		player.score_100 -= 1
-		player.stat.get_children()[3].get_children()[1].text = str(player.score_100) 
+		player.container.stat_100.text = str(player.score_100) 
 	elif player.total_throw in range(140,179):
 		player.score_140 -= 1
-		player.stat.get_children()[4].get_children()[1].text = str(player.score_140) 
+		player.container.stat_140.text = str(player.score_140) 
 	elif player.total_throw >= 180:
 		player.score_180 -= 1
-		player.stat.get_children()[5].get_children()[1].text = str(player.score_180) 
+		player.container.stat_180.text = str(player.score_180) 
 
 
 func reset_input():
