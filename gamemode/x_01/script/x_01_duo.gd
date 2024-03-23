@@ -413,10 +413,10 @@ func update_stat_global(player: Player):
 
 func check_out(player: Player):
 	var check_out_array = check_out_calculate(player.target_score)
-	var check_out_string:String
+	var check_out_string:String = ""
 	
 	if check_out_array[0] == 0:
-		player.check_out_label.text = ""
+		player.container.check_out_label.text = ""
 	else:
 		for i in check_out_array:
 			if i == 0:
@@ -428,7 +428,7 @@ func check_out(player: Player):
 			else:
 				check_out_string += str(i) + " - "
 		
-		player.check_out_label.text = check_out_string.left(check_out_string.length() - 3)
+		player.container.check_out_label.text = check_out_string.left(check_out_string.length() - 3)
 
 
 func check_out_calculate(score: int):

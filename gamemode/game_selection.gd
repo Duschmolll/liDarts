@@ -154,7 +154,7 @@ func get_stats(player_name):
 	stat_container.throw.text = str(GlobalData.player_list[player_name].all_time_throw)
 	stat_container.dart.text = str(GlobalData.player_list[player_name].all_time_dart)
 	stat_container.play_time.text = str(GlobalData.player_list[player_name].name)
-	stat_container.average.text = str(GlobalData.player_list[player_name].all_time_average_per_throw)
-	stat_container.average_per_leg.text = str(GlobalData.player_list[player_name].all_time_average_per_leg)
+	stat_container.average.text = "%.2f" % GlobalData.player_list[player_name].all_time_average_per_throw
+	stat_container.average_per_leg.text = "%.2f" % GlobalData.player_list[player_name].all_time_average_per_leg
 	stat_container.hovered.visible = true
 	stat_container.no_hovered.visible = false

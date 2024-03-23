@@ -41,8 +41,8 @@ func get_statistic(player):
 		instance.throw.text = str(GlobalData.player_list[player].all_time_throw)
 		instance.dart.text = str(GlobalData.player_list[player].all_time_dart)
 		instance.play_time.text = str(GlobalData.player_list[player].name)
-		instance.average.text = str(GlobalData.player_list[player].all_time_average_per_throw)
-		instance.average_per_leg.text = str(GlobalData.player_list[player].all_time_average_per_leg)
+		instance.average.text = "%.2f" % GlobalData.player_list[player].all_time_average_per_throw
+		instance.average_per_leg.text = "%.2f" % GlobalData.player_list[player].all_time_average_per_leg
 		local_player_selected.append(player)
 		player_stats_hbox.add_child(instance)
 		check_opponent()

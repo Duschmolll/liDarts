@@ -517,6 +517,7 @@ hovered = NodePath("VBoxContainer")
 no_hovered = NodePath("NoHover")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -754,7 +755,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="NoHover" type="Label" parent="MarginContainer/VBoxContainer/PlayerContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/StatisticContainer/PanelContainer2/PlayerStatsContainer"]
-visible = false
 custom_minimum_size = Vector2(257, 0)
 layout_mode = 2
 size_flags_horizontal = 3
