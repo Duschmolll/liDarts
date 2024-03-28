@@ -110,39 +110,57 @@ func multiplier_buttons(btn):
 
 
 func start_game():
-	for i in range(len(key)):
-		#Reseting Player Proprety
-		GlobalData.player_list[key[i]].target_score = GlobalData.setting['x01'].score
-		GlobalData.player_list[key[i]].number_of_turn = 0
-		GlobalData.player_list[key[i]].turn = false
-		GlobalData.player_list[key[i]].average = 0
-		GlobalData.player_list[key[i]].score_80 = 0
-		GlobalData.player_list[key[i]].score_100 = 0
-		GlobalData.player_list[key[i]].score_140 = 0
-		GlobalData.player_list[key[i]].score_180 = 0
-		GlobalData.player_list[key[i]].container.turn_arrow_left.visible = false
-		GlobalData.player_list[key[i]].container.turn_arrow_right.visible = false
-		#Resetting up the historic of throws
-		for k in range(9):
-			GlobalData.player_list[key[i]].container.history_throw[k].text = ""
-			GlobalData.player_list[key[i]].container.history_score[k].text = ""
-		GlobalData.player_list[key[i]].container.history_score[0].text = str(GlobalData.setting['x01'].score)
-		
-		#Reset label of target score
-		GlobalData.player_list[key[i]].container.score_label.text = str(GlobalData.setting['x01'].score)
-
-
-	#Loading up the stats of players:
-		for k in range(4):
-			GlobalData.player_list[key[0]].container.statistic_total[i].text = "0"
+	if number_of_leg <= GlobalData.setting["x01"].total_leg:
+		for i in range(len(key)):
+			#Reseting Player Proprety
+			GlobalData.player_list[key[i]].target_score = GlobalData.setting['x01'].score
+			GlobalData.player_list[key[i]].number_of_turn = 0
+			GlobalData.player_list[key[i]].turn = false
+			GlobalData.player_list[key[i]].average = 0
+			GlobalData.player_list[key[i]].score_80 = 0
+			GlobalData.player_list[key[i]].score_100 = 0
+			GlobalData.player_list[key[i]].score_140 = 0
+			GlobalData.player_list[key[i]].score_180 = 0
+			GlobalData.player_list[key[i]].container.turn_arrow_left.visible = false
+			GlobalData.player_list[key[i]].container.turn_arrow_right.visible = false
 			
-		GlobalData.player_list[key[i]].container.stat_leg.text = str(GlobalData.player_list[key[i]].leg)
-		GlobalData.player_list[key[i]].container.stat_average.text = "0.00"
-		GlobalData.player_list[key[i]].container.stat_average_leg.text = "%.2f" % GlobalData.player_list[key[i]].average_per_leg
-	
-	GlobalData.player_list[key[0]].turn = true
-	GlobalData.player_list[key[0]].container.turn_arrow_left.visible = true
-	GlobalData.player_list[key[0]].container.turn_arrow_right.visible = true
+			if number_of_leg == 1:
+				GlobalData.player_list[key[i]].average_per_leg = 0
+			
+			#Resetting up the historic of throws
+			for k in range(9):
+				GlobalData.player_list[key[i]].container.history_throw[k].text = ""
+				GlobalData.player_list[key[i]].container.history_score[k].text = ""
+			GlobalData.player_list[key[i]].container.history_score[0].text = str(GlobalData.setting['x01'].score)
+			
+			#Reset label of target score
+			GlobalData.player_list[key[i]].container.score_label.text = str(GlobalData.setting['x01'].score)
+
+			#Loading up the stats of players:
+			for k in range(4):
+				GlobalData.player_list[key[i]].container.statistic_total[k].text = "0"
+				
+			GlobalData.player_list[key[i]].container.stat_leg.text = str(GlobalData.player_list[key[i]].leg)
+			GlobalData.player_list[key[i]].container.stat_average.text = "0.00"
+			GlobalData.player_list[key[i]].container.stat_average_leg.text = "%.2f" % GlobalData.player_list[key[i]].average_per_leg
+			
+		GlobalData.player_list[key[0]].turn = true
+		GlobalData.player_list[key[0]].container.turn_arrow_left.visible = true
+		GlobalData.player_list[key[0]].container.turn_arrow_right.visible = true
+	else:
+		var player
+		for i in GlobalData.player_selected.keys():
+			if GlobalData.player_list[i].target_score == 0:
+				print(i)
+				print(GlobalData.player_list[i].target_score)
+				print(GlobalData.player_list[i].total_score)
+				player = GlobalData.player_list[i]
+		const game_ended = preload("res://gamemode/scene/game_ended.tscn")
+		var instance = game_ended.instantiate()
+		instance.player_name.text = player.name
+		instance.player_flag.set_texture(load(player.flag))
+		instance.player_average.text = "%.2f" % player.average_per_leg
+		self.add_child(instance)
 
 
 func update_score():
@@ -179,11 +197,11 @@ func update_score():
 			bust(player)
 		elif (GlobalData.setting['x01'].double_in == true && player.target_score == GlobalData.setting['x01'].score):
 			if dart_1_label.get_parent().get_children()[0].get_children()[0].button_pressed == true:
-				new_score(player, new_score)
+				update_score_container(player, new_score)
 			else:
 				bust(player)
 		else:
-			new_score(player, new_score)
+			update_score_container(player, new_score)
 		
 	elif (new_score == 0): #Winning the game
 	
@@ -191,8 +209,7 @@ func update_score():
 			number_of_leg += 1
 			player.leg += 1
 			player.number_of_turn += 1
-			update_stats_average(player)
-			update_stat_global(player)
+			update_score_container(player, new_score)
 			start_game()
 		else: # Double Out is active
 			var dart_value_check = [dart_3_value_check, dart_2_value_check, dart_1_value_check]
@@ -205,8 +222,7 @@ func update_score():
 						player.leg += 1
 						double_out = true
 						player.number_of_turn += 1
-						update_stats_average(player)
-						update_stat_global(player)
+						update_score_container(player, new_score)
 						start_game()
 						break
 			if (double_out == false):
@@ -241,7 +257,7 @@ func update_stats_average(player: Player):
 	player.container.stat_average_leg.text = "%.2f" % player.average_per_leg
 
 
-func new_score(player: Player, new_score):
+func update_score_container(player: Player, new_score):
 	update_stats_total(player)
 	player.target_score = new_score
 

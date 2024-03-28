@@ -1,0 +1,148 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhhpxo68fe80h"]
+
+[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="1_wy6td"]
+
+[sub_resource type="GDScript" id="GDScript_pj5ap"]
+script/source = "extends Control
+
+@export var player_name: Label
+@export var player_flag: TextureRect
+@export var player_average: Label
+
+
+func _on_rematch_pressed():
+	get_tree().reload_current_scene()
+
+
+func _on_quit_pressed():
+	get_tree().change_scene_to_file(\"res://main_menu.tscn\")
+
+"
+
+[sub_resource type="Shader" id="Shader_yqk8t"]
+code = "shader_type canvas_item;
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
+
+void fragment() {
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, 0.5);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3sity"]
+shader = SubResource("Shader_yqk8t")
+
+[node name="GameEnded" type="Control" node_paths=PackedStringArray("player_name", "player_flag", "player_average")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_pj5ap")
+player_name = NodePath("CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer/Name")
+player_flag = NodePath("CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer/MarginContainer/Flag")
+player_average = NodePath("CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2/MarginContainer/Value")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3sity")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.105882)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Flag" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_wy6td")
+expand_mode = 3
+
+[node name="Name" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "123456789112345"
+horizontal_alignment = 1
+
+[node name="Desc" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "win the match"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="Desc2" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2/MarginContainer2"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Average per leg:"
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 5
+
+[node name="Value" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "0.00"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Rematch" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Rematch"
+
+[node name="Quit" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/Rematch" to="." method="_on_rematch_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

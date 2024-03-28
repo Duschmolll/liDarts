@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://script/error_popup.gd" id="1_bn7rf"]
 
-[sub_resource type="Shader" id="Shader_yqk8t"]
+[sub_resource type="Shader" id="Shader_41e7b"]
 code = "shader_type canvas_item;
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
 
@@ -12,7 +12,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5q77j"]
-shader = SubResource("Shader_yqk8t")
+shader = SubResource("Shader_41e7b")
 
 [node name="ErrorPopup" type="Control"]
 layout_mode = 3
