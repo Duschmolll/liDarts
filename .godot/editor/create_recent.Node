@@ -1,3 +1,4 @@
+Panel
 VBoxContainer
 MarginContainer
 HBoxContainer
@@ -6,7 +7,6 @@ Button
 Label
 TextureButton
 PanelContainer
-Panel
 ScrollContainer
 Node
 ColorRect
