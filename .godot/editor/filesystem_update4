@@ -1,6 +1,0 @@
-res://gamemode/x_01/x_01_duo.tscn
-res://texture/blur.gdshader
-res://gamemode/game_selection.tscn
-res://gamemode/scene/game_ended.tscn
-res://error_popup.tscn
-res://gamemode/scene/player_list_button.tscn
