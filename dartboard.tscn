@@ -1,0 +1,92 @@
+[gd_scene load_steps=11 format=3 uid="uid://dhl4k5mxhv2la"]
+
+[ext_resource type="Texture2D" uid="uid://bdo6b0s7ocbo7" path="res://texture/ui/dartboard/dartboard.svg" id="1_ldx0a"]
+[ext_resource type="Texture2D" uid="uid://c68prlgdnmp3h" path="res://texture/ui/dartboard/dartboardcomplete.svg" id="2_76ri2"]
+[ext_resource type="Texture2D" uid="uid://3tljjtqyuk38" path="res://texture/ui/dartboard/bull_25.svg" id="3_tgwt1"]
+[ext_resource type="Texture2D" uid="uid://biy0l4giffth" path="res://texture/ui/dartboard/bull_50.svg" id="4_rileq"]
+[ext_resource type="Texture2D" uid="uid://1sat1hfhb72e" path="res://texture/ui/dartboard/black.svg" id="5_diyn4"]
+[ext_resource type="Texture2D" uid="uid://bupiuusmgsm4e" path="res://texture/ui/dartboard/triple_red.svg" id="6_dxn3c"]
+[ext_resource type="Texture2D" uid="uid://d4acy0ngvwouw" path="res://texture/ui/dartboard/double_red.svg" id="7_l68no"]
+[ext_resource type="Texture2D" uid="uid://b4bkt28i7ms5x" path="res://texture/ui/dartboard/white.svg" id="8_ck1mi"]
+[ext_resource type="Texture2D" uid="uid://dm26mn0e0fr40" path="res://texture/ui/dartboard/triple_green.svg" id="9_wntcc"]
+[ext_resource type="Texture2D" uid="uid://dqjm54jd5pbrd" path="res://texture/ui/dartboard/double_triple.svg" id="10_5w2t0"]
+
+[node name="Dartboard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dartboard" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 2562.0
+offset_bottom = 2562.0
+texture = ExtResource("1_ldx0a")
+
+[node name="DartboardFull" type="TextureRect" parent="."]
+offset_right = 2562.0
+offset_bottom = 2562.0
+texture = ExtResource("2_76ri2")
+
+[node name="Bull" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1181.0
+offset_top = 1182.0
+offset_right = 1380.0
+offset_bottom = 1381.0
+texture_normal = ExtResource("3_tgwt1")
+
+[node name="BullDouble" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1235.0
+offset_top = 1236.0
+offset_right = 1326.0
+offset_bottom = 1327.0
+texture_normal = ExtResource("4_rileq")
+
+[node name="20" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 886.0
+offset_top = 200.0
+offset_right = 1680.0
+offset_bottom = 1323.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="20Triple" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1175.0
+offset_top = 649.0
+offset_right = 1376.0
+offset_bottom = 718.0
+texture_normal = ExtResource("6_dxn3c")
+
+[node name="20Double" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1110.0
+offset_top = 264.0
+offset_right = 1431.0
+offset_bottom = 349.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="1" type="TextureButton" parent="."]
+offset_left = 1140.0
+offset_top = 278.0
+offset_right = 1934.0
+offset_bottom = 1401.0
+texture_normal = ExtResource("8_ck1mi")
+
+[node name="1Triple" type="TextureButton" parent="."]
+offset_left = 1429.0
+offset_top = 727.0
+offset_right = 1630.0
+offset_bottom = 796.0
+texture_normal = ExtResource("9_wntcc")
+
+[node name="1Double" type="TextureButton" parent="."]
+offset_left = 1364.0
+offset_top = 342.0
+offset_right = 1685.0
+offset_bottom = 427.0
+texture_normal = ExtResource("10_5w2t0")

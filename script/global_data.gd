@@ -133,4 +133,3 @@ func load_data(path: String):
 		print("Data has been loaded")
 	else:
 		printerr("Cannot open non-existant file at %s!" % [path])
-

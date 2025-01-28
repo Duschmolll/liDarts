@@ -475,9 +475,3 @@ func check_out_calculate(score: int):
 				dart -= k
 		dart -= i
 	return ([0,0,0])
-
-
-
-
-
-

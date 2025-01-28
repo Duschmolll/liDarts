@@ -1,3 +1,5 @@
+TextureButton
+TextureRect
 Panel
 VBoxContainer
 MarginContainer
@@ -5,10 +7,8 @@ HBoxContainer
 Control
 Button
 Label
-TextureButton
 PanelContainer
 ScrollContainer
 Node
 ColorRect
 CanvasLayer
-CenterContainer
