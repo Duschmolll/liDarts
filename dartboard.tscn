@@ -1,6 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://dhl4k5mxhv2la"]
+[gd_scene load_steps=32 format=3 uid="uid://dhl4k5mxhv2la"]
 
 [ext_resource type="Texture2D" uid="uid://bdo6b0s7ocbo7" path="res://texture/ui/dartboard/dartboard.svg" id="1_ldx0a"]
+[ext_resource type="Script" path="res://dartboard.gd" id="1_pqutw"]
 [ext_resource type="Texture2D" uid="uid://c68prlgdnmp3h" path="res://texture/ui/dartboard/dartboardcomplete.svg" id="2_76ri2"]
 [ext_resource type="Texture2D" uid="uid://3tljjtqyuk38" path="res://texture/ui/dartboard/bull_25.svg" id="3_tgwt1"]
 [ext_resource type="Texture2D" uid="uid://biy0l4giffth" path="res://texture/ui/dartboard/bull_50.svg" id="4_rileq"]
@@ -31,15 +32,37 @@
 [ext_resource type="Texture2D" uid="uid://caq2ogtb3ochu" path="res://texture/ui/dartboard/12.svg" id="22_0canx"]
 [ext_resource type="Texture2D" uid="uid://7v7mosgj4j54" path="res://texture/ui/dartboard/05.svg" id="23_bf1fc"]
 
-[node name="Dartboard" type="Control"]
+[node name="Dartboard" type="Control" node_paths=PackedStringArray("group00", "group01", "group02", "group03", "group04", "group05", "group06", "group07", "group08", "group09", "group10", "group11", "group12", "group13", "group14", "group15", "group16", "group17", "group18", "group19", "group20")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pqutw")
+group00 = NodePath("Group00")
+group01 = NodePath("Group01")
+group02 = NodePath("Group02")
+group03 = NodePath("Group03")
+group04 = NodePath("Group4")
+group05 = NodePath("Group05")
+group06 = NodePath("Group06")
+group07 = NodePath("Group7")
+group08 = NodePath("Group08")
+group09 = NodePath("Group09")
+group10 = NodePath("Group10")
+group11 = NodePath("Group11")
+group12 = NodePath("Group12")
+group13 = NodePath("Group13")
+group14 = NodePath("Group14")
+group15 = NodePath("Group15")
+group16 = NodePath("Group16")
+group17 = NodePath("Group17")
+group18 = NodePath("Group18")
+group19 = NodePath("Group19")
+group20 = NodePath("Group20")
 
-[node name="Dartboard" type="TextureRect" parent="."]
+[node name="DartboardBG" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 2562.0
 offset_bottom = 2562.0
@@ -52,78 +75,25 @@ offset_right = 2562.0
 offset_bottom = 2562.0
 texture = ExtResource("2_76ri2")
 
-[node name="Simple00" type="TextureButton" parent="."]
-layout_mode = 0
+[node name="Group00" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Simple" type="TextureButton" parent="Group00"]
 offset_left = 1181.0
 offset_top = 1182.0
 offset_right = 1380.0
 offset_bottom = 1381.0
 texture_normal = ExtResource("3_tgwt1")
 
-[node name="Double00" type="TextureButton" parent="."]
-layout_mode = 0
+[node name="Double" type="TextureButton" parent="Group00"]
 offset_left = 1235.0
 offset_top = 1236.0
 offset_right = 1326.0
 offset_bottom = 1327.0
 texture_normal = ExtResource("4_rileq")
-
-[node name="DefaultW" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Simple" type="TextureButton" parent="DefaultW"]
-layout_mode = 0
-offset_left = 11.0
-offset_top = 68.0
-offset_right = 311.0
-offset_bottom = 922.0
-texture_normal = ExtResource("8_ck1mi")
-
-[node name="Double" type="TextureButton" parent="DefaultW"]
-layout_mode = 0
-offset_right = 321.0
-offset_bottom = 85.0
-texture_normal = ExtResource("10_5w2t0")
-
-[node name="Triple" type="TextureButton" parent="DefaultW"]
-layout_mode = 0
-offset_left = 63.0
-offset_top = 384.0
-offset_right = 264.0
-offset_bottom = 453.0
-texture_normal = ExtResource("9_wntcc")
-
-[node name="DefaultB" type="Control" parent="."]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Simple" type="TextureButton" parent="DefaultB"]
-layout_mode = 0
-offset_left = 11.0
-offset_top = 68.0
-offset_right = 311.0
-offset_bottom = 922.0
-texture_normal = ExtResource("5_diyn4")
-
-[node name="Double" type="TextureButton" parent="DefaultB"]
-layout_mode = 0
-offset_right = 321.0
-offset_bottom = 85.0
-texture_normal = ExtResource("7_l68no")
-
-[node name="Triple" type="TextureButton" parent="DefaultB"]
-layout_mode = 0
-offset_left = 63.0
-offset_top = 384.0
-offset_right = 264.0
-offset_bottom = 453.0
-texture_normal = ExtResource("6_dxn3c")
 
 [node name="Group20" type="Control" parent="."]
 layout_mode = 3
@@ -413,6 +383,7 @@ offset_bottom = 1781.0
 rotation = 2.19911
 
 [node name="Number" type="TextureRect" parent="Group15"]
+layout_mode = 0
 offset_left = 132.135
 offset_top = -34.1978
 offset_right = 287.135
@@ -452,6 +423,7 @@ offset_bottom = 2043.0
 rotation = 2.51327
 
 [node name="Number" type="TextureRect" parent="Group02"]
+layout_mode = 0
 offset_left = 156.36
 offset_top = -43.3799
 offset_right = 241.36
@@ -491,6 +463,7 @@ offset_bottom = 2235.0
 rotation = 2.82743
 
 [node name="Number" type="TextureRect" parent="Group17"]
+layout_mode = 0
 offset_left = 208.986
 offset_top = -47.7588
 offset_right = 355.986
@@ -530,6 +503,7 @@ offset_bottom = 2338.0
 rotation = 3.14159
 
 [node name="Number" type="TextureRect" parent="Group03"]
+layout_mode = 0
 offset_left = 203.0
 offset_top = -60.0
 offset_right = 289.0
@@ -569,6 +543,7 @@ offset_bottom = 2341.0
 rotation = 3.45575
 
 [node name="Number" type="TextureRect" parent="Group19"]
+layout_mode = 0
 offset_left = 238.455
 offset_top = -84.8384
 offset_right = 388.455
@@ -608,6 +583,7 @@ offset_bottom = 2244.0
 rotation = 3.76991
 
 [node name="Number" type="TextureRect" parent="Group7"]
+layout_mode = 0
 offset_left = 225.905
 offset_top = -97.3816
 offset_right = 305.905
@@ -647,6 +623,7 @@ offset_bottom = 2057.0
 rotation = 4.08407
 
 [node name="Number" type="TextureRect" parent="Group16"]
+layout_mode = 0
 offset_left = 304.749
 offset_top = -150.644
 offset_right = 454.749
@@ -686,6 +663,7 @@ offset_bottom = 1798.0
 rotation = 4.39823
 
 [node name="Number" type="TextureRect" parent="Group08"]
+layout_mode = 0
 offset_left = 271.795
 offset_top = -147.216
 offset_right = 360.795
@@ -725,6 +703,7 @@ offset_bottom = 1492.0
 rotation = 4.71239
 
 [node name="Number" type="TextureRect" parent="Group11"]
+layout_mode = 0
 offset_left = 231.0
 offset_top = -184.0
 offset_right = 340.0
@@ -764,6 +743,7 @@ offset_bottom = 1170.0
 rotation = 5.02655
 
 [node name="Number" type="TextureRect" parent="Group14"]
+layout_mode = 0
 offset_left = 193.386
 offset_top = -230.017
 offset_right = 356.386
@@ -803,6 +783,7 @@ offset_bottom = 862.0
 rotation = 5.34071
 
 [node name="Number" type="TextureRect" parent="Group09"]
+layout_mode = 0
 offset_left = 195.593
 offset_top = -208.855
 offset_right = 277.593
@@ -842,6 +823,7 @@ offset_bottom = 600.0
 rotation = 5.65487
 
 [node name="Number" type="TextureRect" parent="Group12"]
+layout_mode = 0
 offset_left = 176.854
 offset_top = -234.912
 offset_right = 328.854
@@ -881,6 +863,7 @@ offset_bottom = 408.0
 rotation = 5.96903
 
 [node name="Number" type="TextureRect" parent="Group05"]
+layout_mode = 0
 offset_left = 177.448
 offset_top = -203.106
 offset_right = 259.448

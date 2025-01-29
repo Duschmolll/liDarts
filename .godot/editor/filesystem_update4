@@ -1,2 +1,4 @@
-res://dartboard.tscn
+res://gamemode/x_01/x_01_duo.tscn
 res://texture/blur.gdshader
+res://dartboard.gd
+res://dartboard.tscn

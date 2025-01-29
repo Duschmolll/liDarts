@@ -50,7 +50,6 @@ func _ready():
 	history_throw = [history_01_throw, history_02_throw, history_03_throw, history_04_throw, history_05_throw, history_06_throw, history_07_throw, history_08_throw, history_09_throw]
 	history_score = [history_01_score, history_02_score, history_03_score, history_04_score, history_05_score, history_06_score,history_07_score,history_08_score, history_09_score]
 	statistic_total = [stat_80, stat_100, stat_140, stat_180]
-
 "
 
 [sub_resource type="GDScript" id="GDScript_5qlxe"]

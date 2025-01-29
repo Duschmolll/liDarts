@@ -1,5 +1,6 @@
-TextureRect
 Control
+Node
+TextureRect
 Container
 TextureButton
 Panel
@@ -10,5 +11,4 @@ Button
 Label
 PanelContainer
 ScrollContainer
-Node
 ColorRect
