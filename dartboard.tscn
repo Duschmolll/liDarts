@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhl4k5mxhv2la"]
+[gd_scene load_steps=31 format=3 uid="uid://dhl4k5mxhv2la"]
 
 [ext_resource type="Texture2D" uid="uid://bdo6b0s7ocbo7" path="res://texture/ui/dartboard/dartboard.svg" id="1_ldx0a"]
 [ext_resource type="Texture2D" uid="uid://c68prlgdnmp3h" path="res://texture/ui/dartboard/dartboardcomplete.svg" id="2_76ri2"]
@@ -10,6 +10,26 @@
 [ext_resource type="Texture2D" uid="uid://b4bkt28i7ms5x" path="res://texture/ui/dartboard/white.svg" id="8_ck1mi"]
 [ext_resource type="Texture2D" uid="uid://dm26mn0e0fr40" path="res://texture/ui/dartboard/triple_green.svg" id="9_wntcc"]
 [ext_resource type="Texture2D" uid="uid://dqjm54jd5pbrd" path="res://texture/ui/dartboard/double_triple.svg" id="10_5w2t0"]
+[ext_resource type="Texture2D" uid="uid://bpaeabl7oe5ct" path="res://texture/ui/dartboard/20.svg" id="11_8qjpi"]
+[ext_resource type="Texture2D" uid="uid://bm2lwv6n4lje0" path="res://texture/ui/dartboard/15.svg" id="11_iy68w"]
+[ext_resource type="Texture2D" uid="uid://4t8lymbwce81" path="res://texture/ui/dartboard/02.svg" id="12_kffo5"]
+[ext_resource type="Texture2D" uid="uid://b15f4ku8sgd2g" path="res://texture/ui/dartboard/01.svg" id="12_w1wjg"]
+[ext_resource type="Texture2D" uid="uid://bc53xq8lrclfj" path="res://texture/ui/dartboard/18.svg" id="13_s1nnb"]
+[ext_resource type="Texture2D" uid="uid://c21iow7wulg4d" path="res://texture/ui/dartboard/17.svg" id="13_w67kx"]
+[ext_resource type="Texture2D" uid="uid://bin2ov5ws1qfr" path="res://texture/ui/dartboard/04.svg" id="14_hwm8e"]
+[ext_resource type="Texture2D" uid="uid://dystlaf2fhxah" path="res://texture/ui/dartboard/03.svg" id="14_nnhuq"]
+[ext_resource type="Texture2D" uid="uid://c4hqe1ty6pmnw" path="res://texture/ui/dartboard/19.svg" id="15_qknyt"]
+[ext_resource type="Texture2D" uid="uid://c7ypwidpt4rfc" path="res://texture/ui/dartboard/13.svg" id="15_sjmf3"]
+[ext_resource type="Texture2D" uid="uid://c8yt2dklytvm8" path="res://texture/ui/dartboard/07.svg" id="16_hmivq"]
+[ext_resource type="Texture2D" uid="uid://cnrcyde64vgtt" path="res://texture/ui/dartboard/06.svg" id="16_q74jr"]
+[ext_resource type="Texture2D" uid="uid://dhfawp5k3gpqo" path="res://texture/ui/dartboard/10.svg" id="17_tjirv"]
+[ext_resource type="Texture2D" uid="uid://cxrcnelw3ddky" path="res://texture/ui/dartboard/16.svg" id="17_yxsfa"]
+[ext_resource type="Texture2D" uid="uid://pue0quqnji27" path="res://texture/ui/dartboard/08.svg" id="18_gi7iq"]
+[ext_resource type="Texture2D" uid="uid://bk5a040ab6ymv" path="res://texture/ui/dartboard/11.svg" id="19_kc3kc"]
+[ext_resource type="Texture2D" uid="uid://bx1w1mgqmsu36" path="res://texture/ui/dartboard/14.svg" id="20_oil4x"]
+[ext_resource type="Texture2D" uid="uid://b0feayg8p4jtg" path="res://texture/ui/dartboard/09.svg" id="21_bicvk"]
+[ext_resource type="Texture2D" uid="uid://caq2ogtb3ochu" path="res://texture/ui/dartboard/12.svg" id="22_0canx"]
+[ext_resource type="Texture2D" uid="uid://7v7mosgj4j54" path="res://texture/ui/dartboard/05.svg" id="23_bf1fc"]
 
 [node name="Dartboard" type="Control"]
 layout_mode = 3
@@ -113,6 +133,14 @@ offset_top = 265.0
 offset_right = 1151.0
 offset_bottom = 305.0
 
+[node name="Number" type="TextureRect" parent="Group20"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = -203.0
+offset_right = 254.0
+offset_bottom = -60.0
+texture = ExtResource("11_8qjpi")
+
 [node name="Simple" type="TextureButton" parent="Group20"]
 layout_mode = 0
 offset_left = 11.0
@@ -143,6 +171,15 @@ offset_top = 262.0
 offset_right = 1473.0
 offset_bottom = 302.0
 rotation = 0.314159
+
+[node name="Number" type="TextureRect" parent="Group01"]
+layout_mode = 0
+offset_left = 104.247
+offset_top = -193.694
+offset_right = 147.247
+offset_bottom = -53.6943
+rotation = -0.314159
+texture = ExtResource("12_w1wjg")
 
 [node name="Simple" type="TextureButton" parent="Group01"]
 layout_mode = 0
@@ -175,6 +212,15 @@ offset_right = 1781.0
 offset_bottom = 399.0
 rotation = 0.628319
 
+[node name="Number" type="TextureRect" parent="Group18"]
+layout_mode = 0
+offset_left = 45.8689
+offset_top = -135.919
+offset_right = 204.869
+offset_bottom = 7.08093
+rotation = -0.628319
+texture = ExtResource("13_s1nnb")
+
 [node name="Simple" type="TextureButton" parent="Group18"]
 layout_mode = 0
 offset_left = 11.0
@@ -205,6 +251,15 @@ offset_top = 546.0
 offset_right = 2044.0
 offset_bottom = 586.0
 rotation = 0.942478
+
+[node name="Number" type="TextureRect" parent="Group4"]
+layout_mode = 0
+offset_left = 77.8653
+offset_top = -141.198
+offset_right = 171.865
+offset_bottom = -1.19824
+rotation = -0.942478
+texture = ExtResource("14_hwm8e")
 
 [node name="Simple" type="TextureButton" parent="Group4"]
 layout_mode = 0
@@ -237,6 +292,15 @@ offset_right = 2236.0
 offset_bottom = 846.0
 rotation = 1.25664
 
+[node name="Number" type="TextureRect" parent="Group13"]
+layout_mode = 0
+offset_left = 71.1552
+offset_top = -83.0781
+offset_right = 222.155
+offset_bottom = 59.9219
+rotation = -1.25664
+texture = ExtResource("15_sjmf3")
+
 [node name="Simple" type="TextureButton" parent="Group13"]
 layout_mode = 0
 offset_left = 11.0
@@ -258,3 +322,590 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("6_dxn3c")
+
+[node name="Group06" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2298.0
+offset_top = 1112.0
+offset_right = 2338.0
+offset_bottom = 1152.0
+rotation = 1.5708
+
+[node name="Number" type="TextureRect" parent="Group06"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = -75.0
+offset_right = 171.0
+offset_bottom = 66.0
+rotation = -1.5708
+texture = ExtResource("16_q74jr")
+
+[node name="Simple" type="TextureButton" parent="Group06"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("8_ck1mi")
+
+[node name="Double" type="TextureButton" parent="Group06"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("10_5w2t0")
+
+[node name="Triple" type="TextureButton" parent="Group06"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("9_wntcc")
+
+[node name="Group10" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2301.0
+offset_top = 1434.0
+offset_right = 2341.0
+offset_bottom = 1474.0
+rotation = 1.88496
+
+[node name="Number" type="TextureRect" parent="Group10"]
+layout_mode = 0
+offset_left = 99.8605
+offset_top = -32.4463
+offset_right = 254.86
+offset_bottom = 110.554
+rotation = -1.88496
+texture = ExtResource("17_tjirv")
+
+[node name="Simple" type="TextureButton" parent="Group10"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="Double" type="TextureButton" parent="Group10"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="Triple" type="TextureButton" parent="Group10"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("6_dxn3c")
+
+[node name="Group15" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2204.0
+offset_top = 1741.0
+offset_right = 2244.0
+offset_bottom = 1781.0
+rotation = 2.19911
+
+[node name="Number" type="TextureRect" parent="Group15"]
+offset_left = 132.135
+offset_top = -34.1978
+offset_right = 287.135
+offset_bottom = 108.802
+rotation = -2.19911
+texture = ExtResource("11_iy68w")
+
+[node name="Simple" type="TextureButton" parent="Group15"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("8_ck1mi")
+
+[node name="Double" type="TextureButton" parent="Group15"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("10_5w2t0")
+
+[node name="Triple" type="TextureButton" parent="Group15"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("9_wntcc")
+
+[node name="Group02" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2017.0
+offset_top = 2003.0
+offset_right = 2057.0
+offset_bottom = 2043.0
+rotation = 2.51327
+
+[node name="Number" type="TextureRect" parent="Group02"]
+offset_left = 156.36
+offset_top = -43.3799
+offset_right = 241.36
+offset_bottom = 97.6201
+rotation = -2.51327
+texture = ExtResource("12_kffo5")
+
+[node name="Simple" type="TextureButton" parent="Group02"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="Double" type="TextureButton" parent="Group02"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="Triple" type="TextureButton" parent="Group02"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("6_dxn3c")
+
+[node name="Group17" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1758.0
+offset_top = 2195.0
+offset_right = 1798.0
+offset_bottom = 2235.0
+rotation = 2.82743
+
+[node name="Number" type="TextureRect" parent="Group17"]
+offset_left = 208.986
+offset_top = -47.7588
+offset_right = 355.986
+offset_bottom = 92.2412
+rotation = -2.82743
+texture = ExtResource("13_w67kx")
+
+[node name="Simple" type="TextureButton" parent="Group17"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("8_ck1mi")
+
+[node name="Double" type="TextureButton" parent="Group17"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("10_5w2t0")
+
+[node name="Triple" type="TextureButton" parent="Group17"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("9_wntcc")
+
+[node name="Group03" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1451.0
+offset_top = 2298.0
+offset_right = 1491.0
+offset_bottom = 2338.0
+rotation = 3.14159
+
+[node name="Number" type="TextureRect" parent="Group03"]
+offset_left = 203.0
+offset_top = -60.0
+offset_right = 289.0
+offset_bottom = 83.0
+rotation = -3.14159
+texture = ExtResource("14_nnhuq")
+
+[node name="Simple" type="TextureButton" parent="Group03"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="Double" type="TextureButton" parent="Group03"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="Triple" type="TextureButton" parent="Group03"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("6_dxn3c")
+
+[node name="Group19" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1129.0
+offset_top = 2301.0
+offset_right = 1169.0
+offset_bottom = 2341.0
+rotation = 3.45575
+
+[node name="Number" type="TextureRect" parent="Group19"]
+offset_left = 238.455
+offset_top = -84.8384
+offset_right = 388.455
+offset_bottom = 58.1616
+rotation = -3.45575
+texture = ExtResource("15_qknyt")
+
+[node name="Simple" type="TextureButton" parent="Group19"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("8_ck1mi")
+
+[node name="Double" type="TextureButton" parent="Group19"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("10_5w2t0")
+
+[node name="Triple" type="TextureButton" parent="Group19"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("9_wntcc")
+
+[node name="Group7" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 822.0
+offset_top = 2204.0
+offset_right = 862.0
+offset_bottom = 2244.0
+rotation = 3.76991
+
+[node name="Number" type="TextureRect" parent="Group7"]
+offset_left = 225.905
+offset_top = -97.3816
+offset_right = 305.905
+offset_bottom = 42.6184
+rotation = -3.76991
+texture = ExtResource("16_hmivq")
+
+[node name="Simple" type="TextureButton" parent="Group7"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="Double" type="TextureButton" parent="Group7"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="Triple" type="TextureButton" parent="Group7"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("6_dxn3c")
+
+[node name="Group16" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 2017.0
+offset_right = 600.0
+offset_bottom = 2057.0
+rotation = 4.08407
+
+[node name="Number" type="TextureRect" parent="Group16"]
+offset_left = 304.749
+offset_top = -150.644
+offset_right = 454.749
+offset_bottom = -9.6438
+rotation = -4.08407
+texture = ExtResource("17_yxsfa")
+
+[node name="Simple" type="TextureButton" parent="Group16"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("8_ck1mi")
+
+[node name="Double" type="TextureButton" parent="Group16"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("10_5w2t0")
+
+[node name="Triple" type="TextureButton" parent="Group16"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("9_wntcc")
+
+[node name="Group08" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 367.0
+offset_top = 1758.0
+offset_right = 407.0
+offset_bottom = 1798.0
+rotation = 4.39823
+
+[node name="Number" type="TextureRect" parent="Group08"]
+offset_left = 271.795
+offset_top = -147.216
+offset_right = 360.795
+offset_bottom = -4.21558
+rotation = -4.39823
+texture = ExtResource("18_gi7iq")
+
+[node name="Simple" type="TextureButton" parent="Group08"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="Double" type="TextureButton" parent="Group08"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="Triple" type="TextureButton" parent="Group08"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("6_dxn3c")
+
+[node name="Group11" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 265.0
+offset_top = 1452.0
+offset_right = 305.0
+offset_bottom = 1492.0
+rotation = 4.71239
+
+[node name="Number" type="TextureRect" parent="Group11"]
+offset_left = 231.0
+offset_top = -184.0
+offset_right = 340.0
+offset_bottom = -44.0
+rotation = -4.71239
+texture = ExtResource("19_kc3kc")
+
+[node name="Simple" type="TextureButton" parent="Group11"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("8_ck1mi")
+
+[node name="Double" type="TextureButton" parent="Group11"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("10_5w2t0")
+
+[node name="Triple" type="TextureButton" parent="Group11"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("9_wntcc")
+
+[node name="Group14" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 262.0
+offset_top = 1130.0
+offset_right = 302.0
+offset_bottom = 1170.0
+rotation = 5.02655
+
+[node name="Number" type="TextureRect" parent="Group14"]
+offset_left = 193.386
+offset_top = -230.017
+offset_right = 356.386
+offset_bottom = -90.0171
+rotation = -5.02655
+texture = ExtResource("20_oil4x")
+
+[node name="Simple" type="TextureButton" parent="Group14"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="Double" type="TextureButton" parent="Group14"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="Triple" type="TextureButton" parent="Group14"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("6_dxn3c")
+
+[node name="Group09" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 358.0
+offset_top = 822.0
+offset_right = 398.0
+offset_bottom = 862.0
+rotation = 5.34071
+
+[node name="Number" type="TextureRect" parent="Group09"]
+offset_left = 195.593
+offset_top = -208.855
+offset_right = 277.593
+offset_bottom = -67.8546
+rotation = -5.34071
+texture = ExtResource("21_bicvk")
+
+[node name="Simple" type="TextureButton" parent="Group09"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("8_ck1mi")
+
+[node name="Double" type="TextureButton" parent="Group09"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("10_5w2t0")
+
+[node name="Triple" type="TextureButton" parent="Group09"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("9_wntcc")
+
+[node name="Group12" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 544.0
+offset_top = 560.0
+offset_right = 584.0
+offset_bottom = 600.0
+rotation = 5.65487
+
+[node name="Number" type="TextureRect" parent="Group12"]
+offset_left = 176.854
+offset_top = -234.912
+offset_right = 328.854
+offset_bottom = -93.9121
+rotation = -5.65487
+texture = ExtResource("22_0canx")
+
+[node name="Simple" type="TextureButton" parent="Group12"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="Double" type="TextureButton" parent="Group12"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="Triple" type="TextureButton" parent="Group12"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("6_dxn3c")
+
+[node name="Group05" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 805.0
+offset_top = 368.0
+offset_right = 845.0
+offset_bottom = 408.0
+rotation = 5.96903
+
+[node name="Number" type="TextureRect" parent="Group05"]
+offset_left = 177.448
+offset_top = -203.106
+offset_right = 259.448
+offset_bottom = -62.1064
+rotation = -5.96903
+texture = ExtResource("23_bf1fc")
+
+[node name="Simple" type="TextureButton" parent="Group05"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("8_ck1mi")
+
+[node name="Double" type="TextureButton" parent="Group05"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("10_5w2t0")
+
+[node name="Triple" type="TextureButton" parent="Group05"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("9_wntcc")
