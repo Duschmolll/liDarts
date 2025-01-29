@@ -26,11 +26,13 @@ offset_bottom = 2562.0
 texture = ExtResource("1_ldx0a")
 
 [node name="DartboardFull" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
 offset_right = 2562.0
 offset_bottom = 2562.0
 texture = ExtResource("2_76ri2")
 
-[node name="Bull" type="TextureButton" parent="."]
+[node name="Simple00" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 1181.0
 offset_top = 1182.0
@@ -38,7 +40,7 @@ offset_right = 1380.0
 offset_bottom = 1381.0
 texture_normal = ExtResource("3_tgwt1")
 
-[node name="BullDouble" type="TextureButton" parent="."]
+[node name="Double00" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 1235.0
 offset_top = 1236.0
@@ -46,47 +48,213 @@ offset_right = 1326.0
 offset_bottom = 1327.0
 texture_normal = ExtResource("4_rileq")
 
-[node name="20" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 886.0
-offset_top = 200.0
-offset_right = 1680.0
-offset_bottom = 1323.0
-texture_normal = ExtResource("5_diyn4")
+[node name="DefaultW" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="20Triple" type="TextureButton" parent="."]
+[node name="Simple" type="TextureButton" parent="DefaultW"]
 layout_mode = 0
-offset_left = 1175.0
-offset_top = 649.0
-offset_right = 1376.0
-offset_bottom = 718.0
-texture_normal = ExtResource("6_dxn3c")
-
-[node name="20Double" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 1110.0
-offset_top = 264.0
-offset_right = 1431.0
-offset_bottom = 349.0
-texture_normal = ExtResource("7_l68no")
-
-[node name="1" type="TextureButton" parent="."]
-offset_left = 1140.0
-offset_top = 278.0
-offset_right = 1934.0
-offset_bottom = 1401.0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
 texture_normal = ExtResource("8_ck1mi")
 
-[node name="1Triple" type="TextureButton" parent="."]
-offset_left = 1429.0
-offset_top = 727.0
-offset_right = 1630.0
-offset_bottom = 796.0
+[node name="Double" type="TextureButton" parent="DefaultW"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("10_5w2t0")
+
+[node name="Triple" type="TextureButton" parent="DefaultW"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
 texture_normal = ExtResource("9_wntcc")
 
-[node name="1Double" type="TextureButton" parent="."]
-offset_left = 1364.0
-offset_top = 342.0
-offset_right = 1685.0
-offset_bottom = 427.0
+[node name="DefaultB" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Simple" type="TextureButton" parent="DefaultB"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="Double" type="TextureButton" parent="DefaultB"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="Triple" type="TextureButton" parent="DefaultB"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("6_dxn3c")
+
+[node name="Group20" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1111.0
+offset_top = 265.0
+offset_right = 1151.0
+offset_bottom = 305.0
+
+[node name="Simple" type="TextureButton" parent="Group20"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="Double" type="TextureButton" parent="Group20"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="Triple" type="TextureButton" parent="Group20"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("6_dxn3c")
+
+[node name="Group01" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1433.0
+offset_top = 262.0
+offset_right = 1473.0
+offset_bottom = 302.0
+rotation = 0.314159
+
+[node name="Simple" type="TextureButton" parent="Group01"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("8_ck1mi")
+
+[node name="Double" type="TextureButton" parent="Group01"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
 texture_normal = ExtResource("10_5w2t0")
+
+[node name="Triple" type="TextureButton" parent="Group01"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("9_wntcc")
+
+[node name="Group18" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1741.0
+offset_top = 359.0
+offset_right = 1781.0
+offset_bottom = 399.0
+rotation = 0.628319
+
+[node name="Simple" type="TextureButton" parent="Group18"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="Double" type="TextureButton" parent="Group18"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="Triple" type="TextureButton" parent="Group18"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("6_dxn3c")
+
+[node name="Group4" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2004.0
+offset_top = 546.0
+offset_right = 2044.0
+offset_bottom = 586.0
+rotation = 0.942478
+
+[node name="Simple" type="TextureButton" parent="Group4"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("8_ck1mi")
+
+[node name="Double" type="TextureButton" parent="Group4"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("10_5w2t0")
+
+[node name="Triple" type="TextureButton" parent="Group4"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("9_wntcc")
+
+[node name="Group13" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2196.0
+offset_top = 806.0
+offset_right = 2236.0
+offset_bottom = 846.0
+rotation = 1.25664
+
+[node name="Simple" type="TextureButton" parent="Group13"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 68.0
+offset_right = 311.0
+offset_bottom = 922.0
+texture_normal = ExtResource("5_diyn4")
+
+[node name="Double" type="TextureButton" parent="Group13"]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 85.0
+texture_normal = ExtResource("7_l68no")
+
+[node name="Triple" type="TextureButton" parent="Group13"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 384.0
+offset_right = 264.0
+offset_bottom = 453.0
+texture_normal = ExtResource("6_dxn3c")

@@ -1,8 +1,8 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1738061537
+::res://::1738134486
 add_player.tscn::PackedScene::4737603927777449796::1737456057::0::1::::<><>::res://texture/blur.gdshader<>uid://csmjlh88yxtjc::::res://texture/countryFlag/World_Wide.png
 credit.txt::TextFile::-1::1737456057::0::1::::<><>::
-dartboard.tscn::PackedScene::7675072357862847194::1738055815::0::1::::<><>::
+dartboard.tscn::PackedScene::7675072357862847194::1738134486::0::1::::<><>::uid://bdo6b0s7ocbo7::::res://texture/ui/dartboard/dartboard.svg<>uid://c68prlgdnmp3h::::res://texture/ui/dartboard/dartboardcomplete.svg<>uid://3tljjtqyuk38::::res://texture/ui/dartboard/bull_25.svg<>uid://biy0l4giffth::::res://texture/ui/dartboard/bull_50.svg<>uid://1sat1hfhb72e::::res://texture/ui/dartboard/black.svg<>uid://bupiuusmgsm4e::::res://texture/ui/dartboard/triple_red.svg<>uid://d4acy0ngvwouw::::res://texture/ui/dartboard/double_red.svg<>uid://b4bkt28i7ms5x::::res://texture/ui/dartboard/white.svg<>uid://dm26mn0e0fr40::::res://texture/ui/dartboard/triple_green.svg<>uid://dqjm54jd5pbrd::::res://texture/ui/dartboard/double_triple.svg
 error_popup.tscn::PackedScene::3443998790046029262::1737456057::0::1::::<><>::res://script/error_popup.gd
 icon.svg::CompressedTexture2D::1507421593103545653::1737456057::1738055690::1::::<><>::
 main_menu.tscn::PackedScene::8325233448556158867::1737456057::0::1::::<><>::res://script/main_menu.gd
@@ -39,8 +39,8 @@ player_list_stats.tscn::PackedScene::7190627111354855480::1737456057::0::1::::<>
 player_stats_container.tscn::PackedScene::4006423139573591938::1737456057::0::1::::<><>::uid://is8s8jdmrquc::::res://texture/france.png<>uid://sjk35bp63qvd::::res://texture/ui/cross.png
 statistic.gd::GDScript::-1::1737456057::0::1::::<>Control<>::
 statistic.tscn::PackedScene::5206034860980474912::1737456057::0::1::::<><>::res://statistic/statistic.gd
-::res://texture/::1738055816
-blur.gdshader::Shader::-1::1738055816::0::1::::<><>::
+::res://texture/::1738134486
+blur.gdshader::Shader::-1::1738134486::0::1::::<><>::
 france.png::CompressedTexture2D::600707101055740626::1737456057::1738055690::1::::<><>::
 turn_arrow.png::CompressedTexture2D::5384028518927318056::1737456057::1738055690::1::::<><>::
 ::res://texture/countryFlag/::1738055691
@@ -285,8 +285,8 @@ reload.png::CompressedTexture2D::5159718239521899966::1737456057::1738055690::1:
 verified.png::CompressedTexture2D::1972847407342539082::1737456057::1738055690::1::::<><>::
 write.png::CompressedTexture2D::7223091361313198358::1737456057::1738055690::1::::<><>::
 x-button.png::CompressedTexture2D::7201364916898033489::1737456057::1738055690::1::::<><>::
-::res://texture/ui/dartboard/::1738061732
-black.svg::CompressedTexture2D::1862104040903454322::1738060020::1738061539::1::::<><>::
+::res://texture/ui/dartboard/::1738061801
+black.svg::CompressedTexture2D::1862104040903454322::1738134658::1738134663::1::::<><>::
 bull_25.svg::CompressedTexture2D::2005195261078890337::1738061484::1738061539::1::::<><>::
 bull_50.svg::CompressedTexture2D::88206341184213961::1738061462::1738061539::1::::<><>::
 dartboard.svg::CompressedTexture2D::2627773858096655984::1738061023::1738061540::1::::<><>::
@@ -295,6 +295,6 @@ double_red.svg::CompressedTexture2D::9194904143089260918::1738060375::1738061539
 double_triple.svg::CompressedTexture2D::8301646664062085313::1738060417::1738061539::1::::<><>::
 triple_green.svg::CompressedTexture2D::8059170752036954415::1738060399::1738061539::1::::<><>::
 triple_red.svg::CompressedTexture2D::3821685753412322814::1738060368::1738061539::1::::<><>::
-white.svg::CompressedTexture2D::4424604096477696891::1738060343::1738061539::1::::<><>::
+white.svg::CompressedTexture2D::4424604096477696891::1738134640::1738134663::1::::<><>::
 ::res://texture/ui/vecteezy_dartboard-target-illustration-bullseye-shop-target-flat-design_20456582_543/::1738061716
 vecteezy_dartboard-target-illustration-bullseye-shop-target-flat-design_20456582.jpg::CompressedTexture2D::6298145003910557071::1677466626::1738056498::1::::<><>::
