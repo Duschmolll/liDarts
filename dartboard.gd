@@ -29,9 +29,4 @@ var controlGroupList: Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	controlGroupList = [group00,group01,group02,group03,group04,group05,group06,group07,group08,group09,group10,group11,group12,group13,group14,group15,group16,group17,group18,group19,group20]
-	
-	for elem:Control in controlGroupList:
-		for btn in elem.get_children():
-			if btn.name != "Number":
-				btn.pressed.connect(Callable(self, "number_buttons").bind(btn)) 
+	pass

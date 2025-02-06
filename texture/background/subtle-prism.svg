@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 2560 1440"
+   version="1.1"
+   sodipodi:docname="subtle-prism.svg"
+   width="2560"
+   height="1440"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="subtle-prism.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview77"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.5"
+     inkscape:cx="1127"
+     inkscape:cy="731"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <defs
+     id="defs70">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#b"
+       id="pattern80"
+       patternTransform="matrix(0.66666665,0,0,-0.66666665,719.11998,996.43998)" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#b"
+       id="pattern79"
+       patternTransform="matrix(0.66666665,0,0,-0.66666665,719.11998,996.43998)" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#b"
+       id="pattern78"
+       patternTransform="matrix(0.66666665,0,0,-0.66666665,719.11998,996.43998)" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#b"
+       id="pattern77"
+       patternTransform="matrix(0.66666665,0,0,-0.66666665,719.11998,996.43998)" />
+    <style
+       id="style1">.cls-1{fill:none;}.cls-2{fill:#444;}.cls-2,.cls-3,.cls-4,.cls-5,.cls-6,.cls-7,.cls-8,.cls-9{opacity:0.1;}.cls-4{fill:#aaa;}.cls-5{fill:#ddd;}.cls-6{fill:#999;}.cls-7{fill:#fff;}.cls-8{fill:#666;}.cls-9{fill:#222;}.cls-10{fill:url(#linear-gradient);}.cls-11{fill:url(#b);}</style>
+    <linearGradient
+       id="linear-gradient"
+       x1="-465.81"
+       y1="1426.74"
+       x2="-465.81"
+       y2="346.73999"
+       gradientTransform="matrix(-0.5,-0.87,-0.87,0.5,1476.51,-296.08)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#fff"
+         id="stop1" />
+      <stop
+         offset="1"
+         stop-color="#4fe"
+         id="stop2" />
+    </linearGradient>
+    <pattern
+       id="b"
+       data-name="b"
+       width="1080"
+       height="900"
+       patternTransform="matrix(0.5, 0, 0, -0.5, 539.34, 747.33)"
+       patternUnits="userSpaceOnUse"
+       viewBox="0 0 1080 900">
+      <rect
+         class="cls-1"
+         width="1080"
+         height="900"
+         id="rect2" />
+      <polygon
+         class="cls-2"
+         points="90 750 0 600 180 600 90 750"
+         id="polygon2" />
+      <polygon
+         class="cls-3"
+         points="90 750 180 900 0 900 90 750"
+         id="polygon3" />
+      <polygon
+         class="cls-4"
+         points="270 750 360 900 180 900 270 750"
+         id="polygon4" />
+      <polygon
+         class="cls-5"
+         points="450 750 360 600 540 600 450 750"
+         id="polygon5" />
+      <polygon
+         class="cls-6"
+         points="450 750 540 900 360 900 450 750"
+         id="polygon6" />
+      <polygon
+         class="cls-3"
+         points="630 750 540 600 720 600 630 750"
+         id="polygon7" />
+      <polygon
+         class="cls-5"
+         points="630 750 720 900 540 900 630 750"
+         id="polygon8" />
+      <polygon
+         class="cls-2"
+         points="810 750 720 600 900 600 810 750"
+         id="polygon9" />
+      <polygon
+         class="cls-7"
+         points="810 750 900 900 720 900 810 750"
+         id="polygon10" />
+      <polygon
+         class="cls-5"
+         points="990 750 900 600 1080 600 990 750"
+         id="polygon11" />
+      <polygon
+         class="cls-2"
+         points="990 750 1080 900 900 900 990 750"
+         id="polygon12" />
+      <polygon
+         class="cls-5"
+         points="90 450 0 300 180 300 90 450"
+         id="polygon13" />
+      <polygon
+         class="cls-3"
+         points="90 450 180 600 0 600 90 450"
+         id="polygon14" />
+      <polygon
+         class="cls-8"
+         points="270 450 180 300 360 300 270 450"
+         id="polygon15" />
+      <polygon
+         class="cls-4"
+         points="270 450 360 600 180 600 270 450"
+         id="polygon16" />
+      <polygon
+         class="cls-5"
+         points="450 450 360 300 540 300 450 450"
+         id="polygon17" />
+      <polygon
+         class="cls-6"
+         points="450 450 540 600 360 600 450 450"
+         id="polygon18" />
+      <polygon
+         class="cls-6"
+         points="630 450 540 300 720 300 630 450"
+         id="polygon19" />
+      <polygon
+         class="cls-7"
+         points="630 450 720 600 540 600 630 450"
+         id="polygon20" />
+      <polygon
+         class="cls-3"
+         points="810 450 720 300 900 300 810 450"
+         id="polygon21" />
+      <polygon
+         class="cls-5"
+         points="810 450 900 600 720 600 810 450"
+         id="polygon22" />
+      <polygon
+         class="cls-4"
+         points="990 450 900 300 1080 300 990 450"
+         id="polygon23" />
+      <polygon
+         class="cls-2"
+         points="990 450 1080 600 900 600 990 450"
+         id="polygon24" />
+      <polygon
+         class="cls-9"
+         points="90 150 0 0 180 0 90 150"
+         id="polygon25" />
+      <polygon
+         class="cls-3"
+         points="270 150 180 0 360 0 270 150"
+         id="polygon26" />
+      <polygon
+         class="cls-5"
+         points="270 150 360 300 180 300 270 150"
+         id="polygon27" />
+      <polygon
+         class="cls-3"
+         points="450 150 540 300 360 300 450 150"
+         id="polygon28" />
+      <polygon
+         class="cls-3"
+         points="630 150 540 0 720 0 630 150"
+         id="polygon29" />
+      <polygon
+         class="cls-2"
+         points="630 150 720 300 540 300 630 150"
+         id="polygon30" />
+      <polygon
+         class="cls-4"
+         points="810 150 720 0 900 0 810 150"
+         id="polygon31" />
+      <polygon
+         class="cls-8"
+         points="810 150 900 300 720 300 810 150"
+         id="polygon32" />
+      <polygon
+         class="cls-6"
+         points="990 150 900 0 1080 0 990 150"
+         id="polygon33" />
+      <polygon
+         class="cls-6"
+         points="180 900 90 750 270 750 180 900"
+         id="polygon34" />
+      <polygon
+         class="cls-2"
+         points="360 900 270 750 450 750 360 900"
+         id="polygon35" />
+      <polygon
+         class="cls-7"
+         points="540 900 450 750 630 750 540 900"
+         id="polygon36" />
+      <polygon
+         class="cls-3"
+         points="900 900 810 750 990 750 900 900"
+         id="polygon37" />
+      <polygon
+         class="cls-9"
+         points="0 600 -90 450 90 450 0 600"
+         id="polygon38" />
+      <polygon
+         class="cls-7"
+         points="0 600 90 750 -90 750 0 600"
+         id="polygon39" />
+      <polygon
+         class="cls-7"
+         points="180 600 90 450 270 450 180 600"
+         id="polygon40" />
+      <polygon
+         class="cls-8"
+         points="180 600 270 750 90 750 180 600"
+         id="polygon41" />
+      <polygon
+         class="cls-9"
+         points="360 600 270 450 450 450 360 600"
+         id="polygon42" />
+      <polygon
+         class="cls-7"
+         points="360 600 450 750 270 750 360 600"
+         id="polygon43" />
+      <polygon
+         class="cls-2"
+         points="540 600 450 450 630 450 540 600"
+         id="polygon44" />
+      <polygon
+         class="cls-9"
+         points="540 600 630 750 450 750 540 600"
+         id="polygon45" />
+      <polygon
+         class="cls-4"
+         points="720 600 630 450 810 450 720 600"
+         id="polygon46" />
+      <polygon
+         class="cls-8"
+         points="720 600 810 750 630 750 720 600"
+         id="polygon47" />
+      <polygon
+         class="cls-7"
+         points="900 600 810 450 990 450 900 600"
+         id="polygon48" />
+      <polygon
+         class="cls-6"
+         points="900 600 990 750 810 750 900 600"
+         id="polygon49" />
+      <polygon
+         class="cls-3"
+         points="0 300 -90 150 90 150 0 300"
+         id="polygon50" />
+      <polygon
+         class="cls-8"
+         points="0 300 90 450 -90 450 0 300"
+         id="polygon51" />
+      <polygon
+         class="cls-4"
+         points="180 300 90 150 270 150 180 300"
+         id="polygon52" />
+      <polygon
+         class="cls-2"
+         points="180 300 270 450 90 450 180 300"
+         id="polygon53" />
+      <polygon
+         class="cls-2"
+         points="360 300 270 150 450 150 360 300"
+         id="polygon54" />
+      <polygon
+         class="cls-6"
+         points="360 300 450 450 270 450 360 300"
+         id="polygon55" />
+      <polygon
+         class="cls-8"
+         points="540 300 630 450 450 450 540 300"
+         id="polygon56" />
+      <polygon
+         class="cls-9"
+         points="720 300 630 150 810 150 720 300"
+         id="polygon57" />
+      <polygon
+         class="cls-7"
+         points="900 300 810 150 990 150 900 300"
+         id="polygon58" />
+      <polygon
+         class="cls-9"
+         points="900 300 990 450 810 450 900 300"
+         id="polygon59" />
+      <polygon
+         class="cls-5"
+         points="0 0 90 150 -90 150 0 0"
+         id="polygon60" />
+      <polygon
+         class="cls-2"
+         points="180 0 270 150 90 150 180 0"
+         id="polygon61" />
+      <polygon
+         class="cls-7"
+         points="360 0 450 150 270 150 360 0"
+         id="polygon62" />
+      <polygon
+         class="cls-4"
+         points="540 0 630 150 450 150 540 0"
+         id="polygon63" />
+      <polygon
+         class="cls-7"
+         points="720 0 810 150 630 150 720 0"
+         id="polygon64" />
+      <polygon
+         class="cls-9"
+         points="900 0 990 150 810 150 900 0"
+         id="polygon65" />
+      <polygon
+         class="cls-9"
+         points="1080 600 990 450 1170 450 1080 600"
+         id="polygon66" />
+      <polygon
+         class="cls-7"
+         points="1080 600 1170 750 990 750 1080 600"
+         id="polygon67" />
+      <polygon
+         class="cls-3"
+         points="1080 300 990 150 1170 150 1080 300"
+         id="polygon68" />
+      <polygon
+         class="cls-8"
+         points="1080 300 1170 450 990 450 1080 300"
+         id="polygon69" />
+      <polygon
+         class="cls-5"
+         points="1080 0 1170 150 990 150 1080 0"
+         id="polygon70" />
+    </pattern>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linear-gradient"
+       id="linearGradient77"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.66666665,-1.16,-1.16,0.66666665,1968.68,-394.77332)"
+       x1="-465.81"
+       y1="1426.74"
+       x2="-465.81"
+       y2="346.73999" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linear-gradient"
+       id="linearGradient78"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.66666665,-1.16,-1.16,0.66666665,1968.68,-394.77332)"
+       x1="-465.81"
+       y1="1426.74"
+       x2="-465.81"
+       y2="346.73999" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linear-gradient"
+       id="linearGradient79"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.66666665,-1.16,-1.16,0.66666665,1968.68,-394.77332)"
+       x1="-465.81"
+       y1="1426.74"
+       x2="-465.81"
+       y2="346.73999" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linear-gradient"
+       id="linearGradient80"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.66666665,-1.16,-1.16,0.66666665,1968.68,-394.77332)"
+       x1="-465.81"
+       y1="1426.74"
+       x2="-465.81"
+       y2="346.73999" />
+  </defs>
+  <rect
+     class="cls-10"
+     width="2560"
+     height="1440"
+     id="rect70"
+     style="fill:url(#linearGradient80);stroke-width:1.33333"
+     x="0"
+     y="0" />
+  <rect
+     class="cls-11"
+     width="2560"
+     height="1440"
+     id="rect71"
+     x="0"
+     y="0"
+     style="fill:url(#pattern80);stroke-width:1.33333" />
+  <rect
+     class="cls-10"
+     width="2560"
+     height="1440"
+     id="rect72"
+     style="fill:url(#linearGradient79);stroke-width:1.33333"
+     x="0"
+     y="0" />
+  <rect
+     class="cls-11"
+     width="2560"
+     height="1440"
+     id="rect73"
+     x="0"
+     y="0"
+     style="fill:url(#pattern79);stroke-width:1.33333" />
+  <rect
+     class="cls-10"
+     width="2560"
+     height="1440"
+     id="rect74"
+     style="fill:url(#linearGradient78);stroke-width:1.33333"
+     x="0"
+     y="0" />
+  <rect
+     class="cls-11"
+     width="2560"
+     height="1440"
+     id="rect75"
+     x="0"
+     y="0"
+     style="fill:url(#pattern78);stroke-width:1.33333" />
+  <rect
+     class="cls-10"
+     width="2560"
+     height="1440"
+     id="rect76"
+     style="fill:url(#linearGradient77);stroke-width:1.33333"
+     x="0"
+     y="0" />
+  <rect
+     class="cls-11"
+     width="2560"
+     height="1440"
+     id="rect77"
+     x="0"
+     y="0"
+     style="fill:url(#pattern77);stroke-width:1.33333" />
+</svg>

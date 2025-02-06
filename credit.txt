@@ -3,3 +3,6 @@ Modify: https://www.flaticon.com/free-icon/write_10613752?term=modify&page=1&pos
 Delete: https://www.flaticon.com/free-icon/x-button_458594?term=delete&page=1&position=38&origin=search&related_id=458594
 Pack: https://www.flaticon.com/packs/website-ui-1
 Flag: "https://icons8.com/icons/collections/spp6bi76qplgden7apvn"
+
+Background: https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/
+DARTBOARD: "https://www.vecteezy.com/free-vector/dartboard-icon" Dartboard Icon Vectors by Vecteezy
