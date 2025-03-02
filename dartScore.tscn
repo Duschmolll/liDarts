@@ -1,0 +1,126 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1klnyodec6dh"]
+
+[ext_resource type="Texture2D" uid="uid://dfqk4knldcmb5" path="res://texture/ui/dartboard/dart_flight_Out.svg" id="1_elcik"]
+[ext_resource type="Script" path="res://dart_score.gd" id="1_ttsao"]
+[ext_resource type="Script" path="res://texture_button_2.gd" id="3_4jn7m"]
+
+[node name="DartScore" type="Control" node_paths=PackedStringArray("button01", "button02", "button03")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ttsao")
+button01 = NodePath("VBoxContainer/TextureButton2")
+button02 = NodePath("VBoxContainer/TextureButton3")
+button03 = NodePath("VBoxContainer/TextureButton4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -170.0
+offset_right = 50.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="TextureButton2" type="TextureButton" parent="VBoxContainer" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("1_elcik")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_4jn7m")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="VBoxContainer/TextureButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -7.0
+offset_right = 6.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -10
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton3" type="TextureButton" parent="VBoxContainer" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("1_elcik")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_4jn7m")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="VBoxContainer/TextureButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.5
+offset_top = -42.5
+offset_right = 14.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -10
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton4" type="TextureButton" parent="VBoxContainer" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("1_elcik")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_4jn7m")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="VBoxContainer/TextureButton4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -257.5
+offset_right = 86.0
+offset_bottom = 257.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -10
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1

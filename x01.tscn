@@ -1,30 +1,32 @@
 [gd_scene load_steps=9 format=3 uid="uid://dnk185rma8pe3"]
 
 [ext_resource type="PackedScene" uid="uid://dhl4k5mxhv2la" path="res://dartboard.tscn" id="1_b5pyi"]
+[ext_resource type="Script" path="res://x_01.gd" id="1_ceexi"]
 [ext_resource type="Texture2D" uid="uid://cayot88mwdqvd" path="res://texture/background/subtle-prism.png" id="1_r4du4"]
 [ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="2_weocv"]
-[ext_resource type="Texture2D" uid="uid://ciycfssdp6ljc" path="res://texture/turn_arrow.png" id="3_ioy74"]
-[ext_resource type="PackedScene" uid="uid://c1klnyodec6dh" path="res://dart_Score.tscn" id="4_6k3ce"]
+[ext_resource type="PackedScene" uid="uid://c1klnyodec6dh" path="res://dartScore.tscn" id="4_6k3ce"]
 
 [sub_resource type="GDScript" id="GDScript_80uk2"]
 script/source = "extends VBoxContainer
 
-@export var name_container: Node
-@export var turn_arrow_left: MarginContainer
-@export var turn_arrow_right: MarginContainer
-@export var score_label: Node
-@export var check_out_label: Node
+@export var player_name: Label
+@export var player_flag: TextureRect
+
+@export var score_label: Label
+@export var check_out_label: Label
 
 @export var statistic_container: Node
-@export var stat_leg: Label
-@export var stat_80: Label
-@export var stat_100: Label
-@export var stat_140: Label
-@export var stat_180: Label
-@export var stat_average: Label
-@export var stat_average_leg: Label
 
 @export var history_container: Node
+
+func _ready():
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_4ud42"]
+script/source = "extends VBoxContainer
+
+
 @export var history_01_throw: Label
 @export var history_01_score: Label
 @export var history_02_throw: Label
@@ -46,41 +48,42 @@ script/source = "extends VBoxContainer
 
 var history_throw = []
 var history_score = []
-var statistic_total = []
 
-func _ready():
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
 	history_throw = [history_01_throw, history_02_throw, history_03_throw, history_04_throw, history_05_throw, history_06_throw, history_07_throw, history_08_throw, history_09_throw]
 	history_score = [history_01_score, history_02_score, history_03_score, history_04_score, history_05_score, history_06_score,history_07_score,history_08_score, history_09_score]
+"
+
+[sub_resource type="GDScript" id="GDScript_dttjp"]
+script/source = "extends VBoxContainer
+
+@export var stat_leg: Label
+@export var stat_80: Label
+@export var stat_100: Label
+@export var stat_140: Label
+@export var stat_180: Label
+@export var stat_average: Label
+@export var stat_average_leg: Label
+
+var statistic_total = []
+
+func _ready() -> void:
 	statistic_total = [stat_80, stat_100, stat_140, stat_180]
 "
 
-[sub_resource type="GDScript" id="GDScript_ti10q"]
-script/source = "extends TextureRect
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	var key = GlobalData.player_selected.keys()[0]
-	self.set_texture(load(GlobalData.player_list[key].flag))
-"
-
-[sub_resource type="GDScript" id="GDScript_ym7hn"]
-script/source = "extends Label
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	var key = GlobalData.player_selected.keys()[0]
-	self.text = GlobalData.player_list[key].name
-"
-
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("dartboard", "dartScore", "dartScoreBtn", "infoPanel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ceexi")
+dartboard = NodePath("Dartboard")
+dartScore = NodePath("PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer/CenterContainer/DartScore")
+dartScoreBtn = NodePath("PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer")
+infoPanel = NodePath("PlayerPanel/VBoxContainer")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -97,25 +100,34 @@ offset_right = 651.0
 offset_bottom = 1491.0
 scale = Vector2(0.415134, 0.415134)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PlayerPanel" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 11
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -832.0
+offset_left = -848.0
+offset_bottom = 812.0
 grow_horizontal = 0
-grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Player1" type="VBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerPanel" node_paths=PackedStringArray("player_name", "player_flag", "score_label", "check_out_label", "statistic_container", "history_container")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = SubResource("GDScript_80uk2")
+player_name = NodePath("Name/CenterContainer/Player/Name")
+player_flag = NodePath("Name/MarginContainer/Flag")
+score_label = NodePath("Score/Player1Score")
+check_out_label = NodePath("Score/Player1Score/MarginContainer/Label")
+statistic_container = NodePath("PanelContainer/MarginContainer/CenterContainer3/Statistic")
+history_container = NodePath("PanelContainer/MarginContainer/CenterContainer/History")
 
-[node name="Name" type="PanelContainer" parent="VBoxContainer/Player1"]
+[node name="Name" type="PanelContainer" parent="PlayerPanel/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Player1/Name"]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerPanel/VBoxContainer/Name"]
 custom_minimum_size = Vector2(69, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -124,33 +136,18 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Flag" type="TextureRect" parent="VBoxContainer/Player1/Name/MarginContainer"]
+[node name="Flag" type="TextureRect" parent="PlayerPanel/VBoxContainer/Name/MarginContainer"]
 layout_mode = 2
 texture = ExtResource("2_weocv")
 expand_mode = 4
-script = SubResource("GDScript_ti10q")
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Player1/Name"]
+[node name="CenterContainer" type="CenterContainer" parent="PlayerPanel/VBoxContainer/Name"]
 layout_mode = 2
 
-[node name="Player" type="HBoxContainer" parent="VBoxContainer/Player1/Name/CenterContainer"]
+[node name="Player" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/Name/CenterContainer"]
 layout_mode = 2
 
-[node name="TurnArrowLeft" type="MarginContainer" parent="VBoxContainer/Player1/Name/CenterContainer/Player"]
-custom_minimum_size = Vector2(69, 69)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Player1/Name/CenterContainer/Player/TurnArrowLeft"]
-layout_mode = 2
-texture = ExtResource("3_ioy74")
-expand_mode = 4
-
-[node name="Name" type="Label" parent="VBoxContainer/Player1/Name/CenterContainer/Player"]
+[node name="Name" type="Label" parent="PlayerPanel/VBoxContainer/Name/CenterContainer/Player"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 50
@@ -158,27 +155,11 @@ text = "Krek
 "
 horizontal_alignment = 1
 vertical_alignment = 1
-script = SubResource("GDScript_ym7hn")
 
-[node name="TurnArrowRight" type="MarginContainer" parent="VBoxContainer/Player1/Name/CenterContainer/Player"]
-custom_minimum_size = Vector2(69, 69)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Player1/Name/CenterContainer/Player/TurnArrowRight"]
-layout_mode = 2
-texture = ExtResource("3_ioy74")
-expand_mode = 4
-flip_h = true
-
-[node name="Score" type="PanelContainer" parent="VBoxContainer/Player1"]
+[node name="Score" type="PanelContainer" parent="PlayerPanel/VBoxContainer"]
 layout_mode = 2
 
-[node name="Player1Score" type="Label" parent="VBoxContainer/Player1/Score"]
+[node name="Player1Score" type="Label" parent="PlayerPanel/VBoxContainer/Score"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 150
@@ -186,7 +167,7 @@ text = "501"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Player1/Score/Player1Score"]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerPanel/VBoxContainer/Score/Player1Score"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -199,34 +180,311 @@ offset_right = 56.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/Player1/Score/Player1Score/MarginContainer"]
+[node name="Label" type="Label" parent="PlayerPanel/VBoxContainer/Score/Player1Score/MarginContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.803922, 0, 1)
 theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Player1"]
+[node name="PanelContainer" type="PanelContainer" parent="PlayerPanel/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Player1/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerPanel/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="FlowContainer" type="FlowContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-alignment = 2
+size_flags_horizontal = 0
 
-[node name="Statistic" type="VBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="CenterContainer" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="DartScore" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer/CenterContainer" instance=ExtResource("4_6k3ce")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="ButtonValidate" type="Button" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Validate"
+
+[node name="ButtonMiss" type="Button" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Miss"
+
+[node name="CenterContainer" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="History" type="VBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer" node_paths=PackedStringArray("history_01_throw", "history_01_score", "history_02_throw", "history_02_score", "history_03_throw", "history_03_score", "history_04_throw", "history_04_score", "history_05_throw", "history_05_score", "history_06_throw", "history_06_score", "history_07_throw", "history_07_score", "history_08_throw", "history_08_score", "history_09_throw", "history_09_score")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+script = SubResource("GDScript_4ud42")
+history_01_throw = NodePath("CenterContainer/Shot00/score")
+history_01_score = NodePath("CenterContainer/Shot00/rem_score")
+history_02_throw = NodePath("CenterContainer2/Shot00/score")
+history_02_score = NodePath("CenterContainer2/Shot00/rem_score")
+history_03_throw = NodePath("CenterContainer3/Shot00/score")
+history_03_score = NodePath("CenterContainer3/Shot00/rem_score")
+history_04_throw = NodePath("CenterContainer4/Shot00/score")
+history_04_score = NodePath("CenterContainer4/Shot00/rem_score")
+history_05_throw = NodePath("CenterContainer5/Shot00/score")
+history_05_score = NodePath("CenterContainer5/Shot00/rem_score")
+history_06_throw = NodePath("CenterContainer6/Shot00/score")
+history_06_score = NodePath("CenterContainer6/Shot00/rem_score")
+history_07_throw = NodePath("CenterContainer7/Shot00/score")
+history_07_score = NodePath("CenterContainer6/Shot00/rem_score")
+history_08_throw = NodePath("CenterContainer8/Shot00/score")
+history_08_score = NodePath("CenterContainer8/Shot00/rem_score")
+history_09_throw = NodePath("CenterContainer9/Shot00/score")
+history_09_score = NodePath("CenterContainer9/Shot00/rem_score")
+
+[node name="CenterContainer" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
+layout_mode = 2
+
+[node name="Shot00" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "2"
+horizontal_alignment = 2
+
+[node name="rem_score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[node name="CenterContainer2" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
+layout_mode = 2
+
+[node name="Shot00" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer2/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "1"
+horizontal_alignment = 2
+
+[node name="rem_score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer2/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "9999
+"
+
+[node name="CenterContainer3" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
+layout_mode = 2
+
+[node name="Shot00" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer3/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "2"
+horizontal_alignment = 2
+
+[node name="rem_score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer3/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "9999
+"
+
+[node name="CenterContainer4" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
+layout_mode = 2
+
+[node name="Shot00" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer4"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer4/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "1"
+horizontal_alignment = 2
+
+[node name="rem_score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer4/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "9999
+"
+
+[node name="CenterContainer5" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
+layout_mode = 2
+
+[node name="Shot00" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer5"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer5/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "1"
+horizontal_alignment = 2
+
+[node name="rem_score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer5/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "9999
+"
+
+[node name="CenterContainer6" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
+layout_mode = 2
+
+[node name="Shot00" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer6"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer6/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "1"
+horizontal_alignment = 2
+
+[node name="rem_score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer6/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "9999
+"
+
+[node name="CenterContainer7" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
+layout_mode = 2
+
+[node name="Shot00" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer7"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer7/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "1"
+horizontal_alignment = 2
+
+[node name="rem_score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer7/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "9999
+"
+
+[node name="CenterContainer8" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
+layout_mode = 2
+
+[node name="Shot00" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer8"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer8/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "1"
+horizontal_alignment = 2
+
+[node name="rem_score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer8/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "9999
+"
+
+[node name="CenterContainer9" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
+layout_mode = 2
+
+[node name="Shot00" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer9"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer9/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "1"
+horizontal_alignment = 2
+
+[node name="rem_score" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History/CenterContainer9/Shot00"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "9999
+"
+
+[node name="CenterContainer3" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Statistic" type="VBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3" node_paths=PackedStringArray("stat_leg", "stat_80", "stat_100", "stat_140", "stat_180", "stat_average", "stat_average_leg")]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 10
+script = SubResource("GDScript_dttjp")
+stat_leg = NodePath("Legs/Value")
+stat_80 = NodePath("80+/Value")
+stat_100 = NodePath("100+/Value")
+stat_140 = NodePath("140+/Value")
+stat_180 = NodePath("180+/Value")
+stat_average = NodePath("Match/Value")
+stat_average_leg = NodePath("Leg/Value")
 
-[node name="Title" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
+[node name="Title" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Total
@@ -234,16 +492,16 @@ text = "Total
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Legs" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
+[node name="Legs" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Legs"]
+[node name="Title" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/Legs"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Legs:"
 
-[node name="Value" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Legs"]
+[node name="Value" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/Legs"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
@@ -251,315 +509,105 @@ text = "1
 "
 horizontal_alignment = 2
 
-[node name="80+" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
+[node name="80+" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/80+"]
+[node name="Title" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/80+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "80+:"
 
-[node name="Value" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/80+"]
+[node name="Value" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/80+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="100+" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
+[node name="100+" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/100+"]
+[node name="Title" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/100+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "100+:"
 
-[node name="Value" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/100+"]
+[node name="Value" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/100+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="140+" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
+[node name="140+" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/140+"]
+[node name="Title" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/140+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "140+:"
 
-[node name="Value" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/140+"]
+[node name="Value" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/140+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="180+" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
+[node name="180+" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/180+"]
+[node name="Title" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/180+"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "180+:"
 
-[node name="Value" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/180+"]
+[node name="Value" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/180+"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
 
-[node name="Averages" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
+[node name="Averages" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Averages"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Match" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
+[node name="Match" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Match"]
+[node name="Title" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/Match"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Match:"
 
-[node name="Value" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Match"]
+[node name="Value" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/Match"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "180.00"
 horizontal_alignment = 2
 
-[node name="Leg" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic"]
+[node name="Leg" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Leg"]
+[node name="Title" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/Leg"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Leg:"
 
-[node name="Value" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/Statistic/Leg"]
+[node name="Value" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic/Leg"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
-
-[node name="History" type="VBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 10
-
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
-layout_mode = 2
-
-[node name="Shot00" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer"]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 30
-text = "2"
-horizontal_alignment = 2
-
-[node name="rem_score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "1"
-
-[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
-layout_mode = 2
-
-[node name="Shot00" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 30
-text = "1"
-horizontal_alignment = 2
-
-[node name="rem_score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer2/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "9999
-"
-
-[node name="CenterContainer3" type="CenterContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
-layout_mode = 2
-
-[node name="Shot00" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3"]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 30
-text = "2"
-horizontal_alignment = 2
-
-[node name="rem_score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer3/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "9999
-"
-
-[node name="CenterContainer4" type="CenterContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
-layout_mode = 2
-
-[node name="Shot00" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4"]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 30
-text = "1"
-horizontal_alignment = 2
-
-[node name="rem_score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer4/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "9999
-"
-
-[node name="CenterContainer5" type="CenterContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
-layout_mode = 2
-
-[node name="Shot00" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5"]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 30
-text = "1"
-horizontal_alignment = 2
-
-[node name="rem_score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer5/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "9999
-"
-
-[node name="CenterContainer6" type="CenterContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
-layout_mode = 2
-
-[node name="Shot00" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6"]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 30
-text = "1"
-horizontal_alignment = 2
-
-[node name="rem_score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer6/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "9999
-"
-
-[node name="CenterContainer7" type="CenterContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
-layout_mode = 2
-
-[node name="Shot00" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7"]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 30
-text = "1"
-horizontal_alignment = 2
-
-[node name="rem_score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer7/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "9999
-"
-
-[node name="CenterContainer8" type="CenterContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
-layout_mode = 2
-
-[node name="Shot00" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8"]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 30
-text = "1"
-horizontal_alignment = 2
-
-[node name="rem_score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer8/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "9999
-"
-
-[node name="CenterContainer9" type="CenterContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History"]
-layout_mode = 2
-
-[node name="Shot00" type="HBoxContainer" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9"]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 30
-text = "1"
-horizontal_alignment = 2
-
-[node name="rem_score" type="Label" parent="VBoxContainer/Player1/PanelContainer/MarginContainer/FlowContainer/History/CenterContainer9/Shot00"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "9999
-"
-
-[node name="Control" parent="." instance=ExtResource("4_6k3ce")]
-layout_mode = 1
-offset_left = 1256.0
-offset_top = 776.0
-offset_right = 1040.0
-offset_bottom = 240.0
-scale = Vector2(0.3, 0.3)

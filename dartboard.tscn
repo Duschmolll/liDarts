@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://bdo6b0s7ocbo7" path="res://texture/ui/dartboard/dartboard.svg" id="1_ldx0a"]
 [ext_resource type="Script" path="res://dartboard.gd" id="1_pqutw"]
-[ext_resource type="Texture2D" uid="uid://c68prlgdnmp3h" path="res://texture/ui/dartboard/dartboardcomplete.svg" id="2_76ri2"]
 [ext_resource type="Texture2D" uid="uid://3tljjtqyuk38" path="res://texture/ui/dartboard/bull_25.svg" id="3_tgwt1"]
 [ext_resource type="Texture2D" uid="uid://biy0l4giffth" path="res://texture/ui/dartboard/bull_50.svg" id="4_rileq"]
 [ext_resource type="Texture2D" uid="uid://1sat1hfhb72e" path="res://texture/ui/dartboard/black.svg" id="5_diyn4"]
+[ext_resource type="Script" path="res://dartboardButton.gd" id="5_jf72y"]
 [ext_resource type="Texture2D" uid="uid://bupiuusmgsm4e" path="res://texture/ui/dartboard/triple_red.svg" id="6_dxn3c"]
 [ext_resource type="Texture2D" uid="uid://d4acy0ngvwouw" path="res://texture/ui/dartboard/double_red.svg" id="7_l68no"]
 [ext_resource type="Texture2D" uid="uid://b4bkt28i7ms5x" path="res://texture/ui/dartboard/white.svg" id="8_ck1mi"]
@@ -65,17 +65,11 @@ group19 = NodePath("Group19")
 group20 = NodePath("Group20")
 
 [node name="DartboardBG" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 2562.0
-offset_bottom = 2562.0
-texture = ExtResource("1_ldx0a")
-
-[node name="DartboardFull" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
 offset_right = 2562.0
 offset_bottom = 2562.0
-texture = ExtResource("2_76ri2")
+texture = ExtResource("1_ldx0a")
 
 [node name="Group00" type="Control" parent="."]
 layout_mode = 3
@@ -90,6 +84,8 @@ offset_top = 1182.0
 offset_right = 1380.0
 offset_bottom = 1381.0
 texture_normal = ExtResource("3_tgwt1")
+script = ExtResource("5_jf72y")
+buttonValue = 25
 
 [node name="Double" type="TextureButton" parent="Group00"]
 layout_mode = 0
@@ -98,6 +94,8 @@ offset_top = 1236.0
 offset_right = 1326.0
 offset_bottom = 1327.0
 texture_normal = ExtResource("4_rileq")
+script = ExtResource("5_jf72y")
+buttonValue = 50
 
 [node name="Group20" type="Control" parent="."]
 layout_mode = 3
@@ -122,12 +120,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("5_diyn4")
+script = ExtResource("5_jf72y")
+buttonValue = 20
 
 [node name="Double" type="TextureButton" parent="Group20"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("7_l68no")
+script = ExtResource("5_jf72y")
+buttonValue = 40
 
 [node name="Triple" type="TextureButton" parent="Group20"]
 layout_mode = 0
@@ -136,6 +138,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("6_dxn3c")
+script = ExtResource("5_jf72y")
+buttonValue = 60
 
 [node name="Group01" type="Control" parent="."]
 layout_mode = 3
@@ -162,12 +166,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("8_ck1mi")
+script = ExtResource("5_jf72y")
+buttonValue = 1
 
 [node name="Double" type="TextureButton" parent="Group01"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("10_5w2t0")
+script = ExtResource("5_jf72y")
+buttonValue = 2
 
 [node name="Triple" type="TextureButton" parent="Group01"]
 layout_mode = 0
@@ -176,6 +184,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("9_wntcc")
+script = ExtResource("5_jf72y")
+buttonValue = 3
 
 [node name="Group18" type="Control" parent="."]
 layout_mode = 3
@@ -202,12 +212,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("5_diyn4")
+script = ExtResource("5_jf72y")
+buttonValue = 18
 
 [node name="Double" type="TextureButton" parent="Group18"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("7_l68no")
+script = ExtResource("5_jf72y")
+buttonValue = 36
 
 [node name="Triple" type="TextureButton" parent="Group18"]
 layout_mode = 0
@@ -216,6 +230,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("6_dxn3c")
+script = ExtResource("5_jf72y")
+buttonValue = 54
 
 [node name="Group4" type="Control" parent="."]
 layout_mode = 3
@@ -242,12 +258,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("8_ck1mi")
+script = ExtResource("5_jf72y")
+buttonValue = 4
 
 [node name="Double" type="TextureButton" parent="Group4"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("10_5w2t0")
+script = ExtResource("5_jf72y")
+buttonValue = 8
 
 [node name="Triple" type="TextureButton" parent="Group4"]
 layout_mode = 0
@@ -256,6 +276,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("9_wntcc")
+script = ExtResource("5_jf72y")
+buttonValue = 12
 
 [node name="Group13" type="Control" parent="."]
 layout_mode = 3
@@ -282,12 +304,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("5_diyn4")
+script = ExtResource("5_jf72y")
+buttonValue = 13
 
 [node name="Double" type="TextureButton" parent="Group13"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("7_l68no")
+script = ExtResource("5_jf72y")
+buttonValue = 26
 
 [node name="Triple" type="TextureButton" parent="Group13"]
 layout_mode = 0
@@ -296,6 +322,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("6_dxn3c")
+script = ExtResource("5_jf72y")
+buttonValue = 39
 
 [node name="Group06" type="Control" parent="."]
 layout_mode = 3
@@ -322,12 +350,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("8_ck1mi")
+script = ExtResource("5_jf72y")
+buttonValue = 6
 
 [node name="Double" type="TextureButton" parent="Group06"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("10_5w2t0")
+script = ExtResource("5_jf72y")
+buttonValue = 12
 
 [node name="Triple" type="TextureButton" parent="Group06"]
 layout_mode = 0
@@ -336,6 +368,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("9_wntcc")
+script = ExtResource("5_jf72y")
+buttonValue = 18
 
 [node name="Group10" type="Control" parent="."]
 layout_mode = 3
@@ -362,12 +396,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("5_diyn4")
+script = ExtResource("5_jf72y")
+buttonValue = 10
 
 [node name="Double" type="TextureButton" parent="Group10"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("7_l68no")
+script = ExtResource("5_jf72y")
+buttonValue = 20
 
 [node name="Triple" type="TextureButton" parent="Group10"]
 layout_mode = 0
@@ -376,6 +414,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("6_dxn3c")
+script = ExtResource("5_jf72y")
+buttonValue = 30
 
 [node name="Group15" type="Control" parent="."]
 layout_mode = 3
@@ -402,12 +442,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("8_ck1mi")
+script = ExtResource("5_jf72y")
+buttonValue = 15
 
 [node name="Double" type="TextureButton" parent="Group15"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("10_5w2t0")
+script = ExtResource("5_jf72y")
+buttonValue = 30
 
 [node name="Triple" type="TextureButton" parent="Group15"]
 layout_mode = 0
@@ -416,6 +460,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("9_wntcc")
+script = ExtResource("5_jf72y")
+buttonValue = 45
 
 [node name="Group02" type="Control" parent="."]
 layout_mode = 3
@@ -442,12 +488,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("5_diyn4")
+script = ExtResource("5_jf72y")
+buttonValue = 2
 
 [node name="Double" type="TextureButton" parent="Group02"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("7_l68no")
+script = ExtResource("5_jf72y")
+buttonValue = 4
 
 [node name="Triple" type="TextureButton" parent="Group02"]
 layout_mode = 0
@@ -456,6 +506,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("6_dxn3c")
+script = ExtResource("5_jf72y")
+buttonValue = 6
 
 [node name="Group17" type="Control" parent="."]
 layout_mode = 3
@@ -482,12 +534,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("8_ck1mi")
+script = ExtResource("5_jf72y")
+buttonValue = 17
 
 [node name="Double" type="TextureButton" parent="Group17"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("10_5w2t0")
+script = ExtResource("5_jf72y")
+buttonValue = 34
 
 [node name="Triple" type="TextureButton" parent="Group17"]
 layout_mode = 0
@@ -496,6 +552,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("9_wntcc")
+script = ExtResource("5_jf72y")
+buttonValue = 51
 
 [node name="Group03" type="Control" parent="."]
 layout_mode = 3
@@ -522,12 +580,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("5_diyn4")
+script = ExtResource("5_jf72y")
+buttonValue = 3
 
 [node name="Double" type="TextureButton" parent="Group03"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("7_l68no")
+script = ExtResource("5_jf72y")
+buttonValue = 6
 
 [node name="Triple" type="TextureButton" parent="Group03"]
 layout_mode = 0
@@ -536,6 +598,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("6_dxn3c")
+script = ExtResource("5_jf72y")
+buttonValue = 9
 
 [node name="Group19" type="Control" parent="."]
 layout_mode = 3
@@ -562,12 +626,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("8_ck1mi")
+script = ExtResource("5_jf72y")
+buttonValue = 19
 
 [node name="Double" type="TextureButton" parent="Group19"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("10_5w2t0")
+script = ExtResource("5_jf72y")
+buttonValue = 38
 
 [node name="Triple" type="TextureButton" parent="Group19"]
 layout_mode = 0
@@ -576,6 +644,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("9_wntcc")
+script = ExtResource("5_jf72y")
+buttonValue = 57
 
 [node name="Group7" type="Control" parent="."]
 layout_mode = 3
@@ -602,12 +672,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("5_diyn4")
+script = ExtResource("5_jf72y")
+buttonValue = 7
 
 [node name="Double" type="TextureButton" parent="Group7"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("7_l68no")
+script = ExtResource("5_jf72y")
+buttonValue = 14
 
 [node name="Triple" type="TextureButton" parent="Group7"]
 layout_mode = 0
@@ -616,6 +690,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("6_dxn3c")
+script = ExtResource("5_jf72y")
+buttonValue = 21
 
 [node name="Group16" type="Control" parent="."]
 layout_mode = 3
@@ -642,12 +718,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("8_ck1mi")
+script = ExtResource("5_jf72y")
+buttonValue = 16
 
 [node name="Double" type="TextureButton" parent="Group16"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("10_5w2t0")
+script = ExtResource("5_jf72y")
+buttonValue = 32
 
 [node name="Triple" type="TextureButton" parent="Group16"]
 layout_mode = 0
@@ -656,6 +736,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("9_wntcc")
+script = ExtResource("5_jf72y")
+buttonValue = 48
 
 [node name="Group08" type="Control" parent="."]
 layout_mode = 3
@@ -682,12 +764,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("5_diyn4")
+script = ExtResource("5_jf72y")
+buttonValue = 8
 
 [node name="Double" type="TextureButton" parent="Group08"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("7_l68no")
+script = ExtResource("5_jf72y")
+buttonValue = 16
 
 [node name="Triple" type="TextureButton" parent="Group08"]
 layout_mode = 0
@@ -696,6 +782,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("6_dxn3c")
+script = ExtResource("5_jf72y")
+buttonValue = 24
 
 [node name="Group11" type="Control" parent="."]
 layout_mode = 3
@@ -722,12 +810,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("8_ck1mi")
+script = ExtResource("5_jf72y")
+buttonValue = 11
 
 [node name="Double" type="TextureButton" parent="Group11"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("10_5w2t0")
+script = ExtResource("5_jf72y")
+buttonValue = 22
 
 [node name="Triple" type="TextureButton" parent="Group11"]
 layout_mode = 0
@@ -736,6 +828,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("9_wntcc")
+script = ExtResource("5_jf72y")
+buttonValue = 33
 
 [node name="Group14" type="Control" parent="."]
 layout_mode = 3
@@ -762,12 +856,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("5_diyn4")
+script = ExtResource("5_jf72y")
+buttonValue = 14
 
 [node name="Double" type="TextureButton" parent="Group14"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("7_l68no")
+script = ExtResource("5_jf72y")
+buttonValue = 18
 
 [node name="Triple" type="TextureButton" parent="Group14"]
 layout_mode = 0
@@ -776,6 +874,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("6_dxn3c")
+script = ExtResource("5_jf72y")
+buttonValue = 42
 
 [node name="Group09" type="Control" parent="."]
 layout_mode = 3
@@ -802,12 +902,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("8_ck1mi")
+script = ExtResource("5_jf72y")
+buttonValue = 9
 
 [node name="Double" type="TextureButton" parent="Group09"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("10_5w2t0")
+script = ExtResource("5_jf72y")
+buttonValue = 18
 
 [node name="Triple" type="TextureButton" parent="Group09"]
 layout_mode = 0
@@ -816,6 +920,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("9_wntcc")
+script = ExtResource("5_jf72y")
+buttonValue = 27
 
 [node name="Group12" type="Control" parent="."]
 layout_mode = 3
@@ -842,12 +948,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("5_diyn4")
+script = ExtResource("5_jf72y")
+buttonValue = 12
 
 [node name="Double" type="TextureButton" parent="Group12"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("7_l68no")
+script = ExtResource("5_jf72y")
+buttonValue = 24
 
 [node name="Triple" type="TextureButton" parent="Group12"]
 layout_mode = 0
@@ -856,6 +966,8 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("6_dxn3c")
+script = ExtResource("5_jf72y")
+buttonValue = 36
 
 [node name="Group05" type="Control" parent="."]
 layout_mode = 3
@@ -882,12 +994,16 @@ offset_top = 68.0
 offset_right = 311.0
 offset_bottom = 922.0
 texture_normal = ExtResource("8_ck1mi")
+script = ExtResource("5_jf72y")
+buttonValue = 5
 
 [node name="Double" type="TextureButton" parent="Group05"]
 layout_mode = 0
 offset_right = 321.0
 offset_bottom = 85.0
 texture_normal = ExtResource("10_5w2t0")
+script = ExtResource("5_jf72y")
+buttonValue = 10
 
 [node name="Triple" type="TextureButton" parent="Group05"]
 layout_mode = 0
@@ -896,3 +1012,5 @@ offset_top = 384.0
 offset_right = 264.0
 offset_bottom = 453.0
 texture_normal = ExtResource("9_wntcc")
+script = ExtResource("5_jf72y")
+buttonValue = 15

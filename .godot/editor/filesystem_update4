@@ -1,0 +1,5 @@
+res://x01.tscn
+res://x_01.gd
+res://texture/blur.gdshader
+res://dartScore.tscn
+res://dartboard.tscn
