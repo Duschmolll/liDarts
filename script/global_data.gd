@@ -101,7 +101,7 @@ func load_data(path: String):
 		
 		for key in data.global_data.player_list.keys():
 			var current_player = data.global_data.player_list[key]
-			GlobalData.player_list[key] = Player.new()
+			GlobalData.player_list[key] = Player_old.new()
 			GlobalData.player_list[key].name = current_player.name
 			GlobalData.player_list[key].flag = current_player.flag
 			GlobalData.player_list[key].all_time_average_per_leg = current_player.all_time_average_per_leg
@@ -118,7 +118,7 @@ func load_data(path: String):
 		
 		for key in data.global_data.player_selected.keys():
 			var current_player = data.global_data.player_selected[key]
-			GlobalData.player_selected[key] = Player.new()
+			GlobalData.player_selected[key] = Player_old.new()
 			GlobalData.player_selected[key].name = current_player.name
 			GlobalData.player_selected[key].flag = current_player.flag
 		

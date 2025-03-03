@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b8q6v6cep8lt1"]
 
-[ext_resource type="Shader" path="res://texture/blur.gdshader" id="1_hcisb"]
+[ext_resource type="Shader" uid="uid://sfp031kaoyrt" path="res://texture/blur.gdshader" id="1_hcisb"]
 [ext_resource type="Texture2D" uid="uid://csmjlh88yxtjc" path="res://texture/countryFlag/World_Wide.png" id="2_nxten"]
 
 [sub_resource type="GDScript" id="GDScript_3rnwi"]

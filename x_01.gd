@@ -5,6 +5,9 @@ extends Control
 @export var dartScoreBtn: HBoxContainer
 @export var infoPanel: VBoxContainer 
 
+var playerList = [Player.new("Mattieu", "xxx"), Player.new("Krek", "xxx")]
+var currentPlayer: Player
+
 func dartboardButton(btn, type) -> void:
 	match type:
 		"input":
@@ -25,19 +28,13 @@ func dartboardButton(btn, type) -> void:
 		"scoreSetting":
 			match btn.text:
 				"Validate":
-					var allFull: bool = true
 					var throwScore: int = 0
 					for dartValue in dartScore.buttonList:
-						if dartValue.label.text == "":
-							allFull = false
-						else:
-							throwScore += dartValue.value
-					if allFull:
-						print(throwScore)
-						for dartValue in dartScore.buttonList:
-							dartValue.label.text = ""
-							dartValue.value = 0
-						
+						throwScore += dartValue.value
+					
+					endTurn(throwScore)
+
+
 				"Miss":
 					for dartValue in dartScore.buttonList:
 						if dartValue.label.text == "":
@@ -61,21 +58,39 @@ func button_init() -> void:
 	for btn: TextureButton in dartScore.buttonList:
 		btn.pressed.connect(Callable(self, "dartboardButton").bind(btn, "dartScore"))
 
-func initGame(playerList) -> void:
-	var key = playerList.keys()
-	var currentPlayer = GlobalData.player_list[key[0]]
+func initGame() -> void:
+	
+	for player: Player in playerList:
+		player.newGame(301)
 
+	currentPlayer = playerList[0]
+	
 	infoPanel.player_name.text = currentPlayer.name
 	infoPanel.player_flag.set_texture(load(currentPlayer.flag)) 
 	infoPanel.score_label.text = "301"
 	infoPanel.check_out_label.text = ""
+	
+	infoPanel.statistic_container.fromPlayer(currentPlayer)
+	infoPanel.history_container.newGame()
 
+func endTurn(throwScore: int) -> void:
+	
+	var throwBool:int = currentPlayer.newThrow(throwScore)
+	
+	infoPanel.score_label.text = str(currentPlayer.score)
+	
+	infoPanel.history_container.update(currentPlayer)
+	infoPanel.statistic_container.update(currentPlayer)
+	
+	for dartValue in dartScore.buttonList:
+		dartValue.label.text = ""
+		dartValue.value = 0
+	
+	
 func _ready() -> void:
-
 	button_init()
 	
-	var playerList = GlobalData.player_selected
-	initGame(playerList)
+	initGame()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

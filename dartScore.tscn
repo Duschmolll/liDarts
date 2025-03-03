@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://c1klnyodec6dh"]
 
 [ext_resource type="Texture2D" uid="uid://dfqk4knldcmb5" path="res://texture/ui/dartboard/dart_flight_Out.svg" id="1_elcik"]
-[ext_resource type="Script" path="res://dart_score.gd" id="1_ttsao"]
-[ext_resource type="Script" path="res://texture_button_2.gd" id="3_4jn7m"]
+[ext_resource type="Script" uid="uid://c1uf6756xi153" path="res://dart_score.gd" id="1_ttsao"]
+[ext_resource type="Script" uid="uid://coo2n5ybovqn" path="res://texture_button_2.gd" id="3_4jn7m"]
 
 [node name="DartScore" type="Control" node_paths=PackedStringArray("button01", "button02", "button03")]
 layout_mode = 3

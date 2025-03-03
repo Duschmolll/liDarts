@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c8ff84k2lsxv4"]
 
-[ext_resource type="Script" path="res://gamemode/x_01/script/x_01_duo.gd" id="1_5ysku"]
+[ext_resource type="Script" uid="uid://conrja07mhydg" path="res://gamemode/x_01/script/x_01_duo.gd" id="1_5ysku"]
 [ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="2_vl7k6"]
 [ext_resource type="Texture2D" uid="uid://ciycfssdp6ljc" path="res://texture/turn_arrow.png" id="3_0ukao"]
 

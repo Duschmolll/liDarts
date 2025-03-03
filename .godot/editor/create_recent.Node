@@ -1,11 +1,11 @@
-HBoxContainer
-VBoxContainer
 MarginContainer
+PanelContainer
+Control
+VBoxContainer
+HBoxContainer
 CenterContainer
 Button
-PanelContainer
 AspectRatioContainer
-Control
 Container
 TextureRect
 Label

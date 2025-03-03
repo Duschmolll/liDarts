@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnk185rma8pe3"]
+[gd_scene load_steps=10 format=3 uid="uid://dnk185rma8pe3"]
 
 [ext_resource type="PackedScene" uid="uid://dhl4k5mxhv2la" path="res://dartboard.tscn" id="1_b5pyi"]
-[ext_resource type="Script" path="res://x_01.gd" id="1_ceexi"]
+[ext_resource type="Script" uid="uid://bamaber4d21nb" path="res://x_01.gd" id="1_ceexi"]
 [ext_resource type="Texture2D" uid="uid://cayot88mwdqvd" path="res://texture/background/subtle-prism.png" id="1_r4du4"]
 [ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="2_weocv"]
 [ext_resource type="PackedScene" uid="uid://c1klnyodec6dh" path="res://dartScore.tscn" id="4_6k3ce"]
@@ -49,10 +49,23 @@ script/source = "extends VBoxContainer
 var history_throw = []
 var history_score = []
 
-# Called when the node enters the scene tree for the first time.
+func newGame() -> void:
+	for elem in history_score:
+		elem.text = \"\"
+	for elem in history_throw:
+		elem.text = \"\"
+
+func update(player: Player) -> void:
+	var length = min(len(player.throwList), len(history_score))
+	var k = 0
+	for i in range(len(player.throwList) - 1, (len(player.throwList) - length - 1), -1):
+		history_throw[k].text = str(player.throwList[i])
+		history_score[k].text = str(player.scoreList[i])
+		k += 1
+
 func _ready() -> void:
 	history_throw = [history_01_throw, history_02_throw, history_03_throw, history_04_throw, history_05_throw, history_06_throw, history_07_throw, history_08_throw, history_09_throw]
-	history_score = [history_01_score, history_02_score, history_03_score, history_04_score, history_05_score, history_06_score,history_07_score,history_08_score, history_09_score]
+	history_score = [history_01_score, history_02_score, history_03_score, history_04_score, history_05_score, history_06_score, history_07_score, history_08_score, history_09_score]
 "
 
 [sub_resource type="GDScript" id="GDScript_dttjp"]
@@ -66,11 +79,22 @@ script/source = "extends VBoxContainer
 @export var stat_average: Label
 @export var stat_average_leg: Label
 
-var statistic_total = []
 
-func _ready() -> void:
-	statistic_total = [stat_80, stat_100, stat_140, stat_180]
+func fromPlayer(player: Player) -> void:
+	stat_leg.text = str(player.leg)
+	stat_80.text = str(player.score_80)
+	stat_100.text = str(player.score_100)
+	stat_140.text = str(player.score_140)
+	stat_180.text = str(player.score_180)
+	
+	stat_average.text = str(player.average)
+	stat_average_leg.text = str(player.average_per_leg)
+
+func update(player: Player) -> void:
+	fromPlayer(player)
 "
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e2ibp"]
 
 [node name="Control" type="Control" node_paths=PackedStringArray("dartboard", "dartScore", "dartScoreBtn", "infoPanel")]
 layout_mode = 3
@@ -106,7 +130,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -848.0
-offset_bottom = 812.0
+offset_bottom = 815.0
 grow_horizontal = 0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -139,7 +163,8 @@ theme_override_constants/margin_bottom = 5
 [node name="Flag" type="TextureRect" parent="PlayerPanel/VBoxContainer/Name/MarginContainer"]
 layout_mode = 2
 texture = ExtResource("2_weocv")
-expand_mode = 4
+expand_mode = 1
+stretch_mode = 5
 
 [node name="CenterContainer" type="CenterContainer" parent="PlayerPanel/VBoxContainer/Name"]
 layout_mode = 2
@@ -151,8 +176,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 50
-text = "Krek
-"
+text = "Krek"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -263,7 +287,7 @@ history_05_score = NodePath("CenterContainer5/Shot00/rem_score")
 history_06_throw = NodePath("CenterContainer6/Shot00/score")
 history_06_score = NodePath("CenterContainer6/Shot00/rem_score")
 history_07_throw = NodePath("CenterContainer7/Shot00/score")
-history_07_score = NodePath("CenterContainer6/Shot00/rem_score")
+history_07_score = NodePath("CenterContainer7/Shot00/rem_score")
 history_08_throw = NodePath("CenterContainer8/Shot00/score")
 history_08_score = NodePath("CenterContainer8/Shot00/rem_score")
 history_09_throw = NodePath("CenterContainer9/Shot00/score")
@@ -309,8 +333,7 @@ horizontal_alignment = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "9999
-"
+text = "9999"
 
 [node name="CenterContainer3" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
 layout_mode = 2
@@ -331,8 +354,7 @@ horizontal_alignment = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "9999
-"
+text = "9999"
 
 [node name="CenterContainer4" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
 layout_mode = 2
@@ -353,8 +375,7 @@ horizontal_alignment = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "9999
-"
+text = "9999"
 
 [node name="CenterContainer5" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
 layout_mode = 2
@@ -375,8 +396,7 @@ horizontal_alignment = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "9999
-"
+text = "9999"
 
 [node name="CenterContainer6" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
 layout_mode = 2
@@ -397,8 +417,7 @@ horizontal_alignment = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "9999
-"
+text = "9999"
 
 [node name="CenterContainer7" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
 layout_mode = 2
@@ -419,8 +438,7 @@ horizontal_alignment = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "9999
-"
+text = "9999"
 
 [node name="CenterContainer8" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
 layout_mode = 2
@@ -441,8 +459,7 @@ horizontal_alignment = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "9999
-"
+text = "9999"
 
 [node name="CenterContainer9" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
 layout_mode = 2
@@ -463,8 +480,7 @@ horizontal_alignment = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "9999
-"
+text = "9999"
 
 [node name="CenterContainer3" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
@@ -505,8 +521,7 @@ text = "Legs:"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "1
-"
+text = "1"
 horizontal_alignment = 2
 
 [node name="80+" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic"]
@@ -611,3 +626,78 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 2
+
+[node name="NextPlayer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -848.0
+offset_top = -89.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="NextPlayer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NextPlayer/PanelContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="NextPlayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="NextPlayer/PanelContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "Joueur Suivant"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="NextPlayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_e2ibp")
+
+[node name="MarginContainer" type="MarginContainer" parent="NextPlayer/PanelContainer/VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(69, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Flag" type="TextureRect" parent="NextPlayer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_weocv")
+expand_mode = 4
+
+[node name="CenterContainer2" type="CenterContainer" parent="NextPlayer/PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="NextPlayer/PanelContainer/VBoxContainer/PanelContainer/CenterContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "Krek"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="NextPlayer/PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="Name" type="Label" parent="NextPlayer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "302"
+horizontal_alignment = 2
+vertical_alignment = 1
