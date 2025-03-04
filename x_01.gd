@@ -4,6 +4,7 @@ extends Control
 @export var dartScore: Control
 @export var dartScoreBtn: HBoxContainer
 @export var infoPanel: VBoxContainer 
+@export var nextPlayerPanel: MarginContainer
 
 var playerList = [Player.new("Mattieu", "xxx"), Player.new("Krek", "xxx")]
 var currentPlayer: Player
@@ -58,6 +59,13 @@ func button_init() -> void:
 	for btn: TextureButton in dartScore.buttonList:
 		btn.pressed.connect(Callable(self, "dartboardButton").bind(btn, "dartScore"))
 
+func getNextPlayer(currentPlayer: Player) -> Player:
+	var index = playerList.find(currentPlayer)
+	if index + 1 < len(playerList):
+		return playerList[index + 1]
+	else:
+		return playerList[0]
+	
 func initGame() -> void:
 	
 	for player: Player in playerList:
@@ -72,6 +80,8 @@ func initGame() -> void:
 	
 	infoPanel.statistic_container.fromPlayer(currentPlayer)
 	infoPanel.history_container.newGame()
+	
+	nextPlayerPanel.nextPlayer(getNextPlayer(currentPlayer))
 
 func endTurn(throwScore: int) -> void:
 	
@@ -85,9 +95,31 @@ func endTurn(throwScore: int) -> void:
 	for dartValue in dartScore.buttonList:
 		dartValue.label.text = ""
 		dartValue.value = 0
+		
+	var timer := Timer.new()
+	timer.timeout.connect(nextTurn)
+	timer.timeout.connect(timer.queue_free)
+	timer.wait_time = 1.0 # 1 second
+	timer.one_shot = true # don't loop, run once
+	timer.autostart = true
+	add_child(timer)
+	
+func nextTurn() -> void:
+	
+	currentPlayer = getNextPlayer(currentPlayer)
+	
+	infoPanel.player_name.text = currentPlayer.name
+	infoPanel.player_flag.set_texture(load(currentPlayer.flag)) 
+	infoPanel.score_label.text = str(currentPlayer.score)
+	infoPanel.check_out_label.text = ""
+	infoPanel.statistic_container.fromPlayer(currentPlayer)
+	infoPanel.history_container.update(currentPlayer)
+	
+	nextPlayerPanel.nextPlayer(getNextPlayer(currentPlayer))
 	
 	
 func _ready() -> void:
+	
 	button_init()
 	
 	initGame()
