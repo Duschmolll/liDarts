@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://dnk185rma8pe3"]
 
-[ext_resource type="PackedScene" uid="uid://dhl4k5mxhv2la" path="res://dartboard.tscn" id="1_b5pyi"]
-[ext_resource type="Script" uid="uid://bamaber4d21nb" path="res://x_01.gd" id="1_ceexi"]
-[ext_resource type="Texture2D" uid="uid://cayot88mwdqvd" path="res://texture/background/subtle-prism.png" id="1_r4du4"]
-[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="2_weocv"]
-[ext_resource type="PackedScene" uid="uid://c1klnyodec6dh" path="res://dartScore.tscn" id="4_6k3ce"]
+[ext_resource type="Script" uid="uid://bamaber4d21nb" path="res://x01/x_01.gd" id="1_ow68t"]
+[ext_resource type="Texture2D" uid="uid://cayot88mwdqvd" path="res://texture/background/subtle-prism.png" id="2_iwmqt"]
+[ext_resource type="PackedScene" uid="uid://dhl4k5mxhv2la" path="res://x01/dartboard.tscn" id="3_ds1fe"]
+[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="4_e8we8"]
+[ext_resource type="PackedScene" uid="uid://c1klnyodec6dh" path="res://x01/dartScore.tscn" id="5_lt2a2"]
 
 [sub_resource type="GDScript" id="GDScript_80uk2"]
 script/source = "extends VBoxContainer
@@ -55,7 +55,14 @@ func newGame() -> void:
 	for elem in history_throw:
 		elem.text = \"\"
 
+func clear() -> void:
+	for elem in history_score:
+		elem.text = \"\"
+	for elem in history_throw:
+		elem.text = \"\" 
+		
 func update(player: Player) -> void:
+
 	var length = min(len(player.throwList), len(history_score))
 	var k = 0
 	for i in range(len(player.throwList) - 1, (len(player.throwList) - length - 1), -1):
@@ -118,7 +125,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ceexi")
+script = ExtResource("1_ow68t")
 dartboard = NodePath("Dartboard")
 dartScore = NodePath("PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer/CenterContainer/DartScore")
 dartScoreBtn = NodePath("PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer")
@@ -130,9 +137,9 @@ layout_mode = 0
 offset_right = 2560.0
 offset_bottom = 1440.0
 scale = Vector2(0.75167, 0.75167)
-texture = ExtResource("1_r4du4")
+texture = ExtResource("2_iwmqt")
 
-[node name="Dartboard" parent="." instance=ExtResource("1_b5pyi")]
+[node name="Dartboard" parent="." instance=ExtResource("3_ds1fe")]
 layout_mode = 1
 offset_left = 8.0
 offset_top = 8.0
@@ -178,7 +185,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="Flag" type="TextureRect" parent="PlayerPanel/VBoxContainer/Name/MarginContainer"]
 layout_mode = 2
-texture = ExtResource("2_weocv")
+texture = ExtResource("4_e8we8")
 expand_mode = 1
 stretch_mode = 5
 
@@ -263,7 +270,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="DartScore" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer/CenterContainer" instance=ExtResource("4_6k3ce")]
+[node name="DartScore" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer/CenterContainer" instance=ExtResource("5_lt2a2")]
 layout_mode = 2
 size_flags_horizontal = 0
 
@@ -659,7 +666,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 script = SubResource("GDScript_e2ibp")
-playerName = NodePath("PanelContainer/VBoxContainer/CenterContainer/Name")
+playerName = NodePath("PanelContainer/VBoxContainer/PanelContainer/CenterContainer2/Name")
 flag = NodePath("PanelContainer/VBoxContainer/PanelContainer/MarginContainer/Flag")
 score = NodePath("PanelContainer/VBoxContainer/PanelContainer/MarginContainer2/Name")
 
@@ -695,7 +702,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="Flag" type="TextureRect" parent="NextPlayer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
-texture = ExtResource("2_weocv")
+texture = ExtResource("4_e8we8")
 expand_mode = 4
 
 [node name="CenterContainer2" type="CenterContainer" parent="NextPlayer/PanelContainer/VBoxContainer/PanelContainer"]

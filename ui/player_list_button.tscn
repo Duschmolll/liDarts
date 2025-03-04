@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkrw05xrjea0u"]
 
-[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="2_vujix"]
+[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="1_nm7e1"]
 
 [sub_resource type="GDScript" id="GDScript_sue2f"]
 script/source = "extends Button
@@ -58,7 +58,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="Flag" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
-texture = ExtResource("2_vujix")
+texture = ExtResource("1_nm7e1")
 expand_mode = 3
 
 [node name="Name" type="Label" parent="PanelContainer/HBoxContainer"]

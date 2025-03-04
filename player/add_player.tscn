@@ -40,7 +40,7 @@ func _on_validate_pressed():
 					player_line.placeholder_text= \"Name already taken\"
 					return
 					
-			GlobalData.player_list[str(user_name)] = Player.new()
+			GlobalData.player_list[str(user_name)] = Player_old.new()
 			GlobalData.player_list[str(user_name)].name = user_name
 			GlobalData.player_list[str(user_name)].flag = country_texture.texture.resource_path
 			GlobalData.save_data(GlobalData.SAVE_DIR + GlobalData.SAVE_FILE_NAME)
@@ -56,7 +56,7 @@ func _on_validate_pressed():
 
 
 func create_flag_list():
-	const COUNTRY_LIST = preload(\"res://player/scene/country_list.tscn\")
+	const COUNTRY_LIST = preload(\"res://player/country_list.tscn\")
 	var countries = get_all_flag()
 	var i = 0
 	

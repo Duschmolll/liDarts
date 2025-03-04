@@ -59,6 +59,18 @@ func button_init() -> void:
 	for btn: TextureButton in dartScore.buttonList:
 		btn.pressed.connect(Callable(self, "dartboardButton").bind(btn, "dartScore"))
 
+func toggleInput() -> void:
+	for group: Control in dartboard.controlGroupList:
+		for btn in group.get_children():
+			if btn is TextureButton:
+				btn.disabled = !btn.disabled;
+				
+	for btn: Button in dartScoreBtn.get_children():
+		btn.disabled = !btn.disabled;
+		
+	for btn: TextureButton in dartScore.buttonList:
+		btn.disabled = !btn.disabled;
+		
 func getNextPlayer(currentPlayer: Player) -> Player:
 	var index = playerList.find(currentPlayer)
 	if index + 1 < len(playerList):
@@ -86,7 +98,9 @@ func initGame() -> void:
 func endTurn(throwScore: int) -> void:
 	
 	var throwBool:int = currentPlayer.newThrow(throwScore)
-	
+	for elem in playerList:
+		print(elem)
+		
 	infoPanel.score_label.text = str(currentPlayer.score)
 	
 	infoPanel.history_container.update(currentPlayer)
@@ -95,14 +109,18 @@ func endTurn(throwScore: int) -> void:
 	for dartValue in dartScore.buttonList:
 		dartValue.label.text = ""
 		dartValue.value = 0
-		
-	var timer := Timer.new()
-	timer.timeout.connect(nextTurn)
-	timer.timeout.connect(timer.queue_free)
-	timer.wait_time = 1.0 # 1 second
-	timer.one_shot = true # don't loop, run once
-	timer.autostart = true
-	add_child(timer)
+	
+	if throwBool != 0:
+		var timer := Timer.new()
+		timer.timeout.connect(nextTurn)
+		timer.timeout.connect(timer.queue_free)
+		timer.wait_time = 0.5 # 1 second
+		timer.one_shot = true # don't loop, run once
+		timer.autostart = true
+		add_child(timer)
+	else:
+		print("GG")
+		toggleInput()
 	
 func nextTurn() -> void:
 	
@@ -112,9 +130,11 @@ func nextTurn() -> void:
 	infoPanel.player_flag.set_texture(load(currentPlayer.flag)) 
 	infoPanel.score_label.text = str(currentPlayer.score)
 	infoPanel.check_out_label.text = ""
-	infoPanel.statistic_container.fromPlayer(currentPlayer)
-	infoPanel.history_container.update(currentPlayer)
 	
+	infoPanel.statistic_container.fromPlayer(currentPlayer)
+	infoPanel.history_container.clear()
+	infoPanel.history_container.update(currentPlayer)
+
 	nextPlayerPanel.nextPlayer(getNextPlayer(currentPlayer))
 	
 	

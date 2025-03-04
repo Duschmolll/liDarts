@@ -12,18 +12,18 @@ func _ready():
 	createPlayerList()
 
 func _on_back_to_menu_pressed():
-	get_tree().change_scene_to_file("res://main_menu.tscn")
+	get_tree().change_scene_to_file("res://mainMenu/main_menu.tscn")
 
 
 func _on_new_player_pressed():
-	const add_player_scene = preload("res://add_player.tscn")
+	const add_player_scene = preload("res://player/add_player.tscn")
 	var instance = add_player_scene.instantiate()
 	instance.parent = self
 	self.add_child(instance)
 
 
 func createPlayerList():
-	const PLAYER_LIST = preload("res://player/scene/player_list.tscn")
+	const PLAYER_LIST = preload("res://player/player_list.tscn")
 	var grid_children = player_grid.get_children()
 	if len(grid_children) > 0:
 		for i in range(0, len(grid_children)):

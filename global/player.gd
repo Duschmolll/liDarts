@@ -38,6 +38,9 @@ func _init(name:String, flag: String) -> void:
 	self.name = name
 	self.flag = flag
 
+func _to_string() -> String:
+	return str(self.throwList)
+	
 func newGame(targetScore: int) -> void:
 
 	self.throw = 0
