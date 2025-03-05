@@ -9,43 +9,28 @@ var player_selected = {}
 var setting = {}
 var data_loaded = false
 
-func _ready():
+func _ready() -> void:
 	verify_save_dir(SAVE_DIR)
 	GlobalData.setting['x01'] = X_01_Settings.new()
 	load_data(SAVE_DIR + SAVE_FILE_NAME)
 
 
-func verify_save_dir(path: String):
+func verify_save_dir(path: String) -> void:
 	DirAccess.make_dir_absolute(path)
 
 
-func save_data(path: String):
+func save_data(path: String) -> void:
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
 		printerr(FileAccess.get_open_error())
 		return
-	var global_player = {}
+	var global_player = []
 	var global_player_selected = {}
 	var global_setting = {}
 	
 	if len(GlobalData.player_list.keys()) > 0:
 		for key in GlobalData.player_list.keys():
-			var current_player = GlobalData.player_list[key]
-			global_player[key] = {
-				'name' = current_player.name,
-				'flag' = current_player.flag,
-				'all_time_average_per_leg' = current_player.all_time_average_per_leg,
-				'all_time_average_per_throw' = current_player.all_time_average_per_throw,
-				'all_time_throw' = current_player.all_time_throw,
-				'all_time_dart' = current_player.all_time_dart,
-				'all_time_score_80' = current_player.all_time_score_80,
-				'all_time_score_100' = current_player.all_time_score_100,
-				'all_time_score_140' = current_player.all_time_score_140,
-				'all_time_score_180' = current_player.all_time_score_180,
-				'all_time_leg' = current_player.all_time_leg,
-				'all_time_leg_win' = current_player.all_time_leg_win,
-				'all_time_total_score' = current_player.all_time_total_score
-			}
+			global_player.append(GlobalData.player_list[key].export())
 				
 	if len(GlobalData.player_selected.keys()) > 0:
 		for key in GlobalData.player_selected.keys():
@@ -79,7 +64,7 @@ func save_data(path: String):
 	print("Saved")
 
 
-func load_data(path: String):
+func load_data(path: String) -> void:
 	if data_loaded:
 		return
 	else:
@@ -101,26 +86,12 @@ func load_data(path: String):
 		
 		for key in data.global_data.player_list.keys():
 			var current_player = data.global_data.player_list[key]
-			GlobalData.player_list[key] = Player_old.new()
-			GlobalData.player_list[key].name = current_player.name
-			GlobalData.player_list[key].flag = current_player.flag
-			GlobalData.player_list[key].all_time_average_per_leg = current_player.all_time_average_per_leg
-			GlobalData.player_list[key].all_time_average_per_throw = current_player.all_time_average_per_throw
-			GlobalData.player_list[key].all_time_throw = current_player.all_time_throw
-			GlobalData.player_list[key].all_time_dart = current_player.all_time_dart
-			GlobalData.player_list[key].all_time_score_80 = current_player.all_time_score_80
-			GlobalData.player_list[key].all_time_score_100 = current_player.all_time_score_100
-			GlobalData.player_list[key].all_time_score_140 = current_player.all_time_score_140
-			GlobalData.player_list[key].all_time_score_180 = current_player.all_time_score_180
-			GlobalData.player_list[key].all_time_leg = current_player.all_time_leg
-			GlobalData.player_list[key].all_time_leg_win = current_player.all_time_leg_win
-			GlobalData.player_list[key].all_time_total_score = current_player.all_time_total_score
+			GlobalData.player_list[key] = Player.new(current_player.name, current_player.flag)
+			GlobalData.player_list[key].loadFrom(current_player)
 		
 		for key in data.global_data.player_selected.keys():
 			var current_player = data.global_data.player_selected[key]
-			GlobalData.player_selected[key] = Player_old.new()
-			GlobalData.player_selected[key].name = current_player.name
-			GlobalData.player_selected[key].flag = current_player.flag
+			GlobalData.player_selected[key] = Player.new(current_player.name, current_player.flag)
 		
 		var current_setting = data.global_data.setting['x01']
 		GlobalData.setting['x01'] = X_01_Settings.new()

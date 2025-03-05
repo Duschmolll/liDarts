@@ -34,9 +34,42 @@ var all_time_leg: int
 var all_time_leg_win: int
 var all_time_total_score: int
 
+## Create a Player object with a name and flag.
 func _init(name:String, flag: String) -> void:
 	self.name = name
 	self.flag = flag
+
+##Import data from a player.
+func loadFrom(player: Player) -> void:
+			self.all_time_average_per_leg = player.all_time_average_per_leg
+			self.all_time_average_per_throw = player.all_time_average_per_throw
+			self.all_time_throw = player.all_time_throw
+			self.all_time_dart = player.all_time_dart
+			self.all_time_score_80 = player.all_time_score_80
+			self.all_time_score_100 = player.all_time_score_100
+			self.all_time_score_140 = player.all_time_score_140
+			self.all_time_score_180 = player.all_time_score_180
+			self.all_time_leg = player.all_time_leg
+			self.all_time_leg_win = player.all_time_leg_win
+			self.all_time_total_score = player.all_time_total_score
+
+func export() -> Dictionary:
+	var output = {
+		'name' = self.name,
+		'flag' = self.flag,
+		'all_time_average_per_leg' = self.all_time_average_per_leg,
+		'all_time_average_per_throw' = self.all_time_average_per_throw,
+		'all_time_throw' = self.all_time_throw,
+		'all_time_dart' = self.all_time_dart,
+		'all_time_score_80' = self.all_time_score_80,
+		'all_time_score_100' = self.all_time_score_100,
+		'all_time_score_140' = self.all_time_score_140,
+		'all_time_score_180' = self.all_time_score_180,
+		'all_time_leg' = self.all_time_leg,
+		'all_time_leg_win' = self.all_time_leg_win,
+		'all_time_total_score' = self.all_time_total_score
+	}
+	return output
 
 func _to_string() -> String:
 	return str(self.throwList)
