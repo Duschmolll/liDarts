@@ -139,7 +139,7 @@ func nextTurn() -> void:
 	
 	
 func _ready() -> void:
-	
+	print(playerList)
 	button_init()
 	
 	initGame()

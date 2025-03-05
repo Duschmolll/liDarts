@@ -34,15 +34,13 @@ func _on_validate_pressed():
 				player_line.placeholder_text= \"Invalid Name\"
 
 		else:
-			for key in GlobalData.player_list.keys():
-				if key.to_lower() == user_name.to_lower() :
+			for elem in GlobalData.playerList:
+				if elem.name.to_lower() == user_name.to_lower() :
 					player_line.clear()
 					player_line.placeholder_text= \"Name already taken\"
 					return
 					
-			GlobalData.player_list[str(user_name)] = Player_old.new()
-			GlobalData.player_list[str(user_name)].name = user_name
-			GlobalData.player_list[str(user_name)].flag = country_texture.texture.resource_path
+			GlobalData.playerList.append(Player.new(user_name, country_texture.texture.resource_path))
 			GlobalData.save_data(GlobalData.SAVE_DIR + GlobalData.SAVE_FILE_NAME)
 			player_line.clear()
 			country_texture.set_texture(load(\"res://texture/countryFlag/World_Wide.png\"))
