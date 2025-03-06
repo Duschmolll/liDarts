@@ -8,6 +8,7 @@ extends AspectRatioContainer
 @onready var button_delete = $PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete
 @onready var button_cancel = $PanelContainer/HBoxContainer/MarginContainer4/ButtonCancel
 
+var player: Player
 
 func _ready():
 	button_cancel.visible = false
@@ -31,9 +32,10 @@ func _on_button_delete_pressed():
 
 
 func _on_button_validate_pressed():
-	for key in GlobalData.player_list.keys():
-		if key.to_lower() == $PanelContainer/HBoxContainer/Name.text.to_lower() :
-			GlobalData.player_list.erase(key)
+	for i in range(len(GlobalData.playerList)):
+		var elem = GlobalData.playerList[i]
+		if elem == self.player:
+			GlobalData.playerList.remove_at(i)
 			self.get_node("/root/PlayerMenu").createPlayerList()
 			GlobalData.save_data(GlobalData.SAVE_DIR + GlobalData.SAVE_FILE_NAME)
 			return

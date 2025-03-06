@@ -34,6 +34,7 @@ func createPlayerList():
 			var instance = PLAYER_LIST.instantiate()
 			instance.nameLabel.text = elem.name
 			instance.flagTextureRect.set_texture(load(elem.flag))
+			instance.player = elem
 			player_grid.add_child(instance)
 			i += 1
 

@@ -11,7 +11,7 @@ var data_loaded = false
 
 func _ready() -> void:
 	verify_save_dir(SAVE_DIR)
-	GlobalData.setting['x01'] = X_01_Settings.new()
+	GlobalData.setting['x01'] = X01Settings.new()
 	load_data(SAVE_DIR + SAVE_FILE_NAME)
 
 
@@ -43,14 +43,7 @@ func save_data(path: String) -> void:
 	if len(self.setting.keys()) > 0:
 		for key in self.setting.keys():
 			var current_setting = self.setting[key]
-			globalSetting[key] = {
-				'score' = current_setting.score,
-				'total_leg' = current_setting.total_leg,
-				'total_set' = current_setting.total_set,
-				'double_in' = current_setting.double_in,
-				'double_out' = current_setting.double_out,
-				'show_check_out' = current_setting.show_check_out
-			}
+			globalSetting[key] = self.setting[key].exportDict()
 	
 	var data = {
 		"playerList" = globalPlayer,
@@ -90,14 +83,12 @@ func load_data(path: String) -> void:
 			self.playerSelected.append(Player.new())
 			self.playerSelected[-1].newPlayer(elem.name, elem.flag)
 		
-		var current_setting = data.setting['x01']
-		self.setting['x01'] = X_01_Settings.new()
-		self.setting['x01'].score = current_setting.score
-		self.setting['x01'].total_leg = current_setting.total_leg
-		self.setting['x01'].total_set = current_setting.total_set
-		self.setting['x01'].double_in = current_setting.double_in
-		self.setting['x01'].double_out = current_setting.double_out
-		self.setting['x01'].show_check_out = current_setting.show_check_out
+		for elem in data.setting.keys():
+			match data.setting[elem].type:
+				"X01":
+					self.setting.X01 = X01Settings.new()
+					self.setting.X01.importDict(data.setting[elem])
+
 		print("Data has been loaded")
 	else:
 		printerr("Cannot open non-existant file at %s!" % [path])

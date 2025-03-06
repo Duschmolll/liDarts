@@ -3,7 +3,7 @@ extends Control
 
 
 func _on_play_pressed():
-	get_tree().change_scene_to_file("res://gamemode/game_selection.tscn")
+	get_tree().change_scene_to_file("res://gameSelection/game_selection.tscn")
 
 
 func _on_settings_pressed():

@@ -1,19 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkuvdfuq1gxhk"]
+[gd_scene load_steps=3 format=3 uid="uid://dkuvdfuq1gxhk"]
 
-[ext_resource type="PackedScene" uid="uid://m3qgvl8ev6d8" path="res://gameSelection/game_selection_x01.tscn" id="1_8og4r"]
+[ext_resource type="Script" uid="uid://d2v23dv5uwqe0" path="res://gameSelection/game_selection.gd" id="1_1r5l0"]
+[ext_resource type="PackedScene" uid="uid://m3qgvl8ev6d8" path="res://gameSelection/gameScene/game_selection_x01.tscn" id="1_8og4r"]
 
-[node name="GameSelection" type="Control"]
+[node name="GameSelection" type="Control" node_paths=PackedStringArray("gameMode")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1r5l0")
+gameMode = NodePath("VBoxContainer/PanelContainer2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.5
+offset_top = -137.0
+offset_right = 187.5
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -31,3 +43,5 @@ layout_mode = 2
 [node name="Button" type="Button" parent="VBoxContainer/PanelContainer3"]
 layout_mode = 2
 text = "Validate"
+
+[connection signal="pressed" from="VBoxContainer/PanelContainer3/Button" to="." method="validate"]

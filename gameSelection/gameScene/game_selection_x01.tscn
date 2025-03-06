@@ -1,0 +1,151 @@
+[gd_scene load_steps=3 format=3 uid="uid://m3qgvl8ev6d8"]
+
+[sub_resource type="GDScript" id="GDScript_g2fk1"]
+resource_name = "GameSelectionX01"
+script/source = "extends PanelContainer
+
+@export var target01: CheckBox
+@export var target02: CheckBox
+@export var target03: CheckBox
+@export var target04: CheckBox
+
+@export var doubleIn: CheckBox
+@export var doubleOut: CheckBox
+
+@export var legs: SpinBox
+@export var infinite: CheckBox
+@export var sets: SpinBox
+
+@export var checkout: CheckBox
+
+var listTarget: Array[CheckBox]
+
+func _ready() -> void:
+	listTarget = [target01, target02, target03, target04]
+
+func launch():
+	var targetScore: int = 0
+	for elem:CheckBox in listTarget:
+		if elem.button_pressed:
+			targetScore = int(elem.text)
+			
+	var setting: X01Settings = X01Settings.new()
+	setting.score = targetScore
+	setting.double_in = doubleIn.button_pressed
+	setting.double_out = doubleOut.button_pressed
+	if infinite.pressed:
+		setting.total_leg = 999
+	else:
+		setting.total_leg = legs.value
+		setting.total_set = sets.value
+	setting.show_check_out = checkout.button_pressed
+	
+"
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_g2fk1"]
+
+[node name="GameSelectionX01" type="PanelContainer" node_paths=PackedStringArray("target01", "target02", "target03", "target04", "doubleIn", "doubleOut", "legs", "infinite", "sets", "checkout")]
+offset_right = 375.0
+offset_bottom = 212.0
+script = SubResource("GDScript_g2fk1")
+target01 = NodePath("VBoxContainer/GridContainer/HBoxContainer/CheckBox")
+target02 = NodePath("VBoxContainer/GridContainer/HBoxContainer/CheckBox2")
+target03 = NodePath("VBoxContainer/GridContainer/HBoxContainer/CheckBox3")
+target04 = NodePath("VBoxContainer/GridContainer/HBoxContainer/CheckBox4")
+doubleIn = NodePath("VBoxContainer/GridContainer/CheckBox2")
+doubleOut = NodePath("VBoxContainer/GridContainer/CheckBox3")
+legs = NodePath("VBoxContainer/GridContainer/HBoxContainer2/SpinBox")
+infinite = NodePath("VBoxContainer/GridContainer/HBoxContainer2/CheckBox4")
+sets = NodePath("VBoxContainer/GridContainer/HBoxContainer3/SpinBox")
+checkout = NodePath("VBoxContainer/GridContainer/CheckBox5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+text = "x 01"
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Target:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+button_group = SubResource("ButtonGroup_g2fk1")
+text = "301"
+
+[node name="CheckBox2" type="CheckBox" parent="VBoxContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_g2fk1")
+text = "501"
+
+[node name="CheckBox3" type="CheckBox" parent="VBoxContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_g2fk1")
+text = "801"
+
+[node name="CheckBox4" type="CheckBox" parent="VBoxContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_g2fk1")
+text = "1001"
+
+[node name="Label3" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Double In"
+
+[node name="CheckBox2" type="CheckBox" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Double Out"
+
+[node name="CheckBox3" type="CheckBox" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Legs"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/GridContainer/HBoxContainer2"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="CheckBox4" type="CheckBox" parent="VBoxContainer/GridContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Infinite"
+
+[node name="Label6" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Set"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/GridContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Show Check Out"
+
+[node name="CheckBox5" type="CheckBox" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
