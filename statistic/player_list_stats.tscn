@@ -5,6 +5,9 @@
 [sub_resource type="GDScript" id="GDScript_c04mc"]
 script/source = "extends Button
 
+@export var nameLabel:Label
+@export var flagTextureRect: TextureRect
+
 @export var player_name: Label
 
 func _on_pressed():
@@ -12,13 +15,15 @@ func _on_pressed():
 	parent_node.get_statistic(player_name.text)
 "
 
-[node name="Button" type="Button" node_paths=PackedStringArray("player_name")]
+[node name="Button" type="Button" node_paths=PackedStringArray("nameLabel", "flagTextureRect", "player_name")]
 custom_minimum_size = Vector2(200, 30)
 offset_right = 264.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 flat = true
 script = SubResource("GDScript_c04mc")
+nameLabel = NodePath("PanelContainer/HBoxContainer/Name")
+flagTextureRect = NodePath("PanelContainer/HBoxContainer/MarginContainer/Flag")
 player_name = NodePath("PanelContainer/HBoxContainer/Name")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

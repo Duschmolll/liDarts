@@ -32,9 +32,9 @@ func createPlayerList():
 		var i = 0
 		for elem in GlobalData.playerList:
 			var instance = PLAYER_LIST.instantiate()
+			instance.nameLabel.text = elem.name
+			instance.flagTextureRect.set_texture(load(elem.flag))
 			player_grid.add_child(instance)
-			player_grid.get_children()[i].get_children()[0].get_children()[0].get_children()[1].text = elem.name
-			player_grid.get_children()[i].get_children()[0].get_children()[0].get_children()[0].get_children()[0].set_texture(load(elem.flag))
 			i += 1
 
 
