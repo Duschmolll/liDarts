@@ -2,29 +2,29 @@
 
 [ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="2_n76bn"]
 
-[sub_resource type="GDScript" id="GDScript_c04mc"]
+[sub_resource type="GDScript" id="GDScript_vygcm"]
+resource_name = "playerListButton"
 script/source = "extends Button
 
 @export var nameLabel:Label
 @export var flagTextureRect: TextureRect
 
-@export var player_name: Label
+var player: Player
 
 func _on_pressed():
 	var parent_node = self.get_node(\"/root/Statistic\")
-	parent_node.get_statistic(player_name.text)
+	parent_node.get_statistic(player)
 "
 
-[node name="Button" type="Button" node_paths=PackedStringArray("nameLabel", "flagTextureRect", "player_name")]
+[node name="Button" type="Button" node_paths=PackedStringArray("nameLabel", "flagTextureRect")]
 custom_minimum_size = Vector2(200, 30)
 offset_right = 264.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 flat = true
-script = SubResource("GDScript_c04mc")
+script = SubResource("GDScript_vygcm")
 nameLabel = NodePath("PanelContainer/HBoxContainer/Name")
 flagTextureRect = NodePath("PanelContainer/HBoxContainer/MarginContainer/Flag")
-player_name = NodePath("PanelContainer/HBoxContainer/Name")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

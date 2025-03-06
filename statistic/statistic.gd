@@ -21,28 +21,19 @@ func create_player_list():
 			var instance = PLAYER_LIST.instantiate()
 			instance.nameLabel.text = elem.name
 			instance.flagTextureRect.set_texture(load(elem.flag))
+			instance.player = elem
 			player_list_grid.add_child(instance)
 			i += 1
 
 
-func get_statistic(player):
+func get_statistic(player: Player):
 	if len(local_player_selected) < 2:
 		for i in range(len(local_player_selected)):
 			if player == local_player_selected[i]:
 				return
 		const PLAYER_STAT = preload("res://statistic/player_stats_container.tscn")
 		var instance = PLAYER_STAT.instantiate()
-		instance.player_label.text = str(GlobalData.player_list[player].name)
-		instance.player_flag.set_texture(load(GlobalData.player_list[player].flag))
-		instance.game_played.text = str(GlobalData.player_list[player].name)
-		instance.leg_played.text = str(GlobalData.player_list[player].all_time_leg)
-		instance.game_won.text = str(GlobalData.player_list[player].name)
-		instance.break_leg.text = str(GlobalData.player_list[player].name)
-		instance.throw.text = str(GlobalData.player_list[player].all_time_throw)
-		instance.dart.text = str(GlobalData.player_list[player].all_time_dart)
-		instance.play_time.text = str(GlobalData.player_list[player].name)
-		instance.average.text = "%.2f" % GlobalData.player_list[player].all_time_average_per_throw
-		instance.average_per_leg.text = "%.2f" % GlobalData.player_list[player].all_time_average_per_leg
+		instance.loadPlayer(player)
 		local_player_selected.append(player)
 		player_stats_hbox.add_child(instance)
 		check_opponent()
@@ -52,12 +43,12 @@ func check_opponent():
 	if len(local_player_selected) == 2:
 		for i in range(2):
 			var child = player_stats_hbox.get_children()[i]
-			child.opponent_game.text = str(GlobalData.player_list[local_player_selected[i]].name)
-			child.opponent_winrate.text = str(GlobalData.player_list[local_player_selected[i]].name)
+			child.opponent_game.text = str(local_player_selected[i].name)
+			child.opponent_winrate.text = str(local_player_selected[i].name)
 			child.opponent_selected.visible = true
 			child.opponent_unselected.visible = false
-		player_stats_hbox.get_children()[0].opponent.text = str(GlobalData.player_list[local_player_selected[1]].name)
-		player_stats_hbox.get_children()[1].opponent.text = str(GlobalData.player_list[local_player_selected[0]].name)
+		player_stats_hbox.get_children()[0].opponent.text = str(local_player_selected[1].name)
+		player_stats_hbox.get_children()[1].opponent.text = str(local_player_selected[0].name)
 	else:
 		for i in range(player_stats_hbox.get_child_count()):
 			var child = player_stats_hbox.get_children()[i]
