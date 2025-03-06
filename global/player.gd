@@ -35,24 +35,41 @@ var all_time_leg_win: int
 var all_time_total_score: int
 
 ## Create a Player object with a name and flag.
-func _init(name:String, flag: String) -> void:
+func newPlayer(name:String, flag: String) -> void:
 	self.name = name
 	self.flag = flag
 
-##Import data from a player.
+##Copy data from a player.
 func loadFrom(player: Player) -> void:
-			self.all_time_average_per_leg = player.all_time_average_per_leg
-			self.all_time_average_per_throw = player.all_time_average_per_throw
-			self.all_time_throw = player.all_time_throw
-			self.all_time_dart = player.all_time_dart
-			self.all_time_score_80 = player.all_time_score_80
-			self.all_time_score_100 = player.all_time_score_100
-			self.all_time_score_140 = player.all_time_score_140
-			self.all_time_score_180 = player.all_time_score_180
-			self.all_time_leg = player.all_time_leg
-			self.all_time_leg_win = player.all_time_leg_win
-			self.all_time_total_score = player.all_time_total_score
+	self.all_time_average_per_leg = player.all_time_average_per_leg
+	self.all_time_average_per_throw = player.all_time_average_per_throw
+	self.all_time_throw = player.all_time_throw
+	self.all_time_dart = player.all_time_dart
+	self.all_time_score_80 = player.all_time_score_80
+	self.all_time_score_100 = player.all_time_score_100
+	self.all_time_score_140 = player.all_time_score_140
+	self.all_time_score_180 = player.all_time_score_180
+	self.all_time_leg = player.all_time_leg
+	self.all_time_leg_win = player.all_time_leg_win
+	self.all_time_total_score = player.all_time_total_score
 
+##Load data from a dictionary.
+func import(dic: Dictionary) -> void:
+	self.name = dic.name
+	self.flag = dic.flag
+	self.all_time_average_per_leg = dic.all_time_average_per_leg
+	self.all_time_average_per_throw = dic.all_time_average_per_throw
+	self.all_time_throw = dic.all_time_throw
+	self.all_time_dart = dic.all_time_dart
+	self.all_time_score_80 = dic.all_time_score_80
+	self.all_time_score_100 = dic.all_time_score_100
+	self.all_time_score_140 = dic.all_time_score_140
+	self.all_time_score_180 = dic.all_time_score_180
+	self.all_time_leg = dic.all_time_leg
+	self.all_time_leg_win = dic.all_time_leg_win
+	self.all_time_total_score = dic.all_time_total_score
+	
+##Export data into a Dictionary
 func export() -> Dictionary:
 	var output = {
 		'name' = self.name,
@@ -71,9 +88,11 @@ func export() -> Dictionary:
 	}
 	return output
 
+##Strange Bug with this
 func _to_string() -> String:
-	return str(self.throwList)
-	
+	return self.name + ": " + str(self.throwList)
+
+##Set game related var to 0.
 func newGame(targetScore: int) -> void:
 
 	self.throw = 0
@@ -86,6 +105,7 @@ func newGame(targetScore: int) -> void:
 	self.target_score = targetScore
 	self.score = self.target_score
 
+##Return 0 if won, 1 if > 0 and -1 if bust
 func newThrow(newThrow: int) -> int:
 	self.throw = newThrow
 	self.score = self.score - newThrow

@@ -6,7 +6,7 @@ extends Control
 @export var infoPanel: VBoxContainer 
 @export var nextPlayerPanel: MarginContainer
 
-var playerList = [Player.new("Mattieu", "xxx"), Player.new("Krek", "xxx")]
+var playerList = [Player.new(), Player.new()]
 var currentPlayer: Player
 
 func dartboardButton(btn, type) -> void:
@@ -139,7 +139,8 @@ func nextTurn() -> void:
 	
 	
 func _ready() -> void:
-	print(playerList)
+	playerList[0].newPlayer("Mattieu", "xxx")
+	playerList[1].newPlayer("Krek", "xxx")
 	button_init()
 	
 	initGame()

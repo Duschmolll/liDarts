@@ -7,8 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://dqt42h481gt24" path="res://texture/ui/delete.png" id="5_crc3b"]
 [ext_resource type="Texture2D" uid="uid://sjk35bp63qvd" path="res://texture/ui/cross.png" id="6_7bnnl"]
 
-[node name="PlayerList" type="AspectRatioContainer"]
+[node name="PlayerList" type="AspectRatioContainer" node_paths=PackedStringArray("nameLabel", "flagTextureRect")]
 script = ExtResource("1_6yxb5")
+nameLabel = NodePath("PanelContainer/HBoxContainer/Name")
+flagTextureRect = NodePath("PanelContainer/HBoxContainer/MarginContainer/Flag")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2

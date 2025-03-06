@@ -8,6 +8,7 @@ var playerList: Array[Player] = []
 var playerSelected: Array[Player] = []
 var setting = {}
 var data_loaded = false
+
 func _ready() -> void:
 	verify_save_dir(SAVE_DIR)
 	GlobalData.setting['x01'] = X_01_Settings.new()
@@ -82,18 +83,14 @@ func load_data(path: String) -> void:
 			return
 		
 		for elem in data.playerList:
-			var test := Player_old.new()
-			var test2 := Player.new("Patrick", "Flag")
-			print("Player_old: ", test)
-			print("Player: ", test2)
-			self.playerList.append(Player.new(elem.name, elem.flag))
-			print(self.playerList)
-			self.playerList[-1].loadFrom(elem)
+			self.playerList.append(Player.new())
+			self.playerList[-1].import(elem)
 		
 		for elem in data.playerSelected:
-			self.playerSelected.append(Player.new(elem.name, elem.flag))
+			self.playerSelected.append(Player.new())
+			self.playerSelected[-1].newPlayer(elem.name, elem.flag)
 		
-		var current_setting = data.global_data.setting['x01']
+		var current_setting = data.setting['x01']
 		self.setting['x01'] = X_01_Settings.new()
 		self.setting['x01'].score = current_setting.score
 		self.setting['x01'].total_leg = current_setting.total_leg

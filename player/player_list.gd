@@ -1,5 +1,8 @@
 extends AspectRatioContainer
 
+@export var nameLabel:Label
+@export var flagTextureRect: TextureRect
+
 @onready var button_edit = $PanelContainer/HBoxContainer/MarginContainer3/ButtonEdit
 @onready var button_validate = $PanelContainer/HBoxContainer/MarginContainer3/ButtonValidate
 @onready var button_delete = $PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete
