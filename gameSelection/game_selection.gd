@@ -4,3 +4,4 @@ extends Control
 
 func validate() -> void:
 	gameMode.launch()
+	

@@ -33,13 +33,15 @@ func launch():
 	setting.score = targetScore
 	setting.double_in = doubleIn.button_pressed
 	setting.double_out = doubleOut.button_pressed
-	if infinite.pressed:
+
+	if infinite.button_pressed:
 		setting.total_leg = 999
 	else:
 		setting.total_leg = legs.value
 		setting.total_set = sets.value
 	setting.show_check_out = checkout.button_pressed
 	
+	GlobalData.setting[\"X01\"] = setting
 "
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_g2fk1"]
