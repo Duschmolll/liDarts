@@ -10,10 +10,10 @@ script/source = "extends Button
 @export var flagTextureRect: TextureRect
 
 var player: Player
+var parentNode: Node
 
 func _on_pressed():
-	var parent_node = self.get_node(\"/root/Statistic\")
-	parent_node.get_statistic(player)
+	parentNode.playerPressed(player)
 "
 
 [node name="Button" type="Button" node_paths=PackedStringArray("nameLabel", "flagTextureRect")]

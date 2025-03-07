@@ -26,6 +26,7 @@ func importDict(dic: Dictionary) -> void:
 	
 func exportDict() -> Dictionary:
 	var dict: Dictionary = {
+		'type' = self.type,
 		'score' = self.score,
 		'total_leg' = self.total_leg,
 		'total_set' = self.total_set,

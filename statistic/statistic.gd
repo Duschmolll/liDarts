@@ -22,11 +22,12 @@ func create_player_list():
 			instance.nameLabel.text = elem.name
 			instance.flagTextureRect.set_texture(load(elem.flag))
 			instance.player = elem
+			instance.parentNode = self
 			player_list_grid.add_child(instance)
 			i += 1
 
 
-func get_statistic(player: Player):
+func playerPressed(player: Player):
 	if len(local_player_selected) < 2:
 		for i in range(len(local_player_selected)):
 			if player == local_player_selected[i]:

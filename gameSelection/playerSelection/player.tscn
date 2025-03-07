@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://6si2hm0lvov7"]
+
+[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="1_4flbx"]
+
+[node name="PanelContainer" type="PanelContainer"]
+size_flags_horizontal = 3
+
+[node name="PlayerHBox" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PlayerHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHBox/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerHBox/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Flag" type="TextureRect" parent="PlayerHBox/PanelContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_4flbx")
+expand_mode = 3
+
+[node name="Name" type="Label" parent="PlayerHBox/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "123456789112345"
+
+[node name="Button" type="Button" parent="PlayerHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHBox/Button"]
+layout_mode = 2
+offset_right = 327.0
+offset_bottom = 35.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerHBox/Button/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Flag" type="TextureRect" parent="PlayerHBox/Button/HBoxContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_4flbx")
+expand_mode = 3
+
+[node name="Name" type="Label" parent="PlayerHBox/Button/HBoxContainer"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "123456789112345"

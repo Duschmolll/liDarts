@@ -84,7 +84,7 @@ stretch_mode = 5
 
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer3/ButtonEdit" to="." method="_on_button_edit_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer3/ButtonValidate" to="." method="_on_button_validate_pressed"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete" to="." method="_on_button_delete_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete" to="." method="_on_button_delete_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonCancel" to="." method="_on_button_cancel_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonCancel" to="." method="_on_texture_button_pressed"]
