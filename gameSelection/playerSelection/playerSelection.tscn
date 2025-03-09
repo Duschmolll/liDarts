@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://drhml8jythfqu"]
 
-[ext_resource type="Script" uid="uid://dpkonl8e738dn" path="res://gameSelection/playerSelection/player_selection.gd" id="1_v878k"]
+[ext_resource type="Script" uid="uid://dpkonl8e738dn" path="res://gameSelection/playerSelection/PlayerSelection.gd" id="1_v878k"]
 
 [node name="PlayerSelection" type="Control" node_paths=PackedStringArray("selectedGrid", "playerList")]
 layout_mode = 3

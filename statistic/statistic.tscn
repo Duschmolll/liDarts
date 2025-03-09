@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cgf3vsnarvk85"]
 
-[ext_resource type="Script" uid="uid://b6p206br615w4" path="res://statistic/statistic.gd" id="1_sywme"]
+[ext_resource type="Script" uid="uid://b6p206br615w4" path="res://statistic/Statistic.gd" id="1_sywme"]
 
 [node name="Statistic" type="Control" node_paths=PackedStringArray("player_list_grid", "player_stats_hbox")]
 layout_mode = 3

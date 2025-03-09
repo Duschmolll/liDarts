@@ -26,19 +26,19 @@ script/source = "extends PanelContainer
 
 var player: Player
 
-func loadPlayer(player: Player):
-		self.player_label.text = player.name
-		self.player_flag.set_texture(load(player.flag))
-		self.game_played.text = str(player.name)
-		self.leg_played.text = str(player.all_time_leg)
-		self.game_won.text = str(player.name)
-		self.break_leg.text = str(player.name)
-		self.throw.text = str(player.all_time_throw)
-		self.dart.text = str(player.all_time_dart)
-		self.play_time.text = str(player.name)
-		self.average.text = \"%.2f\" % player.all_time_average_per_throw
-		self.average_per_leg.text = \"%.2f\" % player.all_time_average_per_leg
-		self.player = player
+func loadPlayer(playerInput: Player):
+		self.player_label.text = playerInput.name
+		self.player_flag.set_texture(load(playerInput.flag))
+		self.game_played.text = str(playerInput.name)
+		self.leg_played.text = str(playerInput.all_time_leg)
+		self.game_won.text = str(playerInput.name)
+		self.break_leg.text = str(playerInput.name)
+		self.throw.text = str(playerInput.all_time_throw)
+		self.dart.text = str(playerInput.all_time_dart)
+		self.play_time.text = str(playerInput.name)
+		self.average.text = \"%.2f\" % playerInput.all_time_average_per_throw
+		self.average_per_leg.text = \"%.2f\" % playerInput.all_time_average_per_leg
+		self.player = playerInput
 		
 func _on_texture_button_pressed():
 	var parent_node = self.get_node(\"/root/Statistic\")

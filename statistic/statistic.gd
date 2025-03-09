@@ -10,13 +10,12 @@ func _ready():
 
 
 func create_player_list():
-	const PLAYER_LIST = preload("res://statistic/player_list_stats.tscn")
+	const PLAYER_LIST = preload("res://statistic/PlayerListStat.tscn")
 	var grid_children = player_list_grid.get_children()
 	if len(grid_children) > 0:
 		for i in range(0, len(grid_children)):
 			player_list_grid.remove_child(grid_children[i])
 	if len(GlobalData.playerList) > 0:
-		var i = 0
 		for elem in GlobalData.playerList:
 			var instance = PLAYER_LIST.instantiate()
 			instance.nameLabel.text = elem.name
@@ -24,7 +23,7 @@ func create_player_list():
 			instance.player = elem
 			instance.parentNode = self
 			player_list_grid.add_child(instance)
-			i += 1
+
 
 
 func playerPressed(player: Player):
@@ -32,7 +31,7 @@ func playerPressed(player: Player):
 		for i in range(len(local_player_selected)):
 			if player == local_player_selected[i]:
 				return
-		const PLAYER_STAT = preload("res://statistic/player_stats_container.tscn")
+		const PLAYER_STAT = preload("res://statistic/PlayerListContainer.tscn")
 		var instance = PLAYER_STAT.instantiate()
 		instance.loadPlayer(player)
 		local_player_selected.append(player)
@@ -58,4 +57,4 @@ func check_opponent():
 
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://mainMenu/main_menu.tscn")
+	get_tree().change_scene_to_file("res://mainMenu/MainMenu.tscn")

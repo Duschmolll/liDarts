@@ -41,7 +41,7 @@ func launch():
 		setting.total_set = sets.value
 	setting.show_check_out = checkout.button_pressed
 	
-	GlobalData.setting[\"X01\"] = setting
+	GlobalData.setting[\"x01\"] = setting
 "
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_g2fk1"]

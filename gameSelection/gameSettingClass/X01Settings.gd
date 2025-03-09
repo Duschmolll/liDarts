@@ -37,7 +37,7 @@ func exportDict() -> Dictionary:
 		'double_in' = self.double_in,
 		'double_out' = self.double_out,
 		'show_check_out' = self.show_check_out,
-		'select_player_index' = self.selectPlayerIndex
+		'select_player_index' = self.selectedPlayerIndex
 	}
 	return dict
 	

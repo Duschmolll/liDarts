@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b4ou0wy2lq3p6"]
 
-[ext_resource type="Script" uid="uid://cueeviiwru404" path="res://player/player_list.gd" id="1_6yxb5"]
+[ext_resource type="Script" uid="uid://cueeviiwru404" path="res://player/PlayerList.gd" id="1_6yxb5"]
 [ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="1_77gx0"]
 [ext_resource type="Texture2D" uid="uid://cfrn2nh0x8tmc" path="res://texture/ui/reload.png" id="3_vevam"]
 [ext_resource type="Texture2D" uid="uid://3dwrj5ses33s" path="res://texture/ui/verified.png" id="4_eoi2o"]
@@ -86,5 +86,5 @@ stretch_mode = 5
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer3/ButtonValidate" to="." method="_on_button_validate_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete" to="." method="_on_button_delete_pressed"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonCancel" to="." method="_on_button_cancel_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonCancel" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/MarginContainer4/ButtonCancel" to="." method="_on_button_cancel_pressed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ccmtadf11pxjv"]
 
-[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="1_qtsqf"]
+[ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="1_0loxn"]
 
 [sub_resource type="GDScript" id="GDScript_vygcm"]
 resource_name = "playerListButton"
@@ -59,7 +59,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="Flag" type="TextureRect" parent="PanelContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
-texture = ExtResource("1_qtsqf")
+texture = ExtResource("1_0loxn")
 expand_mode = 3
 
 [node name="Name" type="Label" parent="PanelContainer/HBoxContainer"]

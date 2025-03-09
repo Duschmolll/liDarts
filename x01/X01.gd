@@ -71,8 +71,8 @@ func toggleInput() -> void:
 	for btn: TextureButton in dartScore.buttonList:
 		btn.disabled = !btn.disabled;
 		
-func getNextPlayer(currentPlayer: Player) -> Player:
-	var index = playerList.find(currentPlayer)
+func getNextPlayer(currentPlayerInput: Player) -> Player:
+	var index = playerList.find(currentPlayerInput)
 	if index + 1 < len(playerList):
 		return playerList[index + 1]
 	else:
@@ -144,8 +144,3 @@ func _ready() -> void:
 	button_init()
 	
 	initGame()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://mechhadcjkwo"]
 
-[ext_resource type="Script" uid="uid://cr6yp72bjgkwv" path="res://player/country_list.gd" id="1_2c34l"]
+[ext_resource type="Script" uid="uid://cr6yp72bjgkwv" path="res://player/CountryList.gd" id="1_2c34l"]
 [ext_resource type="Texture2D" uid="uid://csmjlh88yxtjc" path="res://texture/countryFlag/World_Wide.png" id="1_a1oox"]
 
 [node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("country_name", "country_flag")]

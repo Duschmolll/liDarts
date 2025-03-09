@@ -35,7 +35,6 @@ func save_data(path: String) -> void:
 	
 	if len(self.setting.keys()) > 0:
 		for key in self.setting.keys():
-			var current_setting = self.setting[key]
 			globalSetting[key] = self.setting[key].exportDict()
 	
 	var data = {

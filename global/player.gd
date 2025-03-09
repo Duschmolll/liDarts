@@ -37,9 +37,9 @@ var all_time_total_score: int
 
 	
 ## Create a Player object with a name and flag.
-func newPlayer(name:String, flag: String) -> void:
-	self.name = name
-	self.flag = flag
+func newPlayer(nameInput:String, flagInput: String) -> void:
+	self.name = nameInput
+	self.flag = flagInput
 	
 
 ##Copy data from a player.
@@ -111,17 +111,17 @@ func newGame(targetScore: int) -> void:
 	self.score = self.target_score
 
 ##Return 0 if won, 1 if > 0 and -1 if bust
-func newThrow(newThrow: int) -> int:
-	self.throw = newThrow
-	self.score = self.score - newThrow
+func newThrow(newThrowTotal: int) -> int:
+	self.throw = newThrowTotal
+	self.score = self.score - newThrowTotal
 	
 	if self.score >= 0:
-		if newThrow >= 80:
-			if newThrow >= 180:
+		if newThrowTotal >= 80:
+			if newThrowTotal >= 180:
 				self.score_180 += 1
-			elif newThrow >= 140:
+			elif newThrowTotal >= 140:
 				self.score_140 += 1
-			elif newThrow >= 100:
+			elif newThrowTotal >= 100:
 				self.score_100 += 1
 			else:
 				self.score_80 += 1

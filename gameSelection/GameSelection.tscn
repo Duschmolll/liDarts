@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dkuvdfuq1gxhk"]
 
-[ext_resource type="Script" uid="uid://d2v23dv5uwqe0" path="res://gameSelection/game_selection.gd" id="1_1r5l0"]
-[ext_resource type="PackedScene" uid="uid://m3qgvl8ev6d8" path="res://gameSelection/gameScene/game_selection_x01.tscn" id="1_8og4r"]
+[ext_resource type="Script" uid="uid://d2v23dv5uwqe0" path="res://gameSelection/GameSelection.gd" id="1_1r5l0"]
+[ext_resource type="PackedScene" uid="uid://m3qgvl8ev6d8" path="res://gameSelection/gameScene/GameSelectionX01.tscn" id="1_8og4r"]
 
 [node name="GameSelection" type="Control" node_paths=PackedStringArray("gameMode")]
 layout_mode = 3
