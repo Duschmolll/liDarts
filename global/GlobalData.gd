@@ -5,7 +5,6 @@ const SAVE_FILE_NAME = "data.json"
 const SECURITY_KEY = "0EZASQ"
 
 var playerList: Array[Player] = []
-var playerSelected: Array[Player] = []
 var setting = {}
 var data_loaded = false
 
@@ -26,19 +25,13 @@ func save_data(path: String) -> void:
 		return
 	
 	var globalPlayer = []
-	var globalPlayerSelected = {}
 	var globalSetting = {}
 	
 	if len(self.playerList) > 0:
 		for elem: Player in self.playerList:
 			globalPlayer.append(elem.export())
 			
-	if len(self.playerSelected) > 0:
-		for elem in self.playerSelected:
-			globalPlayerSelected = {
-				'name' = elem.name,
-				'flag' = elem.flag
-			}
+
 	
 	if len(self.setting.keys()) > 0:
 		for key in self.setting.keys():
@@ -47,7 +40,6 @@ func save_data(path: String) -> void:
 	
 	var data = {
 		"playerList" = globalPlayer,
-		"playerSelected" = globalPlayerSelected,
 		"setting" = globalSetting
 		}
 		
@@ -78,10 +70,6 @@ func load_data(path: String) -> void:
 		for elem in data.playerList:
 			self.playerList.append(Player.new())
 			self.playerList[-1].import(elem)
-		
-		for elem in data.playerSelected:
-			self.playerSelected.append(Player.new())
-			self.playerSelected[-1].newPlayer(elem.name, elem.flag)
 		
 		for elem in data.setting.keys():
 			match data.setting[elem].type:

@@ -2,6 +2,7 @@ class_name Player
 
 var name: String
 var flag: String
+var index: int
 
 var throw: int = 0
 var throwList = Array([], TYPE_INT, "", null)
@@ -34,10 +35,12 @@ var all_time_leg: int
 var all_time_leg_win: int
 var all_time_total_score: int
 
+	
 ## Create a Player object with a name and flag.
 func newPlayer(name:String, flag: String) -> void:
 	self.name = name
 	self.flag = flag
+	
 
 ##Copy data from a player.
 func loadFrom(player: Player) -> void:
@@ -52,7 +55,8 @@ func loadFrom(player: Player) -> void:
 	self.all_time_leg = player.all_time_leg
 	self.all_time_leg_win = player.all_time_leg_win
 	self.all_time_total_score = player.all_time_total_score
-
+	self.index = len(GlobalData.playerList) - 1
+	
 ##Load data from a dictionary.
 func import(dic: Dictionary) -> void:
 	self.name = dic.name
@@ -68,6 +72,7 @@ func import(dic: Dictionary) -> void:
 	self.all_time_leg = dic.all_time_leg
 	self.all_time_leg_win = dic.all_time_leg_win
 	self.all_time_total_score = dic.all_time_total_score
+	self.index = len(GlobalData.playerList) - 1
 	
 ##Export data into a Dictionary
 func export() -> Dictionary:
