@@ -31,17 +31,19 @@ func launch():
 			
 	var setting: X01Settings = X01Settings.new()
 	setting.score = targetScore
-	setting.double_in = doubleIn.button_pressed
-	setting.double_out = doubleOut.button_pressed
+	setting.doubleIn = doubleIn.button_pressed
+	setting.doubleOut = doubleOut.button_pressed
 
 	if infinite.button_pressed:
-		setting.total_leg = 999
+		setting.totalLeg = 999
 	else:
-		setting.total_leg = legs.value
-		setting.total_set = sets.value
-	setting.show_check_out = checkout.button_pressed
+		setting.totalLeg = legs.value
+		setting.totalSet = sets.value
+	setting.showCheckOut = checkout.button_pressed
 	
 	GlobalData.setting[\"x01\"] = setting
+	
+	get_tree().change_scene_to_file(\"res://gameSelection/playerSelection/playerSelection.tscn\")
 "
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_g2fk1"]

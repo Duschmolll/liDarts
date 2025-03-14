@@ -18,10 +18,7 @@ func create_player_list():
 	if len(GlobalData.playerList) > 0:
 		for elem in GlobalData.playerList:
 			var instance = PLAYER_LIST.instantiate()
-			instance.nameLabel.text = elem.name
-			instance.flagTextureRect.set_texture(load(elem.flag))
-			instance.player = elem
-			instance.parentNode = self
+			instance.setup(elem, self)
 			player_list_grid.add_child(instance)
 
 

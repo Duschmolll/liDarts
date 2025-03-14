@@ -3,36 +3,50 @@ extends Control
 @export var selectedGrid: GridContainer
 @export var playerList: GridContainer
 
-@onready var setting = GlobalData.setting.x01
+@export var validateButton: Button
 
-func create_player_list():
+@onready var setting = GlobalData.setting.x01
+var playerIndex: Array[int]
+
+func createPlayerList():
 	const PLAYER_LIST = preload("res://statistic/PlayerListStat.tscn")
-	var grid_children = playerList.get_children()
-	if len(grid_children) > 0:
-		for i in range(0, len(grid_children)):
-			playerList.remove_child(grid_children[i])
+	var gridChildren = playerList.get_children()
+	if len(gridChildren) > 0:
+		for i in range(0, len(gridChildren)):
+			playerList.remove_child(gridChildren[i])
 	if len(GlobalData.playerList) > 0:
 		var i = 0
 		for elem in GlobalData.playerList:
 			var instance = PLAYER_LIST.instantiate()
-			instance.nameLabel.text = elem.name
-			instance.flagTextureRect.set_texture(load(elem.flag))
-			instance.player = elem
-			instance.parentNode = self
+			instance.setup(elem, self)
 			playerList.add_child(instance)
 			i += 1
 
 
 func playerPressed(player: Player):
-	print("PlayerPressed")
-
-	if player.index not in setting.selectedPlayerIndex:
-		setting.selectedPlayerIndex.append(player.index)
-		var playerNode = load("res://gameSelection/playerSelection/playerButton.tscn")
+	if player.index not in playerIndex:
+		playerIndex.append(player.index)
+		print(playerIndex)
+		var playerNode = load("res://gameSelection/playerSelection/PlayerButton.tscn")
 		var instance = playerNode.instantiate()
-		instance.setup(player, setting)
+		instance.setup(player, playerIndex)
 		selectedGrid.add_child(instance)
 		
 	
 func _ready() -> void:
-	create_player_list()
+	createPlayerList()
+
+func _process(delta: float) -> void:
+	if len(playerIndex) > 1:
+		validateButton.disabled = false
+	else:
+		validateButton.disabled = true
+
+func launchGame() -> void:
+	for elem in playerIndex:
+		setting.selectedPlayerIndex.append(elem)
+	get_tree().change_scene_to_file("res://x01/x01.tscn")
+
+
+func returnGameSelection() -> void:
+	get_tree().change_scene_to_file("res://gameSelection/GameSelection.tscn")

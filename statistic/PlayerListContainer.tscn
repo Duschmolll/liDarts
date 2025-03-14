@@ -30,14 +30,14 @@ func loadPlayer(playerInput: Player):
 		self.player_label.text = playerInput.name
 		self.player_flag.set_texture(load(playerInput.flag))
 		self.game_played.text = str(playerInput.name)
-		self.leg_played.text = str(playerInput.all_time_leg)
+		self.leg_played.text = str(playerInput.allTimeLeg)
 		self.game_won.text = str(playerInput.name)
 		self.break_leg.text = str(playerInput.name)
-		self.throw.text = str(playerInput.all_time_throw)
-		self.dart.text = str(playerInput.all_time_dart)
+		self.throw.text = str(playerInput.allTimeThrow)
+		self.dart.text = str(playerInput.allTimeDart)
 		self.play_time.text = str(playerInput.name)
-		self.average.text = \"%.2f\" % playerInput.all_time_average_per_throw
-		self.average_per_leg.text = \"%.2f\" % playerInput.all_time_average_per_leg
+		self.average.text = \"%.2f\" % playerInput.allTimeAveragePerThrow
+		self.average_per_leg.text = \"%.2f\" % playerInput.allTimeAveragePerLeg
 		self.player = playerInput
 		
 func _on_texture_button_pressed():

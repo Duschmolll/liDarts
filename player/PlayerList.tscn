@@ -7,10 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://dqt42h481gt24" path="res://texture/ui/delete.png" id="5_crc3b"]
 [ext_resource type="Texture2D" uid="uid://sjk35bp63qvd" path="res://texture/ui/cross.png" id="6_7bnnl"]
 
-[node name="PlayerList" type="AspectRatioContainer" node_paths=PackedStringArray("nameLabel", "flagTextureRect")]
+[node name="PlayerList" type="AspectRatioContainer" node_paths=PackedStringArray("nameLabel", "flagTextureRect", "buttonEdit", "buttonValidate", "buttonDelete", "buttonCancel")]
 script = ExtResource("1_6yxb5")
 nameLabel = NodePath("PanelContainer/HBoxContainer/Name")
 flagTextureRect = NodePath("PanelContainer/HBoxContainer/MarginContainer/Flag")
+buttonEdit = NodePath("PanelContainer/HBoxContainer/MarginContainer3/ButtonEdit")
+buttonValidate = NodePath("PanelContainer/HBoxContainer/MarginContainer3/ButtonValidate")
+buttonDelete = NodePath("PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete")
+buttonCancel = NodePath("PanelContainer/HBoxContainer/MarginContainer4/ButtonCancel")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2

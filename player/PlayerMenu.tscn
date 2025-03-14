@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cd37ho4a0fa5m" path="res://player/PlayerMenu.gd" id="1_ipna7"]
 
-[node name="PlayerMenu" type="Control" node_paths=PackedStringArray("player_grid")]
+[node name="PlayerMenu" type="Control" node_paths=PackedStringArray("playerGrid")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,7 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ipna7")
-player_grid = NodePath("MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PlayerListContainer/PanelContainer/MarginContainer/PlayerListControl/PlayerListGrid")
+playerGrid = NodePath("MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PlayerListContainer/PanelContainer/MarginContainer/PlayerListControl/PlayerListGrid")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

@@ -10,18 +10,18 @@ script/source = "extends Button
 @export var flagTextureRect: TextureRect
 
 var player: Player
-var setting
+var playerIndex: Array[int]
 
-func setup(player, setting):
-	self.setting = setting
+func setup(player, playerIndexInput):
+	self.playerIndex = playerIndexInput
 	self.player = player
 	self.nameLabel.text = player.name
 	self.flagTextureRect.set_texture(load(player.flag))
 	
 func _on_pressed():
-	for i in range(len(setting.selectedPlayerIndex)):
-		if player.index == setting.selectedPlayerIndex[i]:
-			setting.selectedPlayerIndex.remove_at(i)
+	for i in range(len(playerIndex)):
+		if player.index == playerIndex[i]:
+			playerIndex.remove_at(i)
 			break
 	queue_free()
 "

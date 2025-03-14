@@ -12,6 +12,12 @@ script/source = "extends Button
 var player: Player
 var parentNode: Node
 
+func setup(playerInput: Player, parent: Node):
+	self.nameLabel.text = playerInput.name
+	self.flagTextureRect.set_texture(load(playerInput.flag))
+	self.parentNode = parent
+	self.player = playerInput
+
 func _on_pressed():
 	parentNode.playerPressed(player)
 "

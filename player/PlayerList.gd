@@ -3,33 +3,36 @@ extends AspectRatioContainer
 @export var nameLabel:Label
 @export var flagTextureRect: TextureRect
 
-@onready var button_edit = $PanelContainer/HBoxContainer/MarginContainer3/ButtonEdit
-@onready var button_validate = $PanelContainer/HBoxContainer/MarginContainer3/ButtonValidate
-@onready var button_delete = $PanelContainer/HBoxContainer/MarginContainer4/ButtonDelete
-@onready var button_cancel = $PanelContainer/HBoxContainer/MarginContainer4/ButtonCancel
+@export var buttonEdit: TextureButton
+@export var buttonValidate: TextureButton
+@export var buttonDelete: TextureButton
+@export var buttonCancel: TextureButton
 
 var player: Player
 
 func _ready():
-	button_cancel.visible = false
-	button_delete.visible = true
-	button_edit.visible = true
-	button_validate.visible = false
+	buttonCancel.visible = false
+	buttonDelete.visible = true
+	buttonEdit.visible = true
+	buttonValidate.visible = false
+
+func setup(playerInput: Player):
+	nameLabel.text = playerInput.name
+	flagTextureRect.set_texture(load(playerInput.flag))
+	player = playerInput
 
 func _on_button_cancel_pressed():
-	button_cancel.visible = false
-	button_delete.visible = true
-	button_edit.visible = true
-	button_validate.visible = false
+	buttonCancel.visible = false
+	buttonDelete.visible = true
+	buttonEdit.visible = true
+	buttonValidate.visible = false
 
 
 func _on_button_delete_pressed():
-	button_cancel.visible = true
-	button_delete.visible = false
-	button_edit.visible = false
-	button_validate.visible = true
-	pass 
-
+	buttonCancel.visible = true
+	buttonDelete.visible = false
+	buttonEdit.visible = false
+	buttonValidate.visible = true 
 
 func _on_button_validate_pressed():
 	for i in range(len(GlobalData.playerList)):
@@ -38,8 +41,4 @@ func _on_button_validate_pressed():
 			GlobalData.playerList.remove_at(i)
 			self.get_node("/root/PlayerMenu").createPlayerList()
 			GlobalData.save_data(GlobalData.SAVE_DIR + GlobalData.SAVE_FILE_NAME)
-			return
-
-
-func _on_button_edit_pressed():
-	pass
+			break

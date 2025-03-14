@@ -6,65 +6,61 @@
 [sub_resource type="GDScript" id="GDScript_3rnwi"]
 script/source = "extends Node
 
-@export var player_line: LineEdit
-@export var country_texture: TextureRect
-@export var country_line: LineEdit
-@export var country_scroll: ScrollContainer
+@export var playerLine: LineEdit
+@export var countryTexture: TextureRect
+@export var countryLine: LineEdit
+@export var countryScroll: ScrollContainer
 var parent: Node
 
 
 func _ready():
 	create_flag_list()
 
-
 func _on_return_pressed():
 	self.queue_free()
 
-
 func _on_validate_pressed():
-	var user_name: String = player_line.text
+	var userName: String = playerLine.text
 	var re = RegEx.new()
 	re.compile(\"[\\\\d\\\\s]+\")
-	var result = re.search(user_name)
+	var result = re.search(userName)
 
-	if len(user_name) > 3:
+	if len(userName) > 3:
 		if result:
-			if result.get_string() != \"\" || user_name == \"\":
-				player_line.clear()
-				player_line.placeholder_text= \"Invalid Name\"
+			if result.get_string() != \"\" || userName == \"\":
+				playerLine.clear()
+				playerLine.placeholder_text= \"Invalid Name\"
 
 		else:
 			for elem in GlobalData.playerList:
-				if elem.name.to_lower() == user_name.to_lower() :
-					player_line.clear()
-					player_line.placeholder_text= \"Name already taken\"
+				if elem.name.to_lower() == userName.to_lower() :
+					playerLine.clear()
+					playerLine.placeholder_text= \"Name already taken\"
 					return
 					
 			GlobalData.playerList.append(Player.new())
-			GlobalData.playerList[-1].newPlayer(user_name, country_texture.texture.resource_path)
+			GlobalData.playerList[-1].newPlayer(userName, countryTexture.texture.resource_path)
 			GlobalData.save_data(GlobalData.SAVE_DIR + GlobalData.SAVE_FILE_NAME)
-			player_line.clear()
-			country_texture.set_texture(load(\"res://texture/countryFlag/World_Wide.png\"))
-			country_line.text = \"\"
-			player_line.placeholder_text = \"Name\"
+			playerLine.clear()
+			countryTexture.set_texture(load(\"res://texture/countryFlag/World_Wide.png\"))
+			countryLine.text = \"\"
+			playerLine.placeholder_text = \"Name\"
 			parent.player_list_updated()
 			self.queue_free()
 	else:
-		player_line.clear()
-		player_line.placeholder_text= \"Name too short\"
+		playerLine.clear()
+		playerLine.placeholder_text= \"Name too short\"
 
 
 func create_flag_list():
 	const COUNTRY_LIST = preload(\"res://player/CountryList.tscn\")
 	var countries = get_all_flag()
-	var i = 0
 	
 	for key in countries.keys():
 		var instance = COUNTRY_LIST.instantiate()
-		country_scroll.get_children()[0].add_child(instance)
-		country_scroll.get_children()[0].get_children()[i].get_children()[0].get_children()[0].get_children()[0].set_texture(load(countries[key].path))
-		country_scroll.get_children()[0].get_children()[i].get_children()[0].get_children()[1].text = countries[key].name
-		i += 1
+		instance.countryName.text = countries[key].name
+		instance.countryFlag.set_texture(load(countries[key].path))
+		countryScroll.get_children()[0].add_child(instance)
 
 
 func get_all_flag():
@@ -86,28 +82,28 @@ func get_all_flag():
 
 
 func _on_line_edit_country_focus_entered():
-	country_line.text = \"\"
+	countryLine.text = \"\"
 	_on_line_edit_country_text_changed(\"\")
-	country_scroll.visible = true
+	countryScroll.visible = true
 
-func _on_line_edit_country_text_changed(new_text):
-	for i in country_scroll.get_children()[0].get_child_count():
-		var country_name_btn = country_scroll.get_children()[0].get_children()[i].get_children()[0].get_children()[1]
-		if !country_name_btn.text.to_lower().begins_with(new_text.to_lower()):
-			country_scroll.get_children()[0].get_children()[i].visible = false
+func _on_line_edit_country_text_changed(newText):
+	for i in countryScroll.get_children()[0].get_child_count():
+		var countryNameBtn = countryScroll.get_children()[0].get_children()[i].get_children()[0].get_children()[1]
+		if !countryNameBtn.text.to_lower().begins_with(newText.to_lower()):
+			countryScroll.get_children()[0].get_children()[i].visible = false
 		else:
-			country_scroll.get_children()[0].get_children()[i].visible = true
-	country_scroll.get_children()[0].visible = true
+			countryScroll.get_children()[0].get_children()[i].visible = true
+	countryScroll.get_children()[0].visible = true
 
 
 func _on_line_edit_name_focus_entered():
-		country_scroll.visible = false
+		countryScroll.visible = false
 
 
 func _on_item_list_item_selected(country_name, country_flag):
-	country_texture.set_texture(country_flag)
-	country_line.text = country_name
-	country_scroll.visible = false
+	countryTexture.set_texture(country_flag)
+	countryLine.text = country_name
+	countryScroll.visible = false
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_udk22"]
@@ -119,12 +115,12 @@ script/source = "extends VBoxContainer
 @export var parent: Node
 "
 
-[node name="AddPlayer" type="Node" node_paths=PackedStringArray("player_line", "country_texture", "country_line", "country_scroll")]
+[node name="AddPlayer" type="Node" node_paths=PackedStringArray("playerLine", "countryTexture", "countryLine", "countryScroll")]
 script = SubResource("GDScript_3rnwi")
-player_line = NodePath("PanelContainer/MarginContainer/CreatePlayer/HBoxContainer/LineEditName")
-country_texture = NodePath("PanelContainer/MarginContainer/CreatePlayer/HBoxContainer2/MarginContainer/Flag")
-country_line = NodePath("PanelContainer/MarginContainer/CreatePlayer/HBoxContainer2/LineEditCountry")
-country_scroll = NodePath("PanelContainer/MarginContainer/CreatePlayer/ScrollContainer")
+playerLine = NodePath("PanelContainer/MarginContainer/CreatePlayer/HBoxContainer/LineEditName")
+countryTexture = NodePath("PanelContainer/MarginContainer/CreatePlayer/HBoxContainer2/MarginContainer/Flag")
+countryLine = NodePath("PanelContainer/MarginContainer/CreatePlayer/HBoxContainer2/LineEditCountry")
+countryScroll = NodePath("PanelContainer/MarginContainer/CreatePlayer/ScrollContainer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_udk22")

@@ -6,7 +6,8 @@ extends Control
 @export var infoPanel: VBoxContainer 
 @export var nextPlayerPanel: MarginContainer
 
-var playerList = [Player.new(), Player.new()]
+
+var playerList: Array[Player] = []
 var currentPlayer: Player
 
 func dartboardButton(btn, type) -> void:
@@ -85,13 +86,13 @@ func initGame() -> void:
 
 	currentPlayer = playerList[0]
 	
-	infoPanel.player_name.text = currentPlayer.name
-	infoPanel.player_flag.set_texture(load(currentPlayer.flag)) 
-	infoPanel.score_label.text = "301"
-	infoPanel.check_out_label.text = ""
+	infoPanel.playerName.text = currentPlayer.name
+	infoPanel.playerFlag.set_texture(load(currentPlayer.flag)) 
+	infoPanel.scoreLabel.text = "301"
+	infoPanel.checkOutLabel.text = ""
 	
-	infoPanel.statistic_container.fromPlayer(currentPlayer)
-	infoPanel.history_container.newGame()
+	infoPanel.statisticContainer.fromPlayer(currentPlayer)
+	infoPanel.historyContainer.newGame()
 	
 	nextPlayerPanel.nextPlayer(getNextPlayer(currentPlayer))
 
@@ -101,10 +102,10 @@ func endTurn(throwScore: int) -> void:
 	for elem in playerList:
 		print(elem)
 		
-	infoPanel.score_label.text = str(currentPlayer.score)
+	infoPanel.scoreLabel.text = str(currentPlayer.score)
 	
-	infoPanel.history_container.update(currentPlayer)
-	infoPanel.statistic_container.update(currentPlayer)
+	infoPanel.historyContainer.update(currentPlayer)
+	infoPanel.statisticContainer.update(currentPlayer)
 	
 	for dartValue in dartScore.buttonList:
 		dartValue.label.text = ""
@@ -126,21 +127,29 @@ func nextTurn() -> void:
 	
 	currentPlayer = getNextPlayer(currentPlayer)
 	
-	infoPanel.player_name.text = currentPlayer.name
-	infoPanel.player_flag.set_texture(load(currentPlayer.flag)) 
-	infoPanel.score_label.text = str(currentPlayer.score)
-	infoPanel.check_out_label.text = ""
+	infoPanel.playerName.text = currentPlayer.name
+	infoPanel.playerFlag.set_texture(load(currentPlayer.flag)) 
+	infoPanel.scoreLabel.text = str(currentPlayer.score)
+	infoPanel.checkOutLabel.text = ""
 	
-	infoPanel.statistic_container.fromPlayer(currentPlayer)
-	infoPanel.history_container.clear()
-	infoPanel.history_container.update(currentPlayer)
+	infoPanel.statisticContainer.fromPlayer(currentPlayer)
+	infoPanel.historyContainer.clear()
+	infoPanel.historyContainer.update(currentPlayer)
 
 	nextPlayerPanel.nextPlayer(getNextPlayer(currentPlayer))
 	
 	
 func _ready() -> void:
-	playerList[0].newPlayer("Mattieu", "xxx")
-	playerList[1].newPlayer("Krek", "xxx")
+	if len(GlobalData.setting.x01.selectedPlayerIndex) < 2:
+		playerList.append(Player.new())
+		playerList[0].newPlayer("Mattieu", "xxx")
+		playerList.append(Player.new())
+		playerList[1].newPlayer("Krek", "xxx")
+	else:
+		for index in GlobalData.setting.x01.selectedPlayerIndex:
+			playerList.append(Player.new())
+			playerList[-1].loadFrom(GlobalData.playerList[index])
+	
 	button_init()
 	
 	initGame()

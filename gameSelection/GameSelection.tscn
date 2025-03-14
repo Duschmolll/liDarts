@@ -40,8 +40,16 @@ layout_mode = 2
 [node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/PanelContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer3"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/PanelContainer3/VBoxContainer"]
 layout_mode = 2
 text = "Validate"
 
-[connection signal="pressed" from="VBoxContainer/PanelContainer3/Button" to="." method="validate"]
+[node name="Button2" type="Button" parent="VBoxContainer/PanelContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Return"
+
+[connection signal="pressed" from="VBoxContainer/PanelContainer3/VBoxContainer/Button" to="." method="validate"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer3/VBoxContainer/Button2" to="." method="returnToMenu"]

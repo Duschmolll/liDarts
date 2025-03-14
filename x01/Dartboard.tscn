@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://3tljjtqyuk38" path="res://texture/ui/dartboard/bull_25.svg" id="3_tgwt1"]
 [ext_resource type="Texture2D" uid="uid://biy0l4giffth" path="res://texture/ui/dartboard/bull_50.svg" id="4_rileq"]
 [ext_resource type="Texture2D" uid="uid://1sat1hfhb72e" path="res://texture/ui/dartboard/black.svg" id="5_diyn4"]
-[ext_resource type="Script" uid="uid://cwp6i3b45fb12" path="res://x01/DartboardButton.gd" id="5_jf72y"]
+[ext_resource type="Script" uid="uid://cwp6i3b45fb12" path="res://x01/dartboardButton.gd" id="5_jf72y"]
 [ext_resource type="Texture2D" uid="uid://bupiuusmgsm4e" path="res://texture/ui/dartboard/triple_red.svg" id="6_dxn3c"]
 [ext_resource type="Texture2D" uid="uid://d4acy0ngvwouw" path="res://texture/ui/dartboard/double_red.svg" id="7_l68no"]
 [ext_resource type="Texture2D" uid="uid://b4bkt28i7ms5x" path="res://texture/ui/dartboard/white.svg" id="8_ck1mi"]

@@ -9,39 +9,39 @@
 [sub_resource type="GDScript" id="GDScript_80uk2"]
 script/source = "extends VBoxContainer
 
-@export var player_name: Label
-@export var player_flag: TextureRect
+@export var playerName: Label
+@export var playerFlag: TextureRect
 
-@export var score_label: Label
-@export var check_out_label: Label
+@export var scoreLabel: Label
+@export var checkOutLabel: Label
 
-@export var statistic_container: Node
+@export var statisticContainer: Node
 
-@export var history_container: Node
+@export var historyContainer: Node
 "
 
 [sub_resource type="GDScript" id="GDScript_4ud42"]
 script/source = "extends VBoxContainer
 
 
-@export var history_01_throw: Label
-@export var history_01_score: Label
-@export var history_02_throw: Label
-@export var history_02_score: Label
-@export var history_03_throw: Label
-@export var history_03_score: Label
-@export var history_04_throw: Label
-@export var history_04_score: Label
-@export var history_05_throw: Label
-@export var history_05_score: Label
-@export var history_06_throw: Label
-@export var history_06_score: Label
-@export var history_07_throw: Label
-@export var history_07_score: Label
-@export var history_08_throw: Label
-@export var history_08_score: Label
-@export var history_09_throw: Label
-@export var history_09_score: Label
+@export var historyThrow01: Label
+@export var historyScore01: Label
+@export var historyThrow02: Label
+@export var historyScore02: Label
+@export var historyThrow03: Label
+@export var historyScore03: Label
+@export var historyThrow04: Label
+@export var historyScore04: Label
+@export var historyThrow05: Label
+@export var historyScore05: Label
+@export var historyThrow06: Label
+@export var historyScore06: Label
+@export var historyThrow07: Label
+@export var historyScore07: Label
+@export var historyThrow08: Label
+@export var historyScore08: Label
+@export var historyThrow09: Label
+@export var historyScore09: Label
 
 var history_throw = []
 var history_score = []
@@ -68,31 +68,32 @@ func update(player: Player) -> void:
 		k += 1
 
 func _ready() -> void:
-	history_throw = [history_01_throw, history_02_throw, history_03_throw, history_04_throw, history_05_throw, history_06_throw, history_07_throw, history_08_throw, history_09_throw]
-	history_score = [history_01_score, history_02_score, history_03_score, history_04_score, history_05_score, history_06_score, history_07_score, history_08_score, history_09_score]
+	history_throw = [historyThrow01, historyThrow02, historyThrow03, historyThrow04, historyThrow05, historyThrow06, historyThrow07, historyThrow08, historyThrow09, ]
+	history_score = [historyScore01, historyScore02, historyScore03, historyScore04, historyScore05, historyScore06, historyScore07, historyScore08, historyScore09]
+	
 "
 
 [sub_resource type="GDScript" id="GDScript_dttjp"]
 script/source = "extends VBoxContainer
 
-@export var stat_leg: Label
-@export var stat_80: Label
-@export var stat_100: Label
-@export var stat_140: Label
-@export var stat_180: Label
-@export var stat_average: Label
-@export var stat_average_leg: Label
+@export var statLeg: Label
+@export var stat80: Label
+@export var stat100: Label
+@export var stat140: Label
+@export var stat180: Label
+@export var statAverage: Label
+@export var statAverageLeg: Label
 
 
 func fromPlayer(player: Player) -> void:
-	stat_leg.text = str(player.leg)
-	stat_80.text = str(player.score_80)
-	stat_100.text = str(player.score_100)
-	stat_140.text = str(player.score_140)
-	stat_180.text = str(player.score_180)
+	statLeg.text = str(player.leg)
+	stat80.text = str(player.score80)
+	stat100.text = str(player.score100)
+	stat140.text = str(player.score140)
+	stat180.text = str(player.score180)
 	
-	stat_average.text = str(player.average)
-	stat_average_leg.text = str(player.average_per_leg)
+	statAverage.text = str(player.average)
+	statAverageLeg.text = str(player.averagePerLeg)
 
 func update(player: Player) -> void:
 	fromPlayer(player)
@@ -157,16 +158,16 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerPanel" node_paths=PackedStringArray("player_name", "player_flag", "score_label", "check_out_label", "statistic_container", "history_container")]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerPanel" node_paths=PackedStringArray("playerName", "playerFlag", "scoreLabel", "checkOutLabel", "statisticContainer", "historyContainer")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = SubResource("GDScript_80uk2")
-player_name = NodePath("Name/CenterContainer/Player/Name")
-player_flag = NodePath("Name/MarginContainer/Flag")
-score_label = NodePath("Score/Player1Score")
-check_out_label = NodePath("Score/Player1Score/MarginContainer/Label")
-statistic_container = NodePath("PanelContainer/MarginContainer/CenterContainer3/Statistic")
-history_container = NodePath("PanelContainer/MarginContainer/CenterContainer/History")
+playerName = NodePath("Name/CenterContainer/Player/Name")
+playerFlag = NodePath("Name/MarginContainer/Flag")
+scoreLabel = NodePath("Score/Player1Score")
+checkOutLabel = NodePath("Score/Player1Score/MarginContainer/Label")
+statisticContainer = NodePath("PanelContainer/MarginContainer/CenterContainer3/Statistic")
+historyContainer = NodePath("PanelContainer/MarginContainer/CenterContainer/History")
 
 [node name="Name" type="PanelContainer" parent="PlayerPanel/VBoxContainer"]
 layout_mode = 2
@@ -289,29 +290,29 @@ text = "Miss"
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="History" type="VBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer" node_paths=PackedStringArray("history_01_throw", "history_01_score", "history_02_throw", "history_02_score", "history_03_throw", "history_03_score", "history_04_throw", "history_04_score", "history_05_throw", "history_05_score", "history_06_throw", "history_06_score", "history_07_throw", "history_07_score", "history_08_throw", "history_08_score", "history_09_throw", "history_09_score")]
+[node name="History" type="VBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer" node_paths=PackedStringArray("historyThrow01", "historyScore01", "historyThrow02", "historyScore02", "historyThrow03", "historyScore03", "historyThrow04", "historyScore04", "historyThrow05", "historyScore05", "historyThrow06", "historyScore06", "historyThrow07", "historyScore07", "historyThrow08", "historyScore08", "historyThrow09", "historyScore09")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 script = SubResource("GDScript_4ud42")
-history_01_throw = NodePath("CenterContainer/Shot00/score")
-history_01_score = NodePath("CenterContainer/Shot00/rem_score")
-history_02_throw = NodePath("CenterContainer2/Shot00/score")
-history_02_score = NodePath("CenterContainer2/Shot00/rem_score")
-history_03_throw = NodePath("CenterContainer3/Shot00/score")
-history_03_score = NodePath("CenterContainer3/Shot00/rem_score")
-history_04_throw = NodePath("CenterContainer4/Shot00/score")
-history_04_score = NodePath("CenterContainer4/Shot00/rem_score")
-history_05_throw = NodePath("CenterContainer5/Shot00/score")
-history_05_score = NodePath("CenterContainer5/Shot00/rem_score")
-history_06_throw = NodePath("CenterContainer6/Shot00/score")
-history_06_score = NodePath("CenterContainer6/Shot00/rem_score")
-history_07_throw = NodePath("CenterContainer7/Shot00/score")
-history_07_score = NodePath("CenterContainer7/Shot00/rem_score")
-history_08_throw = NodePath("CenterContainer8/Shot00/score")
-history_08_score = NodePath("CenterContainer8/Shot00/rem_score")
-history_09_throw = NodePath("CenterContainer9/Shot00/score")
-history_09_score = NodePath("CenterContainer9/Shot00/rem_score")
+historyThrow01 = NodePath("CenterContainer/Shot00/score")
+historyScore01 = NodePath("CenterContainer/Shot00/rem_score")
+historyThrow02 = NodePath("CenterContainer2/Shot00/score")
+historyScore02 = NodePath("CenterContainer2/Shot00/rem_score")
+historyThrow03 = NodePath("CenterContainer3/Shot00/score")
+historyScore03 = NodePath("CenterContainer3/Shot00/rem_score")
+historyThrow04 = NodePath("CenterContainer4/Shot00/score")
+historyScore04 = NodePath("CenterContainer4/Shot00/rem_score")
+historyThrow05 = NodePath("CenterContainer5/Shot00/score")
+historyScore05 = NodePath("CenterContainer5/Shot00/rem_score")
+historyThrow06 = NodePath("CenterContainer6/Shot00/score")
+historyScore06 = NodePath("CenterContainer6/Shot00/rem_score")
+historyThrow07 = NodePath("CenterContainer7/Shot00/score")
+historyScore07 = NodePath("CenterContainer7/Shot00/rem_score")
+historyThrow08 = NodePath("CenterContainer8/Shot00/score")
+historyScore08 = NodePath("CenterContainer8/Shot00/rem_score")
+historyThrow09 = NodePath("CenterContainer9/Shot00/score")
+historyScore09 = NodePath("CenterContainer9/Shot00/rem_score")
 
 [node name="CenterContainer" type="CenterContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer/History"]
 layout_mode = 2
@@ -506,19 +507,19 @@ text = "9999"
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="Statistic" type="VBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3" node_paths=PackedStringArray("stat_leg", "stat_80", "stat_100", "stat_140", "stat_180", "stat_average", "stat_average_leg")]
+[node name="Statistic" type="VBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3" node_paths=PackedStringArray("statLeg", "stat80", "stat100", "stat140", "stat180", "statAverage", "statAverageLeg")]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 10
 script = SubResource("GDScript_dttjp")
-stat_leg = NodePath("Legs/Value")
-stat_80 = NodePath("80+/Value")
-stat_100 = NodePath("100+/Value")
-stat_140 = NodePath("140+/Value")
-stat_180 = NodePath("180+/Value")
-stat_average = NodePath("Match/Value")
-stat_average_leg = NodePath("Leg/Value")
+statLeg = NodePath("Legs/Value")
+stat80 = NodePath("80+/Value")
+stat100 = NodePath("100+/Value")
+stat140 = NodePath("140+/Value")
+stat180 = NodePath("180+/Value")
+statAverage = NodePath("Match/Value")
+statAverageLeg = NodePath("Leg/Value")
 
 [node name="Title" type="Label" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer3/Statistic"]
 layout_mode = 2
