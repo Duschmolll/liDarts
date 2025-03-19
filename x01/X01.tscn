@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bamaber4d21nb" path="res://x01/X01.gd" id="1_ow68t"]
 [ext_resource type="Texture2D" uid="uid://cayot88mwdqvd" path="res://texture/background/subtle-prism.png" id="2_iwmqt"]
-[ext_resource type="PackedScene" uid="uid://dhl4k5mxhv2la" path="res://x01/Dartboard.tscn" id="3_ds1fe"]
+[ext_resource type="PackedScene" uid="uid://dhl4k5mxhv2la" path="res://x01/scene/Dartboard.tscn" id="3_ds1fe"]
 [ext_resource type="Texture2D" uid="uid://is8s8jdmrquc" path="res://texture/france.png" id="4_e8we8"]
-[ext_resource type="PackedScene" uid="uid://c1klnyodec6dh" path="res://x01/DartScore.tscn" id="5_lt2a2"]
+[ext_resource type="PackedScene" uid="uid://c1klnyodec6dh" path="res://x01/scene/DartScore.tscn" id="5_lt2a2"]
 
 [sub_resource type="GDScript" id="GDScript_80uk2"]
 script/source = "extends VBoxContainer
@@ -86,7 +86,7 @@ script/source = "extends VBoxContainer
 
 
 func fromPlayer(player: Player) -> void:
-	statLeg.text = str(player.leg)
+	statLeg.text = str(player.nbLeg)
 	stat80.text = str(player.score80)
 	stat100.text = str(player.score100)
 	stat140.text = str(player.score140)
@@ -270,7 +270,6 @@ size_flags_vertical = 4
 
 [node name="DartScore" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer/CenterContainer" instance=ExtResource("5_lt2a2")]
 layout_mode = 2
-size_flags_horizontal = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerPanel/VBoxContainer/PanelContainer/MarginContainer/CenterContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

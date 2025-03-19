@@ -12,7 +12,8 @@ var numberOfTurn: int = 0
 var score: int = 0
 var targetScore: int = 0
 
-var leg: int = 0
+var nbSet: int = 0
+var nbLeg: int = 0
 var average: float = 0.0
 var averagePerLeg: float = 0.0
 
@@ -44,6 +45,8 @@ func newPlayer(nameInput:String, flagInput: String) -> void:
 
 ##Copy data from a player.
 func loadFrom(player: Player) -> void:
+	self.name = player.name
+	self.flag = player.flag
 	self.allTimeAveragePerLeg = player.allTimeAveragePerLeg
 	self.allTimeAveragePerThrow = player.allTimeAveragePerThrow
 	self.allTimeThrow = player.allTimeThrow
@@ -103,9 +106,18 @@ func newGame(targetScoreInput: int) -> void:
 	self.throw = 0
 	self.numberOfTurn = 0
 	
-	self.leg = 0
+	self.nbLeg = 0
+	self.nbSet
 	self.average = 0.0
 	self.averagePerLeg = 0.0
+	
+	self.targetScore = targetScoreInput
+	self.score = self.targetScore
+
+func newLeg(targetScoreInput: int) -> void:
+	
+	self.throw = 0
+	self.numberOfTurn = 0
 	
 	self.targetScore = targetScoreInput
 	self.score = self.targetScore

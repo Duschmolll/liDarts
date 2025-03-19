@@ -7,6 +7,7 @@ const SECURITY_KEY = "0EZASQ"
 var playerList: Array[Player] = []
 var setting = {}
 var data_loaded = false
+var gameSelected
 
 func _ready() -> void:
 	verify_save_dir(SAVE_DIR)

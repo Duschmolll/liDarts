@@ -15,12 +15,11 @@ func createPlayerList():
 		for i in range(0, len(gridChildren)):
 			playerList.remove_child(gridChildren[i])
 	if len(GlobalData.playerList) > 0:
-		var i = 0
 		for elem in GlobalData.playerList:
 			var instance = PLAYER_LIST.instantiate()
 			instance.setup(elem, self)
 			playerList.add_child(instance)
-			i += 1
+
 
 
 func playerPressed(player: Player):
@@ -45,7 +44,7 @@ func _process(delta: float) -> void:
 func launchGame() -> void:
 	for elem in playerIndex:
 		setting.selectedPlayerIndex.append(elem)
-	get_tree().change_scene_to_file("res://x01/x01.tscn")
+	get_tree().change_scene_to_file(GlobalData.gameSelected)
 
 
 func returnGameSelection() -> void:

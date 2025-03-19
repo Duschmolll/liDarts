@@ -6,9 +6,11 @@ extends Control
 @export var infoPanel: VBoxContainer 
 @export var nextPlayerPanel: MarginContainer
 
-
+var setting: X01Settings
 var playerList: Array[Player] = []
 var currentPlayer: Player
+var PlayerStartLegIndex: int = 0
+var PlayerStartSetIndex: int = 0
 
 func dartboardButton(btn, type) -> void:
 	match type:
@@ -81,14 +83,14 @@ func getNextPlayer(currentPlayerInput: Player) -> Player:
 	
 func initGame() -> void:
 	
-	for player: Player in playerList:
-		player.newGame(301)
+	for elem: Player in playerList:
+		elem.newGame(setting.score)
 
 	currentPlayer = playerList[0]
 	
 	infoPanel.playerName.text = currentPlayer.name
 	infoPanel.playerFlag.set_texture(load(currentPlayer.flag)) 
-	infoPanel.scoreLabel.text = "301"
+	infoPanel.scoreLabel.text = str(setting.score)
 	infoPanel.checkOutLabel.text = ""
 	
 	infoPanel.statisticContainer.fromPlayer(currentPlayer)
@@ -96,11 +98,24 @@ func initGame() -> void:
 	
 	nextPlayerPanel.nextPlayer(getNextPlayer(currentPlayer))
 
+func newLeg():
+	
+	for elem: Player in playerList:
+		elem.newLeg(setting.score)
+	
+	infoPanel.playerName.text = currentPlayer.name
+	infoPanel.playerFlag.set_texture(load(currentPlayer.flag)) 
+	infoPanel.scoreLabel.text = str(setting.score)
+	infoPanel.checkOutLabel.text = ""
+	
+	infoPanel.statisticContainer.fromPlayer(currentPlayer)
+	infoPanel.historyContainer.newGame()
+	
+	nextPlayerPanel.nextPlayer(getNextPlayer(currentPlayer))
+	
 func endTurn(throwScore: int) -> void:
 	
 	var throwBool:int = currentPlayer.newThrow(throwScore)
-	for elem in playerList:
-		print(elem)
 		
 	infoPanel.scoreLabel.text = str(currentPlayer.score)
 	
@@ -120,8 +135,8 @@ func endTurn(throwScore: int) -> void:
 		timer.autostart = true
 		add_child(timer)
 	else:
-		print("GG")
-		toggleInput()
+		legWon()
+		
 	
 func nextTurn() -> void:
 	
@@ -138,15 +153,31 @@ func nextTurn() -> void:
 
 	nextPlayerPanel.nextPlayer(getNextPlayer(currentPlayer))
 	
-	
+func legWon():
+	currentPlayer.nbLeg += 1
+	if currentPlayer.nbLeg >= float(setting.totalLeg) / 2:
+		currentPlayer.nbSet += 1
+		if currentPlayer.nbSet >= float(setting.totalSet) / 2:
+			print("GG")
+			toggleInput()
+		else:
+			PlayerStartSetIndex = PlayerStartSetIndex + 1 if PlayerStartSetIndex + 1 < len(playerList) else 0
+			currentPlayer = playerList[PlayerStartSetIndex]
+			newLeg()
+	else:
+		PlayerStartLegIndex = PlayerStartLegIndex + 1 if PlayerStartLegIndex + 1 < len(playerList) else 0
+		currentPlayer = playerList[PlayerStartLegIndex]
+		newLeg()
+		
 func _ready() -> void:
+	setting = GlobalData.setting.x01
 	if len(GlobalData.setting.x01.selectedPlayerIndex) < 2:
 		playerList.append(Player.new())
 		playerList[0].newPlayer("Mattieu", "xxx")
 		playerList.append(Player.new())
 		playerList[1].newPlayer("Krek", "xxx")
 	else:
-		for index in GlobalData.setting.x01.selectedPlayerIndex:
+		for index in setting.selectedPlayerIndex:
 			playerList.append(Player.new())
 			playerList[-1].loadFrom(GlobalData.playerList[index])
 	

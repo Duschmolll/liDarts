@@ -42,7 +42,7 @@ func launch():
 	setting.showCheckOut = checkout.button_pressed
 	
 	GlobalData.setting[\"x01\"] = setting
-	
+	GlobalData.gameSelected = \"res://x01/X01.tscn\"
 	get_tree().change_scene_to_file(\"res://gameSelection/playerSelection/playerSelection.tscn\")
 "
 
@@ -130,7 +130,8 @@ layout_mode = 2
 [node name="SpinBox" type="SpinBox" parent="VBoxContainer/GridContainer/HBoxContainer2"]
 layout_mode = 2
 min_value = 1.0
-max_value = 10.0
+max_value = 20.0
+step = 2.0
 value = 1.0
 
 [node name="CheckBox4" type="CheckBox" parent="VBoxContainer/GridContainer/HBoxContainer2"]
@@ -139,13 +140,17 @@ text = "Infinite"
 
 [node name="Label6" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Set"
+text = "Sets"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 
 [node name="SpinBox" type="SpinBox" parent="VBoxContainer/GridContainer/HBoxContainer3"]
 layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+step = 2.0
+value = 1.0
 
 [node name="Label7" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2

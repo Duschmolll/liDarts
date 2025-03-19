@@ -1,11 +1,10 @@
 [gd_scene load_steps=32 format=3 uid="uid://dhl4k5mxhv2la"]
 
 [ext_resource type="Texture2D" uid="uid://bdo6b0s7ocbo7" path="res://texture/ui/dartboard/dartboard.svg" id="1_ldx0a"]
-[ext_resource type="Script" uid="uid://banwseou7v2yw" path="res://x01/Dartboard.gd" id="1_pqutw"]
 [ext_resource type="Texture2D" uid="uid://3tljjtqyuk38" path="res://texture/ui/dartboard/bull_25.svg" id="3_tgwt1"]
 [ext_resource type="Texture2D" uid="uid://biy0l4giffth" path="res://texture/ui/dartboard/bull_50.svg" id="4_rileq"]
 [ext_resource type="Texture2D" uid="uid://1sat1hfhb72e" path="res://texture/ui/dartboard/black.svg" id="5_diyn4"]
-[ext_resource type="Script" uid="uid://cwp6i3b45fb12" path="res://x01/dartboardButton.gd" id="5_jf72y"]
+[ext_resource type="Script" uid="uid://cwp6i3b45fb12" path="res://x01/scene/DartboardButton.gd" id="5_jf72y"]
 [ext_resource type="Texture2D" uid="uid://bupiuusmgsm4e" path="res://texture/ui/dartboard/triple_red.svg" id="6_dxn3c"]
 [ext_resource type="Texture2D" uid="uid://d4acy0ngvwouw" path="res://texture/ui/dartboard/double_red.svg" id="7_l68no"]
 [ext_resource type="Texture2D" uid="uid://b4bkt28i7ms5x" path="res://texture/ui/dartboard/white.svg" id="8_ck1mi"]
@@ -32,6 +31,76 @@
 [ext_resource type="Texture2D" uid="uid://caq2ogtb3ochu" path="res://texture/ui/dartboard/12.svg" id="22_0canx"]
 [ext_resource type="Texture2D" uid="uid://7v7mosgj4j54" path="res://texture/ui/dartboard/05.svg" id="23_bf1fc"]
 
+[sub_resource type="GDScript" id="GDScript_dtsec"]
+resource_name = "Dartboard"
+script/source = "extends Control
+
+#Control Group Nodes
+@export var group00: Control
+@export var group01: Control
+@export var group02: Control
+@export var group03: Control
+@export var group04: Control
+@export var group05: Control
+@export var group06: Control
+@export var group07: Control
+@export var group08: Control
+@export var group09: Control
+@export var group10: Control
+@export var group11: Control
+@export var group12: Control
+@export var group13: Control
+@export var group14: Control
+@export var group15: Control
+@export var group16: Control
+@export var group17: Control
+@export var group18: Control
+@export var group19: Control
+@export var group20: Control
+
+#Variables
+var controlGroupList: Array[Control]
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	controlGroupList.append(group00)
+	controlGroupList.append(group01)
+	controlGroupList.append(group02)
+	controlGroupList.append(group03)
+	controlGroupList.append(group04)
+	controlGroupList.append(group05)
+	controlGroupList.append(group06)
+	controlGroupList.append(group07)
+	controlGroupList.append(group08)
+	controlGroupList.append(group09)
+	controlGroupList.append(group10)
+	controlGroupList.append(group11)
+	controlGroupList.append(group12)
+	controlGroupList.append(group13)
+	controlGroupList.append(group14)
+	controlGroupList.append(group15)
+	controlGroupList.append(group16)
+	controlGroupList.append(group17)
+	controlGroupList.append(group18)
+	controlGroupList.append(group19)
+	controlGroupList.append(group20)
+	
+	for elem in controlGroupList:
+		for btn in elem.get_children():
+			if btn is TextureButton:
+				if btn.texture_normal:
+					# Get the image from the texture normal
+					var image = btn.texture_normal.get_image()
+					# Create the BitMap
+					var bitmap = BitMap.new()
+					# Fill it from the image alpha
+					bitmap.create_from_image_alpha(image)
+					# Assign it to the mask
+					btn.texture_click_mask = bitmap
+	pass
+"
+
 [node name="Dartboard" type="Control" node_paths=PackedStringArray("group00", "group01", "group02", "group03", "group04", "group05", "group06", "group07", "group08", "group09", "group10", "group11", "group12", "group13", "group14", "group15", "group16", "group17", "group18", "group19", "group20")]
 layout_mode = 3
 anchors_preset = 15
@@ -41,7 +110,7 @@ offset_right = 648.0
 offset_bottom = 1488.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_pqutw")
+script = SubResource("GDScript_dtsec")
 group00 = NodePath("Group00")
 group01 = NodePath("Group01")
 group02 = NodePath("Group02")
