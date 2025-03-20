@@ -9,6 +9,7 @@ var doubleOut: bool = false
 var showCheckOut: bool = false
 var selectedPlayerIndex: Array[int] = []
 
+## Copy data from another X01Setting object
 func importSettings(setting: X01Settings) -> void:
 	self.score = setting.score
 	self.totalLeg = setting.totalLeg
@@ -17,7 +18,8 @@ func importSettings(setting: X01Settings) -> void:
 	self.doubleOut = setting.doubleOut
 	self.showCheckOut = setting.showCheckOut
 	self.selectedPlayerIndex = setting.selectedPlayerIndex
-		
+
+## Copy data from a dict
 func importDict(dic: Dictionary) -> void:
 	self.score = dic.score
 	self.totalLeg = dic.totalLeg
@@ -27,7 +29,8 @@ func importDict(dic: Dictionary) -> void:
 	self.showCheckOut = dic.showCheckOut
 	for index in dic.selectedPlayerIndex:
 		self.selectedPlayerIndex.append(index)
-		
+
+## Export Object into a Dictionary
 func exportDict() -> Dictionary:
 	var dict: Dictionary = {
 		'type' = self.type,

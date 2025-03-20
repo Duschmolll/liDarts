@@ -4,9 +4,13 @@ const SAVE_DIR = "user://data/"
 const SAVE_FILE_NAME = "data.json"
 const SECURITY_KEY = "0EZASQ"
 
+## List of the different player saved.
 var playerList: Array[Player] = []
+## Setting dictionary to save the differentes type of settings.
 var setting = {}
+## Bool to check if the data as been loaded.
 var data_loaded = false
+## gameSelected is used for loading the right scene when an user as selected his playerList
 var gameSelected
 
 func _ready() -> void:
@@ -14,11 +18,11 @@ func _ready() -> void:
 	GlobalData.setting['x01'] = X01Settings.new()
 	load_data(SAVE_DIR + SAVE_FILE_NAME)
 
-
+## Verify if the save path is valid.
 func verify_save_dir(path: String) -> void:
 	DirAccess.make_dir_absolute(path)
 
-
+## Save the data into a JSON file.
 func save_data(path: String) -> void:
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
@@ -48,7 +52,7 @@ func save_data(path: String) -> void:
 	file.close()
 	print("Saved")
 
-
+## Load the data from a JSON file
 func load_data(path: String) -> void:
 	if data_loaded:
 		return

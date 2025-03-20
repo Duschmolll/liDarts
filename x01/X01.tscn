@@ -18,6 +18,16 @@ script/source = "extends VBoxContainer
 @export var statisticContainer: Node
 
 @export var historyContainer: Node
+
+func setup(playerInput: PlayerX01, settingInput: X01Settings) -> void:
+	
+	playerName.text = playerInput.player.name
+	playerFlag.set_texture(load(playerInput.player.flag)) 
+	scoreLabel.text = str(settingInput.score)
+	checkOutLabel.text = \"\"
+	
+	statisticContainer.fromPlayer(playerInput)
+	historyContainer.newGame()
 "
 
 [sub_resource type="GDScript" id="GDScript_4ud42"]
@@ -58,7 +68,7 @@ func clear() -> void:
 	for elem in history_throw:
 		elem.text = \"\" 
 		
-func update(player: Player) -> void:
+func update(player: PlayerX01) -> void:
 
 	var length = min(len(player.throwList), len(history_score))
 	var k = 0
@@ -85,7 +95,7 @@ script/source = "extends VBoxContainer
 @export var statAverageLeg: Label
 
 
-func fromPlayer(player: Player) -> void:
+func fromPlayer(player: PlayerX01) -> void:
 	statLeg.text = str(player.nbLeg)
 	stat80.text = str(player.score80)
 	stat100.text = str(player.score100)
@@ -95,7 +105,7 @@ func fromPlayer(player: Player) -> void:
 	statAverage.text = str(player.average)
 	statAverageLeg.text = str(player.averagePerLeg)
 
-func update(player: Player) -> void:
+func update(player: PlayerX01) -> void:
 	fromPlayer(player)
 "
 
@@ -107,10 +117,10 @@ script/source = "extends MarginContainer
 @export var flag: TextureRect
 @export var score: Label
 
-func nextPlayer(player: Player):
-	playerName.text = player.name
-	flag.set_texture(load(player.flag))
-	score.text = str(player.score)
+func nextPlayer(playerX01: PlayerX01):
+	playerName.text = playerX01.player.name
+	flag.set_texture(load(playerX01.player.flag))
+	score.text = str(playerX01.score)
 	 
 "
 
