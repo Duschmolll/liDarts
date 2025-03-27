@@ -22,22 +22,36 @@ func dartboardButton(btn, type) -> void:
 						"Simple":
 							dartValue.label.text = str(btn.buttonValue)
 							dartValue.value = btn.buttonValue
+							dartValue.type = 1
 						"Double":
 							dartValue.label.text = str(btn.buttonValue/2) + "\n" + str(btn.buttonValue/2)
 							dartValue.value = btn.buttonValue
+							dartValue.type = 2
 						"Triple":
 							dartValue.value = btn.buttonValue
 							dartValue.label.text = str(btn.buttonValue/3) + "\n" + str(btn.buttonValue/3) + "\n" + str(btn.buttonValue/3)
+							dartValue.type = 3
 					break;
 					
 		"scoreSetting":
 			match btn.text:
 				"Validate":
 					var throwScore: int = 0
+					var firstDouble: bool = false;
+					var lastDouble: bool = false;
+					
+					# If first throw is a double
+					if dartScore.buttonList[0].type == 2:
+						firstDouble = true
+					
+					#Get throwtotal and if the last throw was a double
 					for dartValue in dartScore.buttonList:
 						throwScore += dartValue.value
-					
-					endTurn(throwScore)
+						if dartValue.type == 2:
+							lastDouble = true
+						elif dartValue.value != 0:
+							lastDouble = false
+					endTurn(throwScore, firstDouble, lastDouble)
 					
 				"Miss":
 					for dartValue in dartScore.buttonList:
@@ -107,9 +121,9 @@ func newLeg() -> void:
 	nextPlayerPanel.nextPlayer(getNextPlayer(currentPlayer))
 
 ## Decided what to do when a player has finished his turn.
-func endTurn(throwScore: int) -> void:
+func endTurn(throwScore: int, firstD: bool, lastD: bool) -> void:
 	
-	var throwBool:int = currentPlayer.newThrow(throwScore)
+	var throwBool:int = currentPlayer.newThrow(throwScore, firstD, lastD)
 	
 	infoPanel.scoreLabel.text = str(currentPlayer.score)
 	
@@ -154,31 +168,60 @@ func nextTurn() -> void:
 func legWon() -> void:
 	currentPlayer.nbLeg += 1
 	if currentPlayer.nbLeg >= float(setting.totalLeg) / 2:
+	## If current player has won the set
+		saveLegPlayer(currentPlayer)
 		currentPlayer.nbSet += 1
 		if currentPlayer.nbSet >= float(setting.totalSet) / 2:
+		## If current player has won the game.
 			print("GG")
 			toggleInput()
+			saveGamePlayer()
 		else:
+		## If current player has not won the game.
 			PlayerStartSetIndex = PlayerStartSetIndex + 1 if PlayerStartSetIndex + 1 < len(playerList) else 0
 			currentPlayer = playerList[PlayerStartSetIndex]
+			resetLegPlayer()
 			newLeg()
 	else:
+	## If current player has not won the set.
 		PlayerStartLegIndex = PlayerStartLegIndex + 1 if PlayerStartLegIndex + 1 < len(playerList) else 0
 		currentPlayer = playerList[PlayerStartLegIndex]
+		saveLegPlayer(currentPlayer)
 		newLeg()
 
+## Save leg info of all players.
+func saveLegPlayer(winner: PlayerX01):
+	for ply in playerList:
+		ply.saveStatLeg(winner)
+
+## Set nbleg to zero for all players.
+func resetLegPlayer():
+	for ply in playerList:
+		ply.nbLeg = 0
+
+## Set game info of all players.
+func saveGamePlayer():
+	var nbSetPlayed = 0
+	for ply in playerList:
+		nbSetPlayed += ply.nbSet
+	
+	for ply in playerList:
+		ply.saveStatGame(nbSetPlayed)
+	
 ## Called when the scene is ready.
 func _ready() -> void:
 	setting = GlobalData.setting.x01
 	if len(GlobalData.setting.x01.selectedPlayerIndex) < 2:
-		playerList.append(Player.new())
-		playerList[0].newPlayer("Mattieu", "xxx")
-		playerList.append(Player.new())
-		playerList[1].newPlayer("Krek", "xxx")
+		playerList.append(PlayerX01.new())
+		playerList[-1].init(Player.new(), setting)
+		playerList[-1].player.newPlayer("Mattieu", "xxx")
+		playerList.append(PlayerX01.new())
+		playerList[-1].init(Player.new(), setting)
+		playerList[-1].player.newPlayer("Krek", "xxx")
 	else:
 		for index in setting.selectedPlayerIndex:
 			playerList.append(PlayerX01.new())
-			playerList[-1].init(GlobalData.playerList[index])
+			playerList[-1].init(GlobalData.playerList[index], setting)
 	
 	button_init()
 	

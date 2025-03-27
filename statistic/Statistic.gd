@@ -40,17 +40,17 @@ func check_opponent():
 	if len(local_player_selected) == 2:
 		for i in range(2):
 			var child = player_stats_hbox.get_children()[i]
-			child.opponent_game.text = str(local_player_selected[i].name)
-			child.opponent_winrate.text = str(local_player_selected[i].name)
-			child.opponent_selected.visible = true
-			child.opponent_unselected.visible = false
+			child.opponentGame.text = str(local_player_selected[i].name)
+			child.opponentWinrate.text = str(local_player_selected[i].name)
+			child.opponentSelected.visible = true
+			child.opponentUnselected.visible = false
 		player_stats_hbox.get_children()[0].opponent.text = str(local_player_selected[1].name)
 		player_stats_hbox.get_children()[1].opponent.text = str(local_player_selected[0].name)
 	else:
 		for i in range(player_stats_hbox.get_child_count()):
 			var child = player_stats_hbox.get_children()[i]
-			child.opponent_selected.visible = false
-			child.opponent_unselected.visible = true
+			child.opponentSelected.visible = false
+			child.opponentUnselected.visible = true
 
 
 func _on_button_pressed():

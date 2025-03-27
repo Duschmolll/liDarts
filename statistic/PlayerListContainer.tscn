@@ -7,37 +7,37 @@
 script/source = "extends PanelContainer
 
 
-@export var player_flag: TextureRect
-@export var player_label: Label
-@export var game_played: Label
-@export var leg_played: Label
-@export var game_won: Label
-@export var break_leg: Label
+@export var playerFlag: TextureRect
+@export var playerLabel: Label
+@export var gamePlayed: Label
+@export var legPlayed: Label
+@export var gameWon: Label
+@export var legWon: Label
 @export var throw: Label
 @export var dart: Label
-@export var play_time: Label
+@export var playTime: Label
 @export var average: Label
-@export var average_per_leg: Label
+@export var averagePerLeg: Label
 @export var opponent: Label
-@export var opponent_game: Label
-@export var opponent_winrate: Label
-@export var opponent_selected: VBoxContainer
-@export var opponent_unselected: Label
+@export var opponentGame: Label
+@export var opponentWinrate: Label
+@export var opponentSelected: VBoxContainer
+@export var opponentUnselected: Label
 
 var player: Player
 
 func loadPlayer(playerInput: Player):
-		self.player_label.text = playerInput.name
-		self.player_flag.set_texture(load(playerInput.flag))
-		self.game_played.text = str(playerInput.name)
-		self.leg_played.text = str(playerInput.allTimeLeg)
-		self.game_won.text = str(playerInput.name)
-		self.break_leg.text = str(playerInput.name)
+		self.playerLabel.text = playerInput.name
+		self.playerFlag.set_texture(load(playerInput.flag))
+		self.gamePlayed.text = str(playerInput.allTimeSet)
+		self.gameWon.text = str(playerInput.allTimeSetWin)
+		self.legPlayed.text = str(playerInput.allTimeLeg)
+		self.legWon.text = str(playerInput.allTimeLegWin)
 		self.throw.text = str(playerInput.allTimeThrow)
 		self.dart.text = str(playerInput.allTimeDart)
-		self.play_time.text = str(playerInput.name)
+		self.playTime.text = str(playerInput.name)
 		self.average.text = \"%.2f\" % playerInput.allTimeAveragePerThrow
-		self.average_per_leg.text = \"%.2f\" % playerInput.allTimeAveragePerLeg
+		self.averagePerLeg.text = \"%.2f\" % playerInput.allTimeAveragePerLeg
 		self.player = playerInput
 		
 func _on_texture_button_pressed():
@@ -50,25 +50,25 @@ func _on_texture_button_pressed():
 	self.queue_free()
 "
 
-[node name="PlayerStatsContainer" type="PanelContainer" node_paths=PackedStringArray("player_flag", "player_label", "game_played", "leg_played", "game_won", "break_leg", "throw", "dart", "play_time", "average", "average_per_leg", "opponent", "opponent_game", "opponent_winrate", "opponent_selected", "opponent_unselected")]
+[node name="PlayerStatsContainer" type="PanelContainer" node_paths=PackedStringArray("playerFlag", "playerLabel", "gamePlayed", "legPlayed", "gameWon", "legWon", "throw", "dart", "playTime", "average", "averagePerLeg", "opponent", "opponentGame", "opponentWinrate", "opponentSelected", "opponentUnselected")]
 size_flags_horizontal = 3
 script = SubResource("GDScript_12jsv")
-player_flag = NodePath("HBoxContainer/PlayerName/HBoxContainer/MarginContainer/Flag")
-player_label = NodePath("HBoxContainer/PlayerName/HBoxContainer/Name")
-game_played = NodePath("HBoxContainer/GamePlayed/HBoxContainer/Input")
-leg_played = NodePath("HBoxContainer/LegPlayed/HBoxContainer/Input")
-game_won = NodePath("HBoxContainer/GameWon/HBoxContainer/Input")
-break_leg = NodePath("HBoxContainer/BreakLeg/HBoxContainer/Input")
+playerFlag = NodePath("HBoxContainer/PlayerName/HBoxContainer/MarginContainer/Flag")
+playerLabel = NodePath("HBoxContainer/PlayerName/HBoxContainer/Name")
+gamePlayed = NodePath("HBoxContainer/GamePlayed/HBoxContainer/Input")
+legPlayed = NodePath("HBoxContainer/LegPlayed/HBoxContainer/Input")
+gameWon = NodePath("HBoxContainer/Game Won/HBoxContainer/Input")
+legWon = NodePath("HBoxContainer/Leg Won/HBoxContainer/Input")
 throw = NodePath("HBoxContainer/Throw/HBoxContainer/Input")
 dart = NodePath("HBoxContainer/Dart/HBoxContainer/Input")
-play_time = NodePath("HBoxContainer/PlayTime/HBoxContainer/Input")
+playTime = NodePath("HBoxContainer/PlayTime/HBoxContainer/Input")
 average = NodePath("HBoxContainer/Average/HBoxContainer/Input")
-average_per_leg = NodePath("HBoxContainer/AveragePerLeg/HBoxContainer/Input")
+averagePerLeg = NodePath("HBoxContainer/AveragePerLeg/HBoxContainer/Input")
 opponent = NodePath("HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer/Label")
-opponent_game = NodePath("HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2")
-opponent_winrate = NodePath("HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer/Label2")
-opponent_selected = NodePath("HBoxContainer/VsPlayer/PanelContainer/VBoxContainer")
-opponent_unselected = NodePath("HBoxContainer/VsPlayer/PanelContainer/Label")
+opponentGame = NodePath("HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/Label2")
+opponentWinrate = NodePath("HBoxContainer/VsPlayer/PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2/HBoxContainer/Label2")
+opponentSelected = NodePath("HBoxContainer/VsPlayer/PanelContainer/VBoxContainer")
+opponentUnselected = NodePath("HBoxContainer/VsPlayer/PanelContainer/Label")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -145,6 +145,28 @@ text = "X"
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="Game Won" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Game Won"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Game Won/HBoxContainer"]
+layout_mode = 2
+text = "Game Won:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Label" parent="HBoxContainer/Game Won/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="LegPlayed" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -168,44 +190,22 @@ text = "X"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="GameWon" type="MarginContainer" parent="HBoxContainer"]
+[node name="Leg Won" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/GameWon"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Leg Won"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/GameWon/HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Leg Won/HBoxContainer"]
 layout_mode = 2
-text = "Game Won"
+text = "Leg Won"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Input" type="Label" parent="HBoxContainer/GameWon/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "X"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="BreakLeg" type="MarginContainer" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 25
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/BreakLeg"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/BreakLeg/HBoxContainer"]
-layout_mode = 2
-text = "Break Leg"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Input" type="Label" parent="HBoxContainer/BreakLeg/HBoxContainer"]
+[node name="Input" type="Label" parent="HBoxContainer/Leg Won/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "X"

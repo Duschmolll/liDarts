@@ -16,6 +16,8 @@ var allTimeScore180: int
 var allTimeLeg: int
 var allTimeLegWin: int
 var allTimeTotalScore: int
+var allTimeSet: int
+var allTimeSetWin: int
 
 	
 ## Create a Player object with a name and flag.
@@ -39,6 +41,8 @@ func loadFrom(player: Player) -> void:
 	self.allTimeLeg = player.allTimeLeg
 	self.allTimeLegWin = player.allTimeLegWin
 	self.allTimeTotalScore = player.allTimeTotalScore
+	self.allTimeSet = player.allTimeSet
+	self.allTimeSetWin = player.allTimeSetWin
 	self.index = len(GlobalData.playerList) - 1
 	
 ##Load data from a dictionary.
@@ -56,6 +60,8 @@ func import(dic: Dictionary) -> void:
 	self.allTimeLeg = dic.allTimeLeg
 	self.allTimeLegWin = dic.allTimeLegWin
 	self.allTimeTotalScore = dic.allTimeTotalScore
+	self.allTimeSet = dic.allTimeSet
+	self.allTimeSetWin = dic.allTimeSetWin
 	self.index = len(GlobalData.playerList) - 1
 	
 ##Export data into a Dictionary
@@ -73,7 +79,9 @@ func export() -> Dictionary:
 		'allTimeScore180' = self.allTimeScore180,
 		'allTimeLeg' = self.allTimeLeg,
 		'allTimeLegWin' = self.allTimeLegWin,
-		'allTimeTotalScore' = self.allTimeTotalScore
+		'allTimeTotalScore' = self.allTimeTotalScore,
+		'allTimeSet' = self.allTimeSet,
+		'allTimeSetWin' = self.allTimeSetWin
 	}
 	return output
 
